@@ -4,7 +4,7 @@ session_start()
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" disable>ร้านค้าประชารัฐ ทดสอบ</a>
+    <a class="navbar-brand" disable>ร้านค้าประชารัฐ</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
