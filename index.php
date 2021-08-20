@@ -29,7 +29,7 @@ session_start()
 </nav>
 <div class="container-fluid">
   <div id="users">
-    <form class="row g-3">
+    <form class="row g-3 mt-2">
       <div class="col-md-5 d-flex justify-content-center">
         <div class="row">
           <input class="search form-control me-2" type="search" placeholder="ค้นหาสินค้า" aria-label="Search" style="width: fit-content;">

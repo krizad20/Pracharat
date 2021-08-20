@@ -1,9 +1,9 @@
 <?php
 include("server.php");
-if ($login != '13812') {
-    header("location:index.php");
-    exit(0);
-}
+// if ($login != '13812') {
+//     header("location:index.php");
+//     exit(0);
+// }
 // if (isset($_SESSION['login'])) {
 //     if ($_SESSION['login'] != '13812') {
 //         header("location: index.php");

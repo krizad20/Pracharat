@@ -5,10 +5,10 @@ $username = "root";
 $password = "";
 $dbname = "pracharat";
 $login;
-if (isset($_POST['login'])) {
-    $_SESSION['login'] = $_POST['password'];
-    $login = $_POST['password'];
-}
+// if (isset($_POST['login'])) {
+//     $_SESSION['login'] = $_POST['password'];
+//     $login = $_POST['password'];
+// }
 
 // $servername = "127.0.0.1:50776";
 // $username = "azure";
