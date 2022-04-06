@@ -270,7 +270,7 @@
 <script>
     $(document).ready(function() {
 
-
+        $.fn.dataTable.ext.errMode = 'throw';
 
         var userList;
         var sID = $("input[type=radio][name=saleID]:checked").val()
