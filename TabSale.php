@@ -549,7 +549,7 @@
 
     //Select Customer
     var selectDataCustomerTable = $('#selectCustomerTable').DataTable({
-        "ajax": "/ajax/customer.php",
+        "ajax": "ajax/customer.php",
         "columns": [{
                 data: 'cHouse'
             },
