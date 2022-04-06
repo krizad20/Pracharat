@@ -32,3 +32,10 @@ if (!$conn) {
         die("Fail" . mysqli_connect_error());
     }
 }
+
+if (!function_exists('str_contains')) {
+	function str_contains($haystack, $needle)
+	{
+		return $needle !== '' && mb_strpos($haystack, $needle) !== false;
+	}
+}

@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+//session_start();
 include('..\system\server.php');
 
 if (isset($_POST["action"])) {
@@ -44,3 +44,4 @@ if (isset($_POST["action"])) {
 		unset($_SESSION["shopping_cart"]);
 	}
 }
+

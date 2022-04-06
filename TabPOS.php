@@ -1,11 +1,8 @@
 <?php
-//session_start();
+
 
 include("system\header.php");
-
 ?>
-
-
 
 
 <div class="container-fluid">
@@ -138,7 +135,6 @@ include("system\header.php");
         </div>
     </div>
 </div>
-
 
 
 <!-- Add To Stock -->
@@ -493,30 +489,6 @@ include("system\header.php");
     today = dd + '/' + mm + '/' + yyyy;
     $('#date').html($('#date').html() + today);
 
-    // $(document).scannerDetection({
-
-    //     timeBeforeScanTest: 10, // wait for the next character for upto 200ms
-    //     avgTimeByChar: 40, // it's not a barcode if a character takes longer than 100ms
-    //     preventDefault: true,
-
-    //     endChar: [13],
-    //     onComplete: function(barcode, qty) {
-    //             validScan = true;
-    //             if (!$('#searchBarOrID').focus()) {
-    //                 addToPOS(barcode);
-    //             }
-
-    //             //$('#searchBarOrID').val(barcode);
-
-    //         } // main callback function	,
-    //         ,
-    //     onError: function(string, qty) {
-    //         if (!$('.modal').hasClass('show')) {
-    //             $('#searchBarOrID').val($('#searchBarOrID').val() + string);
-    //         }
-    //     }
-    // });
-
     $(document).ready(function() {
         var sID = $("input[type=radio][name=saleID]:checked").val();
         var cID = "";
@@ -535,7 +507,7 @@ include("system\header.php");
         getCustomer(sID);
 
         var check = "<?php echo (isset($_SESSION['fromEdit']));
-                        unset($_SESSION['fromEdit']); ?>";
+                        //unset($_SESSION['fromEdit']); ?>";
         if (check) {
             $('input[type=radio][name=saleID][value=s5]').click();
             sID = $("input[type=radio][name=saleID]:checked").val();
@@ -960,7 +932,7 @@ include("system\header.php");
                 alert("กรุณากรอกข้อมูลให้ครบ");
             } else {
                 $.ajax({
-                    url: "TabManageProduct/saveProduct.php",
+                    url: "TabManageProduct/manageProduct.php",
                     method: "POST",
                     data: {
                         pIDSave: pID,
@@ -1236,6 +1208,7 @@ include("system\header.php");
 
         function addToPOS(pID) {
             $('#totalPrice').css("color", "black");
+            console.log(isCal)
             if (isCal) {
                 clearPOS();
             }
@@ -1243,7 +1216,7 @@ include("system\header.php");
                 url: "TabPOS/addToPOS.php",
                 method: "POST",
                 data: {
-                    pIDAdd: pID,
+                    pIDAdd: pID, 
                     sIDNow: sID,
                 },
                 success: function(data) {
@@ -1320,12 +1293,12 @@ include("system\header.php");
             });
         }
 
-        function sendSaleSession(sID) {
+        function sendSaleSession(sID1) {
             $.ajax({
                 url: "TabPOS/nowBill.php",
                 method: "POST",
                 data: {
-                    sID: sID
+                    sID: sID1
                 },
                 success: function(data) {
                     $('#posTable').DataTable().ajax.reload();

@@ -139,7 +139,7 @@ include("system\header.php")
         isAdd = false;
         var cID = table.row(this).data()['cID'];
         $.ajax({
-          url: 'TabMaganeCustomer/selectedCustomer.php',
+          url: 'TabManageCustomer/selectedCustomer.php',
           method: 'POST',
           data: {
             cID: cID

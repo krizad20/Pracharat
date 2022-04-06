@@ -280,7 +280,7 @@ include("system\header.php")
           alert("กรุณากรอกข้อมูลให้ครบ");
         } else {
           $.ajax({
-            url: "TabManageProduct/saveProduct.php",
+            url: "TabManageProduct/manageProduct.php",
             method: "POST",
             data: {
               pIDSave: pID,

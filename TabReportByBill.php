@@ -3,101 +3,80 @@ include("system\header.php");
 ?>
 
 <div class="container-fluid">
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            <h1 class="m-0">แสดงบิลทั้งหมด</h1>
+
+    <div class="card">
+        <div class="card-header p-1">
+            <h3 class="card-title">เลือกเวลา</h3>
         </div>
-        <!-- /.col -->
-    </div>
-
-    <div class="row">
-        <div class="col-lg">
-            <div class="card">
-                <div class="card-header border-0">
-                    <h3 class="card-title">เลือกเวลา</h3>
-                </div>
-                <div class="card-body">
-                    <div class="row mb-2">
-                        <div class="col">
-                            <div class="form-check">
-                                <input class="form-check-input my-2" type="radio" name="flexRadioDefault" id="byDay" value="byDay" checked>
-                                <label class="form-check-label" for="byDay">รายวัน</label>
-                                <input type="date" size="10" id="datepicker_day" name="">
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <div class="form-check">
-                                <input class="form-check-input my-2" type="radio" name="flexRadioDefault" id="byMonth" value="byMonth">
-                                <label class="form-check-label" for="byMonth">รายเดือน</label>
-                                <input type="month" size="10" id="datepicker_month" name="">
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <div class="form-check">
-                                <input class="form-check-input my-2" type="radio" name="flexRadioDefault" id="byYear" value="byYear">
-                                <label class="form-check-label" for="byYear">รายปี</label>
-                                <input type="number" id="datepicker_year" style="width: fit-content;" value="">
-                            </div>
-                        </div>
+        <div class="card-body p-2">
+            <div class="row mb-2">
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input my-2" type="radio" name="flexRadioDefault" id="byDay" value="byDay" checked>
+                        <label class="form-check-label" for="byDay">รายวัน</label>
+                        <input type="date" size="10" id="datepicker_day" name="">
                     </div>
+                </div>
 
-                    <div class="row mb-2 mt-3">
-                        <div class="col">
-                            <div class="form-check">
-                                <input class="form-check-input my-2" type="radio" name="flexRadioDefault" id="byRange" value="byRange">
-                                <label class="form-check-label" for="byRange">ช่วงเวลา ตั้งแต่</label>
-                                <input type="date" size="10" id="datepicker_day_from" name="">
-                                <label class="form-check-label" for="byRange">ถึง</label>
-                                <input type="date" size="10" id="datepicker_day_to" name="">
-                            </div>
-                        </div>
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input my-2" type="radio" name="flexRadioDefault" id="byMonth" value="byMonth">
+                        <label class="form-check-label" for="byMonth">รายเดือน</label>
+                        <input type="month" size="10" id="datepicker_month" name="">
+                    </div>
+                </div>
 
-                        <div class="col text-right">
-                            <button type="button" class="btn btn-success mx-3" onclick="" id="searchButton">ค้นหา</button>
-                            <button type="button" class="btn btn-success mx-3" onclick="" id="toExcelButton">พิมพ์ XLSX</button>
-                        </div>
-
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input my-2" type="radio" name="flexRadioDefault" id="byYear" value="byYear">
+                        <label class="form-check-label" for="byYear">รายปี</label>
+                        <input type="number" id="datepicker_year" style="width: fit-content;" value="">
                     </div>
                 </div>
             </div>
-            <!-- /.card -->
+
+            <div class="row mb-2">
+                <div class="col">
+                    <div class="form-check">
+                        <input class="form-check-input my-2" type="radio" name="flexRadioDefault" id="byRange" value="byRange">
+                        <label class="form-check-label" for="byRange">ช่วงเวลา ตั้งแต่</label>
+                        <input type="date" size="10" id="datepicker_day_from" name="">
+                        <label class="form-check-label" for="byRange">ถึง</label>
+                        <input type="date" size="10" id="datepicker_day_to" name="">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="d-flex ">
+                <input class="search form-control form-control-sm me-2" type="search" id="searchBar" placeholder="ค้นหา..." aria-label="Search" autofocus>
+                <button type="button" class="btn btn-success text-nowrap" onclick="" id="searchButton">ค้นหา</button>
+                <button type="button" class="btn btn-success text-nowrap" onclick="" id="toExcelButton">พิมพ์ XLSX</button>
+            </div>
         </div>
-        <!-- /.col-md-6 -->
     </div>
 
-    <div class="row">
-        <div class="col-lg">
-            <div class="card">
-                <div class="card-body">
-                    <table id="allBillTable" class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">วันที่ขาย</th>
-                                <th scope="col">เลขที่บิลขาย</th>
-                                <th scope="col">บ้านเลขที่</th>
-                                <th scope="col">ชื่อลูกค้า</th>
-                                <th scope="col">รหัสสินค้า</th>
-                                <th scope="col">ชื่อสินค้า</th>
-                                <th scope="col">จำนวน</th>
-                                <th scope="col">ราคาขาย</th>
-                                <th scope="col">ต้นทุน</th>
-                                <th scope="col">กำไร</th>
-                            </tr>
-                        </thead>
-                    </table>
-                    <div class="d-flex flex-column align-items-end">
-                        <div class="row" id="totalCost">ต้นทุนรวม : </div>
-                        <div class="row" id="totalSale">ยอดขายทั้งหมด : </div>
-                        <div class="row" id="totalProfit">กำไรรวม : </div>
-                    </div>
-
-                </div>
+    <div class="card">
+        <div class="card-body p-2">
+            <table id="allBillTable" class="table table-bordered display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">วันที่ขาย</th>
+                        <th scope="col">เลขที่บิลขาย</th>
+                        <th scope="col">บ้านเลขที่</th>
+                        <th scope="col">ชื่อลูกค้า</th>
+                        <th scope="col">ยอดสุทธิ</th>
+                    </tr>
+                </thead>
+            </table>
+            <div class="d-flex flex-column">
+                <div class="row" id="totalCost">ต้นทุนรวม : </div>
+                <div class="row" id="totalSale">ยอดขายทั้งหมด : </div>
+                <div class="row" id="totalProfit">กำไรรวม : </div>
             </div>
-            <!-- /.card -->
+
         </div>
-        <!-- /.col-md-6 -->
     </div>
 </div>
 
@@ -105,42 +84,57 @@ include("system\header.php");
     $.extend(true, $.fn.dataTable.defaults, {
         "info": false,
         "lengthChange": false,
-        //"paging": false
+        paginate: false,
+        "language": {
+            "lengthMenu": "แสดง _MENU_ รายการ",
+            "zeroRecords": "ไม่พบข้อมูล",
+            "info": "แสดง _START_ ถึง _END_ จาก _TOTAL_ รายการ",
+            "infoEmpty": "ไม่พบข้อมูล",
+            "emptyTable": "เลือกเวลาเพื่อค้นหา...",
+            "infoFiltered": "(กรองจาก _MAX_ รายการทั้งหมด)",
+            "search": "",
+        },
+        "columnDefs": [{
+            "targets": [2, 3, 4],
+            "searchable": true,
+        }, {
+            "targets": [1, 2, 3],
+            "orderable": true,
+        }],
+
     });
 
     $(document).ready(function() {
 
         $('#allBillTable').DataTable()
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear() + 543;
+        $('.dataTables_wrapper .dataTables_filter input').hide();
 
-        var date = yyyy + '-' + mm + '-' + dd;
-        var month = yyyy + '-' + mm;
-        var year = yyyy;
-        $('#datepicker_day').val(date)
-        $('#datepicker_month').val(month)
-        $('#datepicker_year').val(year)
-        $('#datepicker_day_from').val(date)
-        $('#datepicker_day_to').val(date)
+
         var selectedDate;
         var dateFrom;
         var dateTo;
+        var table;
+
+        setDate();
+
         $('#searchButton').on('click', function() {
             modeSelect($('input[type=radio][name=flexRadioDefault]:checked').val())
             $('#allBillTable').DataTable().destroy();
-            $('#allBillTable').DataTable({
-                "processing": true,
+            table = $('#allBillTable').DataTable({
                 "ajax": {
                     "url": "TabReport/allBill.php",
                     "method": "POST",
                     data: {
                         dateFrom: dateFrom,
                         dateTo: dateTo
-                    },
+                    }
                 },
                 "columns": [{
+                        "className": 'dt-control',
+                        "orderable": false,
+                        "data": null,
+                        "defaultContent": ''
+                    }, {
                         data: 'bDate'
                     },
                     {
@@ -153,75 +147,86 @@ include("system\header.php");
                         data: 'cName'
                     },
                     {
-                        data: 'bpID'
+                        data: 'bTotal'
                     },
-                    {
-                        data: 'bpName'
-                    },
-                    {
-                        data: 'bpVal'
-                    },
-                    {
-                        data: 'bpSP'
-                    },
-                    {
-                        data: 'bpBP'
-                    },
-                    {
-                        data: 'profit'
-                    }
+
                 ],
-                scrollY: 400,
-                scroller: true,
+                "order": [
+                    [2, 'asc']
+                ],
+                "columnDefs": [{
+                    "targets": [2, 3, 4],
+                    "searchable": true,
+                }, {
+                    "targets": [1, 2, 3],
+                    "orderable": true,
+                }],
+                //sum
 
-                "language": {
-                    "infoEmpty": " ",
-                    "loadingRecords": " ",
-                    "processing": " ",
-                    "emptyTable": " ",
-                },
-                rowGroup: {
-                    dataSrc: 'bID',
-                    startRender: function(rows, group) {
-                        return $('<tr/>')
-                            .append('<td>' + group + '</td>')
-                            .append('<td colspan=100%><button type="button" class="btn btn-success mx-3" id ="edit' + group + '">แก้ไขบิล</button><button type="button" class="btn btn-warning mx-3" id ="print' + group + '">พิมพ์บิล</button><button type="button" class="btn btn-danger mx-3" id ="del' + group + '">ลบบิล</button></td>')
-                    }
-                },
-                "footerCallback": function(row, data, start, end, display) {
-                    var api = this.api(),
-                        data;
-
-                    let bp = api
-                        .column(8)
-                        .data()
-                        .reduce(function(a, b) {
-                            return parseFloat(a) + parseFloat(b);
-                        }, 0);
-                    let sp = api
-                        .column(7)
-                        .data()
-                        .reduce(function(a, b) {
-                            return parseFloat(a) + parseFloat(b);
-                        }, 0);
-
-                    let profit = api
-                        .column(9)
-                        .data()
-                        .reduce(function(a, b) {
-                            return parseFloat(a) + parseFloat(b);
-                        }, 0);
-
-                    $('#totalCost').html("ต้นทุนรวม : " + bp.toFixed(2));
-                    $('#totalSale').html("ยอดขายทั้งหมด : " + sp.toFixed(2));
-                    $('#totalProfit').html("กำไรรวม : " + profit.toFixed(2));
-                }
             });
+            $('.dataTables_wrapper .dataTables_filter input').hide();
+
         })
 
-        $(document).on("click", "#allBillTable tbody tr td button.btn", function() { // any button
-            sendBID(this.id)
+        $('#allBillTable').on('click', 'td.dt-control', function() {
+            var tr = $(this).closest('tr');
+            var row = table.row(tr);
+
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            } else {
+                // Open this row
+                row.child(format(row.data())).show();
+                tr.addClass('shown');
+            }
+            //hide other row
+            $('#allBillTable tbody tr').each(function() {
+                let otherRow = table.row($(this));
+                if (row.index() != otherRow.index()) {
+                    otherRow.child.hide();
+                    $(this).removeClass('shown');
+                }
+            });
         });
+
+        $('#searchBar').on('keyup search', function(e) {
+            table.search(this.value).draw();
+        });
+
+
+        // $(document).on("click", "#allBillTable tbody tr td button.btn", function() { // any button
+        //     sendBID(this.id)
+        // });
+
+
+        function format(d) {
+            // `d` is the original data object for the row
+
+            let json = JSON.parse(d.bDetail);
+            let row = '';
+            for (let i = 0; i < json.length; i++) {
+                row += '<tr>' +
+                    '<td>' + json[i].pID + '</td>' +
+                    '<td>' + json[i].pName + '</td>' +
+                    '<td>' + json[i].pQuantity + '</td>' +
+                    '<td>' + (json[i].pSP * json[i].pQuantity).toFixed(2) + '</td>' +
+                    '<td>' + (json[i].pBP * json[i].pQuantity).toFixed(2) + '</td>' +
+                    '<td>' + ((json[i].pSP - json[i].pBP) * json[i].pQuantity).toFixed(2) + '</td>' +
+                    '</tr>'
+            }
+
+            return '<table class="table table-bordered display" style="width:100%">' +
+                ' <th scope = "col"> รหัสสินค้า </th> ' +
+                ' <th scope = "col"> ชื่อสินค้า </th> ' +
+                ' <th scope = "col"> จำนวน </th> ' +
+                ' <th scope = "col"> ราคาขาย </th> ' +
+                ' <th scope = "col"> ต้นทุน </th> ' +
+                ' <th scope = "col"> กำไร </th> ' +
+                row
+
+        }
 
 
         function modeSelect(mode) {
@@ -273,6 +278,22 @@ include("system\header.php");
                 console.log(text.slice(3))
             }
 
+        }
+
+        function setDate() {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear() + 543;
+
+            var date = yyyy + '-' + mm + '-' + dd;
+            var month = yyyy + '-' + mm;
+            var year = yyyy;
+            $('#datepicker_day').val(date)
+            $('#datepicker_month').val(month)
+            $('#datepicker_year').val(year)
+            $('#datepicker_day_from').val(date)
+            $('#datepicker_day_to').val(date)
         }
     })
 </script>
