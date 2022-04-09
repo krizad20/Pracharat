@@ -42,6 +42,7 @@ include('system.php');
 
 
 
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/scannerdetection/1.2.0/jquery.scannerdetection.min.js" integrity="sha512-ZmglXekGlaYU2nhamWrS8oGQDJQ1UFpLvZxNGHwLfT0H17gXEqEk6oQBgAB75bKYnHVsKqLR3peLVqMDVJWQyA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/scannerdetection/1.2.0/jquery.scannerdetection.compatibility.js" integrity="sha512-YQRu5Y2eFL0L4LrZk2rGxCH5nD8G9ppSaQIqg5mmB/SLd8c0qTJ/cEua3ETXzXzWITvt4x1tiTXFC4M5bJBA4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/scannerdetection/1.2.0/jquery.scannerdetection.compatibility.min.js" integrity="sha512-lDbkDq2ye0YC9a2tSXVSWDI+qH9BSyBuNCP0WSreQFvaIBOhJTz5GgkA0698hwltHNf0WE5/5Ryxr/tD+IBnPg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -70,6 +71,124 @@ include('system.php');
 </style> -->
 
 <body style="font-size:80%;">
+
+	<!-- Add To Stock -->
+	<div class="modal fade" id="addToStockAndSelect" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="addToStockAndSelectLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addToStockLabel">รับสินค้าเข้าสต๊อก</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col">
+							<div class="mb-2 row">
+								<label class="col-form-label" style="width: 30%;">รหัสสินค้า</label>
+								<div class="col" style="width: 70%;">
+									<input type="text" class="form-control " id="pIDA2S" placeholder="รหัสสินค้า" disabled>
+								</div>
+							</div>
+
+							<div class="mb-2 row">
+								<label class="col-form-label" style="width: 30%;">รหัสบาร์โค้ด</label>
+								<div class="col" style="width: 70%;">
+									<input class="form-control" id="pBarA2S" placeholder="รหัสบาร์โค้ด" disabled>
+								</div>
+							</div>
+
+							<div class="mb-2 row">
+								<label class="col-form-label" style="width:30%;">ชื่อสินค้า</label>
+								<div class="col" style="width:30%;">
+									<input type="text" class="form-control " id="pNameA2S" placeholder="ชื่อสินค้า" disabled>
+								</div>
+							</div>
+
+
+
+							<div class="mb-2 row">
+								<label class="col-form-label" style="width:30%;">ราคาซื้อ</label>
+								<div class="col" style="width:70%;">
+									<input type="number" class="form-control " id="pBPA2S" placeholder="ราคาซื้อ" disabled>
+								</div>
+							</div>
+
+							<div class="mb-2 row">
+								<label class="colcol-form-label" style="width:30%;">ราคาขาย</label>
+								<div class="col" style="width:70%;">
+									<input type="number" class="form-control " id="pSPA2S" placeholder="ราคาขาย" disabled>
+								</div>
+							</div>
+
+							<div class="mb-2 row">
+								<label class="col-form-label" style="width:30%;">คงเหลือ</label>
+								<div class="col" style="width:70%;">
+									<input type="number" class="form-control " id="pValA2S" placeholder="จำนวนคงเหลือ" disabled>
+								</div>
+							</div>
+						</div>
+
+						<div class="col">
+							<div class="mb-2 row">
+								<table class="table table-bordered table-hover" id="selectProductA2S">
+									<thead>
+										<tr>
+											<th scope="col">รหัสสินค้า</th>
+											<th scope="col">ชื่อสินค้า</th>
+											<th scope="col">ราคาขาย</th>
+											<th scope="col">คงเหลือ</th>
+											<th scope="col">บาร์โค้ดสินค้า</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col">
+							<div class="mb-2 row">
+								<label class="col-form-label" style="width: 35%;">จำนวนที่จะเพิ่ม</label>
+								<div class="col" style="width: 70%;">
+									<input type="number" onkeydown="return event.keyCode !== 69" class="form-control " id="pAddVal" placeholder="จำนวนที่จะเพิ่ม">
+								</div>
+							</div>
+
+							<div class="mb-2 row">
+								<label class="col-form-label" style="width: 35%;">ราคาที่ซื้อมา</label>
+								<div class="col" style="width: 70%;">
+									<input type="number" onkeydown="return event.keyCode !== 69" class="form-control " id="pNowBP" placeholder="ราคาที่ซื้อมา">
+								</div>
+							</div>
+						</div>
+
+						<div class="col">
+							<div class="mb-2 row">
+								<label class="col-form-label" style="width: 35%;">ราคาซื้อใหม่</label>
+								<div class="col" style="width: 70%;">
+									<input type="number" onkeydown="return event.keyCode !== 69" class="form-control " id="pNewBP" placeholder="ราคาที่ซื้อใหม่">
+								</div>
+							</div>
+
+							<div class="mb-2 row">
+								<label class="col-form-label" style="width: 35%;">ราคาขายใหม่</label>
+								<div class="col" style="width: 70%;">
+									<input type="number" onkeydown="return event.keyCode !== 69" class="form-control " id="pNewSP" placeholder="ราคาขายใหม่">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+					<button type="button" class="btn btn-primary" id="saveAddToStock">บันทึก</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#">Pracharat</a>
@@ -104,6 +223,8 @@ include('system.php');
 							<li><a class="dropdown-item" href="TabReportByBill.php">แยกตามบิล</a></li>
 							<li><a class="dropdown-item" href="TabReportByCustomer.php">แยกตามลูกค้า</a></li>
 							<li><a class="dropdown-item" href="TabReportByProduct.php">แยกตามสินค้า</a></li>
+							<li><a class="dropdown-item" href="TabReportProfit.php">กำไร-ขาดทุน</a></li>
+
 
 						</ul>
 					</li>
@@ -114,3 +235,257 @@ include('system.php');
 	<div class="container-fluid mt-2 overflow-auto">
 
 </body>
+
+<script>
+	$(document).ready(function() {
+
+		let selectProductTable = $("#selectProductA2S").DataTable({
+			"ajax": {
+				"url": "ajax/product.php",
+			},
+
+			"columns": [{
+					"data": "pID"
+				},
+				{
+					"data": "pName"
+				},
+				{
+					"data": "pSP"
+				},
+				{
+					"data": "pVal"
+				},
+				{
+					"data": "pBars",
+					render: function(data, type) {
+						let json = JSON.parse(data);
+						let bars = "";
+						for (let i = 0; i < json.length; i++) {
+							bars += json[i].barcode + ",";
+						}
+
+						return bars;
+					}
+				}
+
+
+			],
+			"lengthChange": false,
+			"ordering": false,
+			"info": false,
+			scrollY: 200,
+			scrollCollapse: true,
+			scroller: true,
+			"columnDefs": [{
+				"targets": [4],
+				"visible": false,
+			}],
+			"language": {
+				"emptyTable": "ไม่พบข้อมูล",
+				"search": "ค้นหา"
+			},
+			"select": {
+				style: 'single',
+				select: true,
+				toggleable: false
+			}
+
+
+		});
+
+
+
+		$('#addToStockAndSelect').on('shown.bs.modal', function(event) {
+			selectProductTable.columns.adjust().draw();
+			//focus search
+			$("#selectProductA2S_filter input").focus();
+
+			$('#selectProductA2S_filter input').on('keyup', function(e) {
+				if (e.keyCode == 13 && $("#selectProductA2S tbody tr").length == 1) {
+					//get data from search
+					// console.log(row.data());
+					let rowData = table.row(':eq(0)', {
+						page: 'current'
+					}).data();
+					let data = {
+						"pID": rowData.pID,
+						"pName": rowData.pName,
+						"pBP": rowData.pBP,
+						"pSP": rowData.pSP,
+						"pVal": rowData.pVal,
+						"pBar": rowData.pBar
+					};
+
+					selectProduct(data);
+
+				}
+			});
+
+		})
+
+		//dblclick
+		$('#selectProductA2S tbody').on('dblclick', 'tr', function() {
+			let row = $("#selectProductA2S").DataTable().row(this).data();
+			let data = {
+				"pID": row.pID,
+				"pName": row.pName,
+				"pBP": row.pBP,
+				"pSP": row.pSP,
+				"pVal": row.pVal,
+				"pBar": row.pBar
+			};
+
+			selectProduct(data);
+		});
+
+		$('#addToStockAndSelect').on('hidden.bs.modal', function(event) {
+			$("#selectProductA2S").DataTable().clear().draw();
+		})
+
+
+
+		function selectProduct(data) {
+
+			var product_id = data.pID;
+			var product_quantity = 0;
+			var pStock = parseInt($('#' + product_id).attr("value"));
+			var action = "addToStock";
+
+			var product_bar = data.pBar;
+			var product_name = data.pName;
+			var product_BP = data.pBP;
+			var product_SP = data.pSP;
+
+			$('#pIDA2S').val(data.pID);
+			$('#pBarA2S').val(data.pBar);
+			$('#pNameA2S').val(data.pName);
+			$('#pBPA2S').val(data.pBP);
+			$('#pSPA2S').val(data.pSP);
+			$('#pValA2S').val(data.pVal);
+			$('#pAddVal').focus();
+
+			let sumOldBP = parseFloat(product_BP) * pStock;
+			$('#pNowBP, #pAddVal').on('keyup', function() {
+				if ($('#pNowBP').val() != "") {
+					let totalBP = sumOldBP + parseFloat($('#pNowBP').val() - 0);
+					let totalVal = pStock + parseInt($('#pAddVal').val());
+					let sumNewBP = parseFloat(totalBP / totalVal).toFixed(2);
+					$('#pNewBP').val(sumNewBP);
+				} else {
+					$('#pNewBP').val("");
+				}
+
+			})
+
+			$('#saveAddToStock').off().on('click', function() {
+				$('#pNewSP').val(parseFloat($('#pNewSP').val()).toFixed(2));
+				$('#pNewBP').val(parseFloat($('#pNewBP').val()).toFixed(2));
+
+				let askConfirm = "";
+				let newBP = parseFloat(product_BP);
+				let newSP = parseFloat(product_SP);
+				let product_quantity = parseInt($('#pAddVal').val() - 0);
+
+				let editBPOnly = $('#pNewBP').val() != "" && $('#pNewBP').val() != product_BP;
+				let editSPOnly = $('#pNewSP').val() != "" && $('#pNewSP').val() != product_SP;
+				let editBPAndSP = editBPOnly && editSPOnly;
+
+				if (editBPAndSP) {
+					askConfirm = "ยืนยันแก้ราคาซื้อจาก " + product_BP + " เป็น " + $('#pNewBP').val() + "\n และราคาขายจาก " + product_SP + " เป็น " + $('#pNewSP').val() + " ใช่หรือไม่"
+				} else {
+					if (editBPOnly) {
+						newBP = parseFloat($('#pNewBP').val());
+						askConfirm = "ยืนยันแก้ราคาซื้อจาก " + product_BP + " เป็น " + $('#pNewBP').val() + " ใช่หรือไม่"
+					}
+					if (editSPOnly) {
+						newSP = parseFloat($('#pNewSP').val());
+						askConfirm = "ยืนยันแก้ราคาขายจาก " + product_SP + " เป็น " + $('#pNewSP').val() + " ใช่หรือไม่"
+					}
+				}
+
+				//Not Change
+				if (product_quantity <= 0 || product_quantity == "") {
+					alert("กรุณากรอกจำนวนสินค้า");
+					$('#pAddVal').focus();
+					$('#pNowBP').val("");
+					$('#pNewBP').val("");
+					$('#pNewSP').val("");
+
+				}
+				//Add and Change BP SP
+				else if (askConfirm != "") {
+					if (confirm(askConfirm)) {
+						$.ajax({
+							url: "TabPOS/posAction.php",
+							type: "POST",
+							data: {
+								action: action,
+								pID: product_id,
+								pName: product_name,
+								pQuantity: product_quantity,
+								pNewBP: newBP,
+								pNewSP: newSP,
+							},
+							success: function(result) {
+								if (editBPOnly) {
+									$('#pBPA2S').val(newBP.toFixed(2));
+									$('#pBPA2S').css('background-color', '#dff0d8');
+								}
+								if (editSPOnly) {
+									$('#pSPA2S').val(newSP.toFixed(2));
+									$('#pSPA2S').css('background-color', '#dff0d8');
+								}
+
+								$('#pValA2S').val(parseInt(data.pVal) + parseInt(product_quantity));
+								$('#pValA2S').css('background-color', '#dff0d8');
+								$('#saveAddToStock').prop('disabled', true);
+								$('#pAddVal').prop('disabled', true);
+								$('#pNowBP').prop('disabled', true);
+								$('#pNewBP').prop('disabled', true);
+								$('#pNewSP').prop('disabled', true);
+								load_product();
+
+								$('#addToStockAndSelect').modal('hide');
+							}
+						});
+					}
+
+				}
+				//Add Only
+				else if (askConfirm == "") {
+					$.ajax({
+						url: "TabPOS/posAction.php",
+						type: "POST",
+						data: {
+							action: action,
+							pID: product_id,
+							pName: product_name,
+							pQuantity: product_quantity,
+							pNewBP: newBP,
+							pNewSP: newSP,
+						},
+						success: function(result) {
+							$('#pValA2S').val(parseInt(data.pVal) + parseInt(product_quantity));
+							$('#pValA2S').css('background-color', '#dff0d8');
+							$('#saveAddToStock').prop('disabled', true);
+							$('#pAddVal').prop('disabled', true);
+							$('#pNowBP').prop('disabled', true);
+							$('#pNewBP').prop('disabled', true);
+							$('#pNewSP').prop('disabled', true);
+							load_product();
+							$('#addToStockAndSelect').modal('hide');
+
+
+						}
+					});
+				} else {
+					alert("กรุณากรอกราคาซื้อหรือราคาขายให้ถูกต้อง");
+					$('#pNowBP').val("");
+					$('#pNewBP').val("");
+					$('#pNewSP').val("");
+				}
+			})
+		}
+	});
+</script>

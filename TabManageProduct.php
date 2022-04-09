@@ -663,7 +663,7 @@ include("system\header.php")
     });
 
     //hide search box
-    $('.dataTables_wrapper .dataTables_filter input').hide();
+    $('#productTable_filter').hide();
 
     //row on click
     $('#productTable tbody').on('click', 'tr', function(row, data, index) {

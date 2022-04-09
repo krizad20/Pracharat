@@ -237,15 +237,15 @@ if (isset($_POST["action"])) {
                         'pSP' => $row["pSP"]
                     );
 
-                    if ($row['hasPacked'] == '1') {
-                        $sql = "UPDATE product p,packproduct pa SET p.pVal= p.pVal - FLOOR((SELECT pVal FROM product WHERE pID = pa.pID)/(pa.paPerPack*1.0)) 
-                                WHERE p.pID = (SELECT paID FROM packproduct WHERE pID = '" . $row['pID'] . "')";
-                        $result = mysqli_query($conn, $sql);
-                    }
-
                     //UPDATE PRODUCT
                     $sql = "UPDATE product SET pVal = pVal - '$values[pQuantity]' WHERE pID = '$values[pID]'";
                     $result = mysqli_query($conn, $sql);
+
+                    if ($row['hasPacked'] == '1') {
+                        $sql = "UPDATE product p,packproduct pa SET p.pVal= FLOOR((SELECT pVal FROM product WHERE pID = pa.pID)/(pa.paPerPack)) 
+                                WHERE p.pID = (SELECT paID FROM packproduct WHERE pID = '" . $row['pID'] . "')";
+                        $result = mysqli_query($conn, $sql);
+                    }
                 }
                 //Pack Product
                 else {

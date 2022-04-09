@@ -82,34 +82,32 @@ while ($row = $list->fetch_assoc()) {
                     }
                     if ($row['isPacked'] == '1') {
                         if (str_contains($key, $pID)) {
-                            $sumProduct = $sumProduct- $value['pQuantity'];
+                            $sumProduct = $sumProduct - $value['pQuantity'];
                         }
                     }
                 }
             }
             if ($row['isPacked'] == '1') {
                 $pValText = intval(($sumProduct) / $perPack);
-
             }
         }
-    }
 
-    $button = '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-success add_to_cart btn-xs" value = "' . $pValText . '">เพิ่ม</button>';
-    if ($pValText <= 0) {
-        $button = '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-success add_to_cart d-none btn-sm" value = "' . $pValText . '">เพิ่ม</button>' .
-            '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-danger add_to_stock btn-xs" value = "' . $pValText . '">เพิ่มสต็อค</button>';
-    }
+        $button = '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-success add_to_cart btn-xs" value = "' . $pValText . '">เพิ่ม</button>';
+        if ($pValText <= 0) {
+            $button = '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-success add_to_cart d-none btn-sm" value = "' . $pValText . '">เพิ่ม</button>' .
+                '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-danger add_to_stock btn-xs" value = "' . $pValText . '">เพิ่มสต็อค</button>';
+        }
 
-    $favButton = '<span type="button" class="position-absolute top-0 end-0 ms-auto btn btn-secondary btn-xs add_fav" value = "' . $row["pID"] . '">
+        $favButton = '<span type="button" class="position-absolute top-0 end-0 ms-auto btn btn-secondary btn-xs add_fav" value = "' . $row["pID"] . '">
                         <i class="far fa-star"></i>
                         </span>';
-    if ($row["pFav"] > 0) {
-        $favButton = '<span type="button" class="position-absolute top-0 end-0 ms-auto btn btn-primary btn-xs add_fav " value = "' . $row["pID"] . '">
+        if ($row["pFav"] > 0) {
+            $favButton = '<span type="button" class="position-absolute top-0 end-0 ms-auto btn btn-primary btn-xs add_fav " value = "' . $row["pID"] . '">
                         <i class="fas fa-star"></i>
                         </span>';
-    }
+        }
 
-    $output .= '
+        $output .= '
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-2">
                 <div class="card mt-2">
                     <div class="card-body d-flex flex-column p-0">
@@ -122,7 +120,7 @@ while ($row = $list->fetch_assoc()) {
                         <span class="position-relative">
                             <img src="product_pic\\' . $row["img"] . '" width="auto" height="120" class="card-img-top">
                             ' . $favButton .
-        '
+            '
                         </span>
                         <span class="fs-10 fw-bolder text-primary text-wrap p-1">' . $row["pName"] . '</span>
                         				
@@ -135,6 +133,7 @@ while ($row = $list->fetch_assoc()) {
                 </div>
             </div>
             ';
+    }
 }
 
 echo $output;
