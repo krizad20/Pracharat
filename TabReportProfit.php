@@ -61,7 +61,6 @@ include("system\header.php");
             <table id="profitTable" class="table table-bordered display" style="width:100%">
                 <thead>
                     <tr>
-                        <th scope="col"></th>
                         <th scope="col">วันที่ขาย</th>
                         <th scope="col">เลขที่บิลขาย</th>
                         <th scope="col">รหัสสินค้า</th>
@@ -74,11 +73,6 @@ include("system\header.php");
                     </tr>
                 </thead>
             </table>
-            <div class="d-flex flex-column">
-                <div class="row" id="totalCost">ต้นทุนรวม : </div>
-                <div class="row" id="totalSale">ยอดขายทั้งหมด : </div>
-                <div class="row" id="totalProfit">กำไรรวม : </div>
-            </div>
 
         </div>
     </div>
@@ -98,16 +92,15 @@ include("system\header.php");
             "infoFiltered": "(กรองจาก _MAX_ รายการทั้งหมด)",
             "search": "",
         },
+        //no order
+        "order": [],
         "columnDefs": [{
-            "targets": 0,
-            "visible": false,
-            "searchable": true
-        }, {
-            "targets": [1, 2, 3, 4, 5, 6, 7, 8],
+            "targets": [0, 1, 2, 3, 4, 5, 6, 7],
             "searchable": false,
             "orderable": false
 
         }],
+
 
     });
 
@@ -120,6 +113,7 @@ include("system\header.php");
         setDate();
         $('#profitTable').DataTable();
         $('.dataTables_wrapper .dataTables_filter input').hide();
+
 
         $('#searchButton').on('click', function() {
             modeSelect($('input[type=radio][name=flexRadioDefault]:checked').val())
@@ -134,8 +128,6 @@ include("system\header.php");
                     }
                 },
                 "columns": [{
-                        data: 'bIDStatic'
-                    }, {
                         data: 'bDate'
                     },
                     {
@@ -161,15 +153,38 @@ include("system\header.php");
                     }
 
                 ],
+                "dom": 'Bfrtip',
+                "buttons": [{
+                    extend: 'excelHtml5',
+                    autoFilter: false,
+                    sheetName: 'รายงานกำไรขาดทุน',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                    },
+                    //filename
+                    filename: function() {
+                        var d = new Date();
+                        var n = d.getTime();
+                        return 'รายงานกำไรขาดทุน' + n;
+                    },
+                    title: "รายงานกำไรขาดทุน"
+
+                }]
 
 
             });
             $('.dataTables_wrapper .dataTables_filter input').hide();
+            $('.dt-button').hide();
+
 
         })
 
         $('#searchBar').on('keyup search', function(e) {
             table.search(this.value).draw();
+        });
+
+        $('#toExcelButton').on('click', function() {
+            table.button('.buttons-excel').trigger();
         });
 
 

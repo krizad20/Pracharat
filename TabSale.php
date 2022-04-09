@@ -302,101 +302,6 @@
         })
 
 
-        function loadCate() {
-            $.ajax({
-                url: "TabAddToStock/cate.php",
-                success: function(data) {
-
-                    var json = $.parseJSON(data)
-                    var str = '<option value="" selected>ทั้งหมด</option>'; // variable to store the options
-
-                    for (let i = 0; i < json.length; i++) {
-                        //console.log(json[i].pCate);
-                        str += '<option value="' + json[i].pCate + '">' + json[i].pCate + '</option>';
-                    }
-                    $('#pCateSelect').html(str)
-
-                }
-            });
-        }
-
-        function load_product() {
-            $.ajax({
-                url: "TabAllProduct/fetch_item.php",
-                method: "POST",
-                data: {
-                    menu: 'tabPOS'
-                },
-                success: function(data) {
-                    $('#display_item').html(data);
-                    userList = new List('items', {
-                        valueNames: ['name', 'cate', 'bars'],
-                        page: 36,
-                        pagination: true
-                    });
-                }
-            });
-        }
-
-        function load_cart_data() {
-            $.ajax({
-                url: "TabAllProduct/fetch_cart.php",
-                method: "POST",
-                data: {
-                    sID: sID
-                },
-                dataType: "json",
-                success: function(data) {
-                    //console.log(data);
-                    $('#cart_details').html(data.cart_details);
-                    $('#totalPrice').text(data.total_price + '฿');
-                    $('#total').text(data.total_item);
-                    $('#bill').text("เลขที่บิล :");
-                    $('#customer').text("ลูกค้า : " + data.customer_name);
-                    cID = data.customer_id;
-                    totalPrice = data.total_price;
-
-                    $('#totalPrice').css("color", "black");
-                    $('#discountPrice').css("color", "black");
-                    $('#checkBill').prop('disabled', false);
-                    $('#note').prop('disabled', false);
-
-                }
-            });
-        }
-
-        function setCustomer(sID, cID) {
-            $.ajax({
-                url: "TabPOS/posAction.php",
-                method: "POST",
-                data: {
-                    sID: sID,
-                    cID: cID,
-                    action: 'setCustomer'
-                },
-                success: function(data) {}
-            });
-        }
-
-        function getThaiDate() {
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1; //January is 0!
-            var yyyy = today.getFullYear() + 543;
-
-            if (dd < 10) {
-                dd = '0' + dd
-            }
-
-            if (mm < 10) {
-                mm = '0' + mm
-            }
-
-            today = dd + '/' + mm + '/' + yyyy;
-
-            return today;
-        }
-
         $('#date').text("วันที่ : " + getThaiDate());
 
 
@@ -722,151 +627,24 @@
             var product_BP = $(this).parent().find('.bp').text()
             var product_SP = $(this).parent().find('.sp').text()
 
-            $('#addToStock').modal('show');
+            
 
-            $('#addToStock').on('shown.bs.modal', function() {
-                $('#pIDA2S').val(product_id);
-                $('#pBarA2S').val(product_bar);
-                $('#pNameA2S').val(product_name);
-                $('#pBPA2S').val(product_BP);
-                $('#pSPA2S').val(product_SP);
-                $('#pValA2S').val(pStock);
-                $('#pAddVal').focus();
 
-                let sumOldBP = parseFloat(product_BP) * pStock;
-                $('#pNowBP, #pAddVal').on('keyup', function() {
-                    if ($('#pNowBP').val() != "") {
-                        let totalBP = sumOldBP + parseFloat($('#pNowBP').val() - 0);
-                        let totalVal = pStock + parseInt($('#pAddVal').val());
-                        let sumNewBP = parseFloat(totalBP / totalVal).toFixed(2);
-                        $('#pNewBP').val(sumNewBP);
-                    } else {
-                        $('#pNewBP').val("");
-                    }
+            showModal("noSelect");
 
-                })
 
-                $('#saveAddToStock').off().on('click', function() {
-                    $('#pNewSP').val(parseFloat($('#pNewSP').val()).toFixed(2));
-                    $('#pNewBP').val(parseFloat($('#pNewBP').val()).toFixed(2));
+            let data = {
+                pID: product_id,
+                pName: product_name,
+                pBP: product_BP,
+                pSP: product_SP,
+                pVal: pStock,
+                pBar: product_bar,
+            };
 
-                    let askConfirm = "";
-                    let newBP = parseFloat(product_BP);
-                    let newSP = parseFloat(product_SP);
-                    let product_quantity = parseInt($('#pAddVal').val() - 0);
+            selectProduct(data);
+            load_product();
 
-                    let editBPOnly = $('#pNewBP').val() != "" && $('#pNewBP').val() != product_BP;
-                    let editSPOnly = $('#pNewSP').val() != "" && $('#pNewSP').val() != product_SP;
-                    let editBPAndSP = editBPOnly && editSPOnly;
-
-                    if (editBPAndSP) {
-                        askConfirm = "ยืนยันแก้ราคาซื้อจาก " + product_BP + " เป็น " + $('#pNewBP').val() + "\n และราคาขายจาก " + product_SP + " เป็น " + $('#pNewSP').val() + " ใช่หรือไม่"
-                    } else {
-                        if (editBPOnly) {
-                            newBP = parseFloat($('#pNewBP').val());
-                            askConfirm = "ยืนยันแก้ราคาซื้อจาก " + product_BP + " เป็น " + $('#pNewBP').val() + " ใช่หรือไม่"
-                        }
-                        if (editSPOnly) {
-                            newSP = parseFloat($('#pNewSP').val());
-                            askConfirm = "ยืนยันแก้ราคาขายจาก " + product_SP + " เป็น " + $('#pNewSP').val() + " ใช่หรือไม่"
-                        }
-                    }
-
-                    //Not Change
-                    if (product_quantity <= 0 || product_quantity == "") {
-                        alert("กรุณากรอกจำนวนสินค้า");
-                        $('#pAddVal').focus();
-                        $('#pNowBP').val("");
-                        $('#pNewBP').val("");
-                        $('#pNewSP').val("");
-
-                    }
-                    //Add and Change BP SP
-                    else if (askConfirm != "") {
-                        if (confirm(askConfirm)) {
-                            $.ajax({
-                                url: "TabPOS/posAction.php",
-                                type: "POST",
-                                data: {
-                                    action: action,
-                                    pID: product_id,
-                                    pName: product_name,
-                                    pQuantity: product_quantity,
-                                    pNewBP: newBP,
-                                    pNewSP: newSP,
-                                },
-                                success: function(result) {
-                                    if (editBPOnly) {
-                                        $('#pBPA2S').val(newBP.toFixed(2));
-                                        $('#pBPA2S').css('background-color', '#dff0d8');
-                                    }
-                                    if (editSPOnly) {
-                                        $('#pSPA2S').val(newSP.toFixed(2));
-                                        $('#pSPA2S').css('background-color', '#dff0d8');
-                                    }
-
-                                    $('#pValA2S').val(product_quantity);
-                                    $('#pValA2S').css('background-color', '#dff0d8');
-                                    $('#saveAddToStock').prop('disabled', true);
-                                    $('#pAddVal').prop('disabled', true);
-                                    $('#pNowBP').prop('disabled', true);
-                                    $('#pNewBP').prop('disabled', true);
-                                    $('#pNewSP').prop('disabled', true);
-                                    load_product();
-                                }
-                            });
-                        }
-
-                    }
-                    //Add Only
-                    else if (askConfirm == "") {
-                        $.ajax({
-                            url: "TabPOS/posAction.php",
-                            type: "POST",
-                            data: {
-                                action: action,
-                                pID: product_id,
-                                pName: product_name,
-                                pQuantity: product_quantity,
-                                pNewBP: newBP,
-                                pNewSP: newSP,
-                            },
-                            success: function(result) {
-                                $('#pValA2S').val(product_quantity);
-                                $('#pValA2S').css('background-color', '#dff0d8');
-                                $('#saveAddToStock').prop('disabled', true);
-                                $('#pAddVal').prop('disabled', true);
-                                $('#pNowBP').prop('disabled', true);
-                                $('#pNewBP').prop('disabled', true);
-                                $('#pNewSP').prop('disabled', true);
-                                load_product();
-
-                            }
-                        });
-                    } else {
-                        alert("กรุณากรอกราคาซื้อหรือราคาขายให้ถูกต้อง");
-                        $('#pNowBP').val("");
-                        $('#pNewBP').val("");
-                        $('#pNewSP').val("");
-                    }
-                })
-            });
-
-            $('#addToStock').on('hidden.bs.modal', function() {
-                $('#pBPA2S').css('background-color', '#fff');
-                $('#pSPA2S').css('background-color', '#fff');
-                $('#pValA2S').css('background-color', '#fff');
-
-                $('#pAddVal').val("");
-                $('#pNowBP').val("");
-                $('#pNewBP').val("");
-                $('#pNewSP').val("");
-                $('#pAddVal').prop('disabled', false);
-                $('#pNowBP').prop('disabled', false);
-                $('#pNewBP').prop('disabled', false);
-                $('#pNewSP').prop('disabled', false);
-                $('#saveAddToStock').prop('disabled', false);
-            })
 
         });
 
@@ -884,6 +662,101 @@
             var day = date.getDate();
             day = (day < 10 ? "0" : "") + day;
             return year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
+        }
+
+        function loadCate() {
+            $.ajax({
+                url: "TabAddToStock/cate.php",
+                success: function(data) {
+
+                    var json = $.parseJSON(data)
+                    var str = '<option value="" selected>ทั้งหมด</option>'; // variable to store the options
+
+                    for (let i = 0; i < json.length; i++) {
+                        //console.log(json[i].pCate);
+                        str += '<option value="' + json[i].pCate + '">' + json[i].pCate + '</option>';
+                    }
+                    $('#pCateSelect').html(str)
+
+                }
+            });
+        }
+
+        function load_product() {
+            $.ajax({
+                url: "TabAllProduct/fetch_item.php",
+                method: "POST",
+                data: {
+                    menu: 'tabPOS'
+                },
+                success: function(data) {
+                    $('#display_item').html(data);
+                    userList = new List('items', {
+                        valueNames: ['name', 'cate', 'bars'],
+                        page: 36,
+                        pagination: true
+                    });
+                }
+            });
+        }
+
+        function load_cart_data() {
+            $.ajax({
+                url: "TabAllProduct/fetch_cart.php",
+                method: "POST",
+                data: {
+                    sID: sID
+                },
+                dataType: "json",
+                success: function(data) {
+                    //console.log(data);
+                    $('#cart_details').html(data.cart_details);
+                    $('#totalPrice').text(data.total_price + '฿');
+                    $('#total').text(data.total_item);
+                    $('#bill').text("เลขที่บิล :");
+                    $('#customer').text("ลูกค้า : " + data.customer_name);
+                    cID = data.customer_id;
+                    totalPrice = data.total_price;
+
+                    $('#totalPrice').css("color", "black");
+                    $('#discountPrice').css("color", "black");
+                    $('#checkBill').prop('disabled', false);
+                    $('#note').prop('disabled', false);
+
+                }
+            });
+        }
+
+        function setCustomer(sID, cID) {
+            $.ajax({
+                url: "TabPOS/posAction.php",
+                method: "POST",
+                data: {
+                    sID: sID,
+                    cID: cID,
+                    action: 'setCustomer'
+                },
+                success: function(data) {}
+            });
+        }
+
+        function getThaiDate() {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear() + 543;
+
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            today = dd + '/' + mm + '/' + yyyy;
+
+            return today;
         }
     });
 </script>
