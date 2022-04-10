@@ -1,5 +1,8 @@
 <?php
 include("system\header.php");
+if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
+    echo "<script>window.location.href='index.php';</script>";
+}
 ?>
 
 <div class="container-fluid">

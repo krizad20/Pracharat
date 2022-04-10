@@ -1,5 +1,10 @@
 <?php
-include("system\header.php")
+include("system\header.php");
+if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
+  echo "<script>window.location.href='index.php';</script>";
+}
+
+
 ?>
 
 <div class="container-fluid" id="items">
@@ -1028,7 +1033,7 @@ include("system\header.php")
     });
 
     $('#managePackEditTable,#managePackEditGrid,#managePackAdd').click(function(event) {
-      $('#ppaID').val($('#pIDAdd').val());
+      $('#ppaID').val(pID);
       let id = $(this).attr("id");
 
       $.ajax({
@@ -1046,12 +1051,14 @@ include("system\header.php")
           $('#ppaBPerOne').val(json[0].pBP);
           subProductVal = json[0].pVal;
           if (id == "managePackEditTable") {
+            $('#ppaID').val(pID);
             $('#ppaName').val($('#pNameEditTable').val());
             $('#ppaBPerPack').val($('#pBPEditTable').val());
             $('#ppaSP').val($('#pSPEditTable').val());
             paCate = $('#pCateEditTable').val();
 
           } else if (id == "managePackEditGrid") {
+            $('#ppaID').val(pID);
             $('#ppaName').val($('#pNameEditGrid').val());
             $('#ppaBPerPack').val($('#pBPEditGrid').val());
             $('#ppaSP').val($('#pSPEditGrid').val());

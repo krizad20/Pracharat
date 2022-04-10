@@ -1,5 +1,7 @@
-<?
+<?php
+session_start();
 include('system.php');
+
 ?>
 
 <head>
@@ -19,6 +21,7 @@ include('system.php');
 
 	<link rel="stylesheet" href="css/adminlte.min.css">
 	<link rel="icon" href="img/logo.jpg">
+	<!-- <link href="css/signin.css" rel="stylesheet"> -->
 
 
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
@@ -51,25 +54,24 @@ include('system.php');
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.4/JsBarcode.all.min.js" integrity="sha512-9KXy/GLQQ+pPW7VwnI74DzjzUix9GINtAAPwWl4vzaaEqgfOeDgkea6UWM4xAvCeoeiBxzYepep2xxbkX3w/pg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+	<!-- <style>
+		.bd-placeholder-img {
+			font-size: 1.125rem;
+			text-anchor: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+		}
+
+		@media (min-width: 768px) {
+			.bd-placeholder-img-lg {
+				font-size: 3.5rem;
+			}
+		}
+	</style> -->
 
 </head>
 
-<!-- <style>
-	html,
-	body {
-		height: 100%;
-		margin: 0;
-		padding: 0;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		overflow: hidden;
-		min-height: 100vh;
-
-
-	}
-</style> -->
 
 <body style="font-size:80%;">
 
@@ -201,34 +203,54 @@ include('system.php');
 					<li class="nav-item">
 						<a class="nav-link active" aria-current="page" href="OnlineCart.php">Home</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="TabSale.php">หน้าจอขาย</a>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							จัดการสินค้า
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="TabManageProduct.php">จัดการสินค้า</a></li>
-							<li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#addToStockAndSelect">รับสินค้าเข้าสต็อค</a></li>
-						</ul>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="TabManageCustomer.php">จัดการลูกค้า</a>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							รายงานการขาย
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="TabReportByBill.php">แยกตามบิล</a></li>
-							<li><a class="dropdown-item" href="TabReportByCustomer.php">แยกตามลูกค้า</a></li>
-							<li><a class="dropdown-item" href="TabReportByProduct.php">แยกตามสินค้า</a></li>
-							<li><a class="dropdown-item" href="TabReportProfit.php">กำไร-ขาดทุน</a></li>
+					<?php
+						if (isset($_SESSION['seller'])) {
+							echo '<li class="nav-item"><a class="nav-link" href="TabSale.php">หน้าจอขาย</a></li>';
+						}
+
+						if (isset($_SESSION['seller']) && $_SESSION['permission'] == 1) {
+							echo '
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									จัดการสินค้า
+								</a>
+									<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<li><a class="dropdown-item" href="TabManageProduct.php">จัดการสินค้า</a></li>
+										<li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#addToStockAndSelect">รับสินค้าเข้าสต็อค</a></li>
+									</ul>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="TabManageCustomer.php">จัดการลูกค้า</a>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									รายงานการขาย
+								</a>
+									<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<li><a class="dropdown-item" href="TabReportByBill.php">แยกตามบิล</a></li>
+										<li><a class="dropdown-item" href="TabReportByCustomer.php">แยกตามลูกค้า</a></li>
+										<li><a class="dropdown-item" href="TabReportByProduct.php">แยกตามสินค้า</a></li>
+										<li><a class="dropdown-item" href="TabReportProfit.php">กำไร-ขาดทุน</a></li>
 
 
-						</ul>
-					</li>
+									</ul>
+							</li>';
+						}
+
+						if (isset($_SESSION['seller'])) {
+							echo '<li class="nav-item dropdown">
+										<a class="nav-link dropdown-toggle me-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">' . $_SESSION['seller'] . '</a>
+											<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+												<li><a class="dropdown-item" href="#">แก้ไขข้อมูล</a></li>
+												<li><form action="login.php" method="post">
+												<button type="submit" class="dropdown-item" name="logout">ออกจากระบบ</form></li>
+												</button>
+												
+											</ul>
+										</li>';
+						}
+					?>
+
 				</ul>
 			</div>
 		</div>
@@ -238,4 +260,5 @@ include('system.php');
 
 
 		<script src="system\addToStock.js"></script>
+
 </body>

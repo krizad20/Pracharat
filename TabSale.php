@@ -1,4 +1,10 @@
-<?php include("system\header.php"); ?>
+<?php
+include("system\header.php");
+if (!isset($_SESSION['seller'])) {
+    echo "<script>window.location.href='index.php';</script>";
+}
+
+?>
 
 <div class="row overflow-auto" style="height: 90%;">
     <div class="d-flex col-md-6">
@@ -421,10 +427,7 @@
             var quantity = parseInt($(this).val());
             var action = 'quantity_change';
             var pStock = parseInt($('#' + product_id).attr("value"));
-            if (quantity > pStock) {
-                alert("จำนวนสินค้าไม่พอ");
-                $(this).val(old_quantity);
-            } else if (quantity != '') {
+            if (quantity > 0 && quantity <= pStock + old_quantity) {
                 $.ajax({
                     url: "TabPOS/posAction.php",
                     method: "POST",
@@ -439,21 +442,163 @@
                         load_product();
                     }
                 });
+
+            } else if (quantity != '') {
+                alert("จำนวนสินค้าไม่พอ");
+
+                $(this).val(old_quantity);
             }
         });
 
-        $('#searchBar').off().on('keyup', function(e) {
+        $('#searchBar').off().on('keypress', function(e) {
             if (e.keyCode == 13) {
+                e.preventDefault();
                 var search = $('#searchBar').val() + '"';
+                var isHave = false;
+
+                ThaiToEng(search);
+
                 $('.bars').each(function() {
                     if ($(this).text().toLowerCase().indexOf(search.toLowerCase()) > -1) {
                         id = $(this).attr("value");
                         $('#' + id).click();
                         $('#searchBar').val('');
+                        isHave = true;
                     }
                 });
+
+                if (!isHave) {
+                    alert("ไม่พบสินค้า");
+                    $('#searchBar').select();
+
+                }
             }
         });
+
+        $(document).on('keypress', function(e) {
+            // e.preventDefault();
+            $('#searchBar').focus();
+            if ($('#searchBar').focus() != true) {
+                $('#searchBar').focus();
+            }
+        });
+
+        //Thai-English Keyboard Mapping
+        function ThaiToEng(string) {
+
+            let eng = "";
+            let mapKeyBoardJSON = {
+                'ๅ': '1',
+                '+': '!',
+                '1': '@',
+                '/': '2',
+                '-': '3',
+                '2': '#',
+                'ภ': '4',
+                '3': '$',
+                'ถ': '5',
+                '4': '%',
+                'ุ': '6',
+                'ู': '^',
+                'ึ': '7',
+                '฿': '&',
+                'ค': '8',
+                '5': '*',
+                'ต': '9',
+                '6': '(',
+                'จ': '0',
+                '7': ')',
+                'ข': '-',
+                '8': '_',
+                'ช': '=',
+                '9': '+',
+                'ๆ': 'q',
+                '0': 'Q',
+                'ไ': 'w',
+                '"': 'W',
+                'ำ': 'e',
+                'ฎ': 'E',
+                'พ': 'r',
+                'ฑ': 'R',
+                'ะ': 't',
+                'ธ': 'T',
+                'ั': 'y',
+                'ํ': 'Y',
+                'ี': 'u',
+                '๊': 'U',
+                'ร': 'i',
+                'ณ': 'I',
+                'น': 'o',
+                'ฯ': 'O',
+                'ย': 'p',
+                'ญ': 'P',
+                'บ': '[',
+                'ฐ': '{',
+                'ล': ']',
+                '`': '`',
+                'ฃ': '\\',
+                'ฅ': '`',
+                'ฟ': 'a',
+                'ฤ': 'A',
+                'ห': 's',
+                'ฆ': 'S',
+                'ก': 'd',
+                'ฏ': 'D',
+                'ด': 'f',
+                'โ': 'F',
+                'เ': 'g',
+                'ฌ': 'G',
+                '้': 'h',
+                '็': 'H',
+                '่': 'j',
+                '๋': 'J',
+                'า': 'k',
+                'ษ': 'K',
+                'ส': 'l',
+                'ศ': 'L',
+                'ว': ';',
+                'ซ': ':',
+                'ง': "'",
+                '.': '"',
+                'ผ': 'z',
+                '(': 'Z',
+                'ป': 'x',
+                ')': 'X',
+                'แ': 'c',
+                'ฉ': 'C',
+                'อ': 'v',
+                'ฮ': 'V',
+                'ิ': 'b',
+                'ฺ': 'B',
+                'ท': 'n',
+                '์': 'N',
+                'ท': 'm',
+                '?': 'M',
+                'ม': '`',
+                'ฒ': '<',
+                'ใ': '.',
+                'ฬ': '>',
+                'ฝ': '/',
+                'ฦ': '?',
+            }
+
+            for (let index = 0; index < string.length; index++) {
+                const element = string[index];
+                if (mapKeyBoardJSON[element] != undefined && 'กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮฯะัาำิีึืุูเเแโใไๅๆ฿เแใไๆกขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮฯะัาำิีึืุูเเแโใไๅๆ฿เแใไๆกขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮฯะัาำิีึืุูเเแโใไๅๆ฿เแใไๆกขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮฯ/-ขช'.includes(element)) {
+                    eng += mapKeyBoardJSON[element];
+                } else {
+                    eng += element;
+                }
+
+            }
+
+
+            return eng;
+        }
+
+
+
+
 
 
         //Select Customer
@@ -627,7 +772,7 @@
             var product_BP = $(this).parent().find('.bp').text()
             var product_SP = $(this).parent().find('.sp').text()
 
-            
+
 
 
             showModal("noSelect");
@@ -759,4 +904,18 @@
             return today;
         }
     });
+
+    //Function dont input Text in thai--
+    function isEng(e) {
+        //alert(String.fromCharCode(e.keyCode));
+        key = e.keyCode;
+        e.returnValue = false;
+        if ((key > 64 && key < 91) || key == 32 || key == 46) {
+            e.returnValue = true;
+        } else if ((key > 96 && key < 123) || key == 32 || key == 46) {
+            e.returnValue = true;
+        } else if (key > 47 && key < 58) {
+            e.returnValue = true;
+        }
+    }
 </script>
