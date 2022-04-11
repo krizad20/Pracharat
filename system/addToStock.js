@@ -1,3 +1,5 @@
+
+
 let selectProductTable = $("#selectProductA2S").DataTable({
   ajax: {
     url: "ajax/product.php",

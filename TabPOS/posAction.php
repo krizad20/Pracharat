@@ -152,9 +152,31 @@ if (isset($_POST["action"])) {
         $sID = $_POST["sID"];
         $pID = $_POST["pID"];
         $pQuantity = $_POST["quantity"];
-        $pTotal = $pQuantity * $_SESSION['product'][$sID][$pID]['pSP'];
-        $_SESSION['product'][$sID][$pID]['pQuantity'] = $pQuantity;
-        $_SESSION['product'][$sID][$pID]['pTotal'] = $pTotal;
+
+        $sql = "SELECT pVal FROM `product` WHERE `pID` = '$pID'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_array($result);
+        $pVal = $row["pVal"];
+
+        foreach ($_SESSION['product'] as $keys => $values) {
+            if ($keys != $sID) {
+                foreach ($values as $key => $value) {
+                    if ($key == $pID) {
+                        $pVal = $pVal - $value['pQuantity'];
+                    }
+                }
+            }
+        }
+
+        if ($pVal >= $pQuantity) {
+            $pTotal = $pQuantity * $_SESSION['product'][$sID][$pID]['pSP'];
+            $_SESSION['product'][$sID][$pID]['pQuantity'] = $pQuantity;
+            $_SESSION['product'][$sID][$pID]['pTotal'] = $pTotal;
+            echo "success";
+        } else {
+            //alert
+            echo "สินค้าหมด";
+        }
     }
 
     if ($_POST["action"] == 'remove') {

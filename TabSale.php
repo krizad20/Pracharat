@@ -6,6 +6,15 @@ if (!isset($_SESSION['seller'])) {
 
 ?>
 
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
+
 <div class="row overflow-auto" style="height: 90%;">
     <div class="d-flex col-md-6">
         <?php include("TabManageProduct/allProductGrid.php"); ?>
@@ -319,6 +328,7 @@ if (!isset($_SESSION['seller'])) {
             var action = "add";
 
 
+
             if (product_quantity > 0 && product_quantity <= pStock) {
                 $.ajax({
                     url: "TabPOS/posAction.php",
@@ -333,6 +343,7 @@ if (!isset($_SESSION['seller'])) {
                     success: function(data) {
                         load_cart_data();
                         load_product();
+                        $('#searchBar').val('');
                     }
                 });
             } else {
@@ -427,7 +438,8 @@ if (!isset($_SESSION['seller'])) {
             var quantity = parseInt($(this).val());
             var action = 'quantity_change';
             var pStock = parseInt($('#' + product_id).attr("value"));
-            if (quantity > 0 && quantity <= pStock + old_quantity) {
+
+            if (quantity > 0) {
                 $.ajax({
                     url: "TabPOS/posAction.php",
                     method: "POST",
@@ -437,15 +449,19 @@ if (!isset($_SESSION['seller'])) {
                         quantity: quantity,
                         action: action
                     },
-                    success: function() {
-                        load_cart_data();
-                        load_product();
+                    success: function(data) {
+                        if (data == 'success') {
+                            load_cart_data();
+                            load_product();
+                        } else {
+                            alert("จำนวนสินค้าไม่พอ");
+                            $('#' + product_id).val(old_quantity);
+                        }
                     }
                 });
 
-            } else if (quantity != '') {
-                alert("จำนวนสินค้าไม่พอ");
-
+            } else if (quantity != '' && quantity <= 0) {
+                alert("จำนวนสินค้าต้องมากกว่า 0");
                 $(this).val(old_quantity);
             }
         });
@@ -477,10 +493,16 @@ if (!isset($_SESSION['seller'])) {
 
         $(document).on('keypress', function(e) {
             // e.preventDefault();
-            $('#searchBar').focus();
-            if ($('#searchBar').focus() != true) {
+            //modol show check
+            if ($('.modal').is(':visible')) {
+
+            } else {
                 $('#searchBar').focus();
+                if ($('#searchBar').focus() != true) {
+                    $('#searchBar').focus();
+                }
             }
+
         });
 
         //Thai-English Keyboard Mapping
@@ -595,10 +617,6 @@ if (!isset($_SESSION['seller'])) {
 
             return eng;
         }
-
-
-
-
 
 
         //Select Customer

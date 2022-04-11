@@ -30,13 +30,17 @@ for ($i=0; $i < sizeof($arr) ; $i++) {
         $pID = $value["pID"];
         $pName = $value["pName"];
         $pQuantity = $value["pQuantity"];
-        $pSP = $value["pSP"];
-        $pBP = $value["pBP"];
+        $pSP = $value["pSP"] * $pQuantity;
+        $pBP = $value["pBP"] * $pQuantity;
 
         $sumSP += number_format((float)$pSP, 2, '.', '');
         $sumBP += number_format((float)$pBP, 2, '.', '');
 
         $pProfit = $pSP - $pBP;
+
+        if($value["pBP"] == 0){
+            $pProfit = 0;
+        }
         $newArray[] = array(
             "bDate" => $bDate,
             "bID" => $bID,
