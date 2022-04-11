@@ -1,5 +1,5 @@
 <?php
-include("system\header.php");
+include("./system/header.php");
 //session_start()
 ?>
 
@@ -24,7 +24,7 @@ include("system\header.php");
           </span>
           <span class="badge bg-success" id="total_price">฿ 0.00</span>
           <span class="position-relative">
-            <img src="img\cart.png" width="25" height="25">
+            <img src="img/cart.png" width="25" height="25">
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="total"></span>
           </span>
         </a>
@@ -79,7 +79,7 @@ include("system\header.php");
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="TabPOS.php" method="post" class="d-grid gap-2">
+        <form action="./TabPOS.php" method="post" class="d-grid gap-2">
           <input name="password" class="form-control" placeholder="******" type="password">
           <div class="form-group">
             <button type="submit" name="login" class="btn btn-primary">เข้าสู่ระบบ</button>
@@ -118,7 +118,7 @@ include("system\header.php");
 
     function loadCate() {
       $.ajax({
-        url: "TabAddToStock/cate.php",
+        url: "./TabAddToStock/cate.php",
         success: function(data) {
 
           var json = $.parseJSON(data)
@@ -136,7 +136,7 @@ include("system\header.php");
 
     function load_product() {
       $.ajax({
-        url: "TabAllProduct/fetch_item.php",
+        url: "./TabAllProduct/fetch_item.php",
         method: "POST",
         data: {
           menu: 'addCart'
@@ -157,7 +157,7 @@ include("system\header.php");
 
     function load_cart_data() {
       $.ajax({
-        url: "TabAllProduct/fetch_cart.php",
+        url: "./TabAllProduct/fetch_cart.php",
         method: "POST",
         dataType: "json",
         success: function(data) {
@@ -177,7 +177,7 @@ include("system\header.php");
       var action = "add";
       if (product_quantity > 0) {
         $.ajax({
-          url: "TabAllProduct/action.php",
+          url: "./TabAllProduct/action.php",
           method: "POST",
           data: {
             product_id: product_id,
@@ -201,7 +201,7 @@ include("system\header.php");
       var action = 'remove';
       if (confirm("ยืนยันที่จะลบสินค้าหรือไม่?")) {
         $.ajax({
-          url: "TabAllProduct/action.php",
+          url: "./TabAllProduct/action.php",
           method: "POST",
           data: {
             product_id: product_id,
@@ -221,7 +221,7 @@ include("system\header.php");
     $(document).on('click', '#clear_cart', function() {
       var action = 'empty';
       $.ajax({
-        url: "TabAllProduct/action.php",
+        url: "./TabAllProduct/action.php",
         method: "POST",
         data: {
           action: action
@@ -236,7 +236,7 @@ include("system\header.php");
 
     $(document).on('click', '#check_out_cart', function() {
       $.ajax({
-        url: "TabAllProduct/sendOrder.php",
+        url: "./TabAllProduct/sendOrder.php",
         method: "POST",
         data: {
         },

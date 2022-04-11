@@ -1,5 +1,5 @@
 <?php
-include("..\system\server.php");
+include(".././system/server.php");
 $dateFrom = $_POST["dateFrom"];
 $dateTo = $_POST["dateTo"];
 $sql = "SELECT c.cID,c.cHouse,c.cName,(SELECT COALESCE(SUM(bTotal),0) FROM bill WHERE cID = c.cID AND DATE(bDate) >= '$dateFrom' AND DATE(bDate) <= '$dateTo') AS total

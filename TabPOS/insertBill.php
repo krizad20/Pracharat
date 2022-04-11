@@ -1,5 +1,5 @@
 <?php
-include('..\system\server.php');
+include('.././system/server.php');
 //session_start();
 //$bID = $_POST["bID"];
 $sql = "SET GLOBAL time_zone = '+7:00'";

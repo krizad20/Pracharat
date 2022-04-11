@@ -1,5 +1,5 @@
 <?php
-include("system\header.php");
+include("./system\header.php");
 
 ?>
 
@@ -240,7 +240,7 @@ include("system\header.php");
                 "serverSide": true,
                 "processing": true,
                 "ajax": {
-                    "url": "TabReport/allBill.php",
+                    "url": "./TabReport/allBill.php",
                     "method": "POST",
                     data: {
                         dateFrom: dateFrom,

@@ -1,5 +1,5 @@
 <?php
-include("system\server.php");
+include("./system/server.php");
 // File upload path
 $targetDir = "product_pic/";
 $fileName = basename($_FILES["file"]["name"]);
@@ -13,7 +13,6 @@ if (isset($_POST["submit"]) && !empty($_FILES["file"]["name"])) {
         $temp = explode(".", $_FILES["file"]["name"]);
         $newfilename = "P00001" . '.' . end($temp);
         move_uploaded_file($_FILES["file"]["tmpName"], "product_pic/" . $newfilename);
-        
     } 
 } 
 ?>

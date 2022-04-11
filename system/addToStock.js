@@ -2,7 +2,7 @@
 
 let selectProductTable = $("#selectProductA2S").DataTable({
   ajax: {
-    url: "ajax/product.php",
+    url: "./ajax/product.php",
   },
 
   columns: [
@@ -196,7 +196,7 @@ function selectProduct(data) {
       else if (askConfirm != "") {
         if (confirm(askConfirm)) {
           $.ajax({
-            url: "TabPOS/posAction.php",
+            url: "./TabPOS/posAction.php",
             type: "POST",
             data: {
               action: action,
@@ -235,7 +235,7 @@ function selectProduct(data) {
       //Add Only
       else if (askConfirm == "") {
         $.ajax({
-          url: "TabPOS/posAction.php",
+          url: "./TabPOS/posAction.php",
           type: "POST",
           data: {
             action: action,

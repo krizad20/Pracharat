@@ -1,5 +1,5 @@
 <?php
-include('..\system\server.php');
+include('.././system/server.php');
 $ID = $_POST["ID"]; //2
 $de = $ID-1; //1
 $in = $ID+1; //3

@@ -1,6 +1,6 @@
 <?php
-include("system\headerCustomer.php");
-include("system\server.php");
+include("./system\headerCustomer.php");
+include("./system\server.php");
 ?>
 
 <body>
@@ -44,7 +44,7 @@ include("system\server.php");
 
     function loadAjax() {
       $.ajax({
-        url: "TabAddToStock/cate.php",
+        url: "./TabAddToStock/cate.php",
         success: function(data) {
 
           var json = $.parseJSON(data)
@@ -60,7 +60,7 @@ include("system\server.php");
       });
 
       $.ajax({
-        url: "TabAllProduct/showAllProduct.php",
+        url: "./TabAllProduct/showAllProduct.php",
         success: function(data) {
           $('#cardRow').html(data)
 

@@ -1,5 +1,5 @@
 <?php
-include("system\header.php");
+include("./system/header.php");
 if (!isset($_SESSION['seller'])) {
     echo "<script>window.location.href='index.php';</script>";
 }
@@ -17,7 +17,7 @@ if (!isset($_SESSION['seller'])) {
 
 <div class="row overflow-auto" style="height: 90%;">
     <div class="d-flex col-md-6">
-        <?php include("TabManageProduct/allProductGrid.php"); ?>
+        <?php include("./TabManageProduct/allProductGrid.php"); ?>
     </div>
     <div class="d-flex col-md-6">
         <div class="card" style="width: 100%;">
@@ -283,28 +283,24 @@ if (!isset($_SESSION['seller'])) {
 </div>
 
 <script>
-    $(document).ready(function() {
+    $.fn.dataTable.ext.errMode = 'throw';
 
-        $.fn.dataTable.ext.errMode = 'throw';
-
-        var userList;
-        var sID = $("input[type=radio][name=saleID]:checked").val()
-        var cID = "";
-        var totalPrice = 0;
-        var date = getThaiDate();
-        $('input[type=radio][name=saleID]').change(function() {
-            sID = this.value;
-            load_cart_data();
-        });
-
-
-        load_product();
-
-        loadCate()
-
+    var userList;
+    var sID = $("input[type=radio][name=saleID]:checked").val()
+    var cID = "";
+    var totalPrice = 0;
+    var date = getThaiDate();
+    $('input[type=radio][name=saleID]').change(function() {
+        sID = this.value;
         load_cart_data();
+    });
+
+    load_product();
+    loadCate();
+    load_cart_data();
 
 
+    $(document).ready(function() {
         $('#pCateSelect').change(function() {
             var selection = this.value;
             if (selection) {
@@ -331,7 +327,7 @@ if (!isset($_SESSION['seller'])) {
 
             if (product_quantity > 0 && product_quantity <= pStock) {
                 $.ajax({
-                    url: "TabPOS/posAction.php",
+                    url: "./TabPOS/posAction.php",
                     method: "POST",
                     data: {
                         sID: sID,
@@ -360,7 +356,7 @@ if (!isset($_SESSION['seller'])) {
                 var action = "addFav";
 
                 $.ajax({
-                    url: "TabPOS/posAction.php",
+                    url: "./TabPOS/posAction.php",
                     method: "POST",
                     data: {
                         pID: product_id,
@@ -378,7 +374,7 @@ if (!isset($_SESSION['seller'])) {
 
                 var action = "removeFav";
                 $.ajax({
-                    url: "TabPOS/posAction.php",
+                    url: "./TabPOS/posAction.php",
                     method: "POST",
                     data: {
                         pID: product_id,
@@ -398,7 +394,7 @@ if (!isset($_SESSION['seller'])) {
             var product_id = $(this).parent().parent().attr("id");
             var action = 'remove';
             $.ajax({
-                url: "TabPOS/posAction.php",
+                url: "./TabPOS/posAction.php",
                 method: "POST",
                 data: {
                     sID: sID,
@@ -415,7 +411,7 @@ if (!isset($_SESSION['seller'])) {
         $(document).on('click', '#clearCart', function() {
             var action = 'empty';
             $.ajax({
-                url: "TabPOS/posAction.php",
+                url: "./TabPOS/posAction.php",
                 method: "POST",
                 data: {
                     sID: sID,
@@ -441,7 +437,7 @@ if (!isset($_SESSION['seller'])) {
 
             if (quantity > 0) {
                 $.ajax({
-                    url: "TabPOS/posAction.php",
+                    url: "./TabPOS/posAction.php",
                     method: "POST",
                     data: {
                         sID: sID,
@@ -505,123 +501,12 @@ if (!isset($_SESSION['seller'])) {
 
         });
 
-        //Thai-English Keyboard Mapping
-        function ThaiToEng(string) {
 
-            let eng = "";
-            let mapKeyBoardJSON = {
-                'ๅ': '1',
-                '+': '!',
-                '1': '@',
-                '/': '2',
-                '-': '3',
-                '2': '#',
-                'ภ': '4',
-                '3': '$',
-                'ถ': '5',
-                '4': '%',
-                'ุ': '6',
-                'ู': '^',
-                'ึ': '7',
-                '฿': '&',
-                'ค': '8',
-                '5': '*',
-                'ต': '9',
-                '6': '(',
-                'จ': '0',
-                '7': ')',
-                'ข': '-',
-                '8': '_',
-                'ช': '=',
-                '9': '+',
-                'ๆ': 'q',
-                '0': 'Q',
-                'ไ': 'w',
-                '"': 'W',
-                'ำ': 'e',
-                'ฎ': 'E',
-                'พ': 'r',
-                'ฑ': 'R',
-                'ะ': 't',
-                'ธ': 'T',
-                'ั': 'y',
-                'ํ': 'Y',
-                'ี': 'u',
-                '๊': 'U',
-                'ร': 'i',
-                'ณ': 'I',
-                'น': 'o',
-                'ฯ': 'O',
-                'ย': 'p',
-                'ญ': 'P',
-                'บ': '[',
-                'ฐ': '{',
-                'ล': ']',
-                '`': '`',
-                'ฃ': '\\',
-                'ฅ': '`',
-                'ฟ': 'a',
-                'ฤ': 'A',
-                'ห': 's',
-                'ฆ': 'S',
-                'ก': 'd',
-                'ฏ': 'D',
-                'ด': 'f',
-                'โ': 'F',
-                'เ': 'g',
-                'ฌ': 'G',
-                '้': 'h',
-                '็': 'H',
-                '่': 'j',
-                '๋': 'J',
-                'า': 'k',
-                'ษ': 'K',
-                'ส': 'l',
-                'ศ': 'L',
-                'ว': ';',
-                'ซ': ':',
-                'ง': "'",
-                '.': '"',
-                'ผ': 'z',
-                '(': 'Z',
-                'ป': 'x',
-                ')': 'X',
-                'แ': 'c',
-                'ฉ': 'C',
-                'อ': 'v',
-                'ฮ': 'V',
-                'ิ': 'b',
-                'ฺ': 'B',
-                'ท': 'n',
-                '์': 'N',
-                'ท': 'm',
-                '?': 'M',
-                'ม': '`',
-                'ฒ': '<',
-                'ใ': '.',
-                'ฬ': '>',
-                'ฝ': '/',
-                'ฦ': '?',
-            }
-
-            for (let index = 0; index < string.length; index++) {
-                const element = string[index];
-                if (mapKeyBoardJSON[element] != undefined && 'กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮฯะัาำิีึืุูเเแโใไๅๆ฿เแใไๆกขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮฯะัาำิีึืุูเเแโใไๅๆ฿เแใไๆกขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮฯะัาำิีึืุูเเแโใไๅๆ฿เแใไๆกขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮฯ/-ขช'.includes(element)) {
-                    eng += mapKeyBoardJSON[element];
-                } else {
-                    eng += element;
-                }
-
-            }
-
-
-            return eng;
-        }
 
 
         //Select Customer
         var selectDataCustomerTable = $('#selectCustomerTable').DataTable({
-            "ajax": "ajax/customer.php",
+            "ajax": "./ajax/customer.php",
             "columns": [{
                     data: 'cHouse'
                 },
@@ -730,7 +615,7 @@ if (!isset($_SESSION['seller'])) {
                     } else if (change == $('#changePrice').html()) {
                         let action = 'checkBill';
                         $.ajax({
-                            url: "TabPOS/posAction.php",
+                            url: "./TabPOS/posAction.php",
                             type: "POST",
                             data: {
                                 action: action,
@@ -811,117 +696,236 @@ if (!isset($_SESSION['seller'])) {
 
         });
 
-        function getDateTime() {
-            var date = new Date();
-            var hour = date.getHours();
-            hour = (hour < 10 ? "0" : "") + hour;
-            var min = date.getMinutes();
-            min = (min < 10 ? "0" : "") + min;
-            var sec = date.getSeconds();
-            sec = (sec < 10 ? "0" : "") + sec;
-            var year = date.getFullYear();
-            var month = date.getMonth() + 1;
-            month = (month < 10 ? "0" : "") + month;
-            var day = date.getDate();
-            day = (day < 10 ? "0" : "") + day;
-            return year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
-        }
 
-        function loadCate() {
-            $.ajax({
-                url: "TabAddToStock/cate.php",
-                success: function(data) {
-
-                    var json = $.parseJSON(data)
-                    var str = '<option value="" selected>ทั้งหมด</option>'; // variable to store the options
-
-                    for (let i = 0; i < json.length; i++) {
-                        //console.log(json[i].pCate);
-                        str += '<option value="' + json[i].pCate + '">' + json[i].pCate + '</option>';
-                    }
-                    $('#pCateSelect').html(str)
-
-                }
-            });
-        }
-
-        function load_product() {
-            $.ajax({
-                url: "TabAllProduct/fetch_item.php",
-                method: "POST",
-                data: {
-                    menu: 'tabPOS'
-                },
-                success: function(data) {
-                    $('#display_item').html(data);
-                    userList = new List('items', {
-                        valueNames: ['name', 'cate', 'bars'],
-                        page: 36,
-                        pagination: true
-                    });
-                }
-            });
-        }
-
-        function load_cart_data() {
-            $.ajax({
-                url: "TabAllProduct/fetch_cart.php",
-                method: "POST",
-                data: {
-                    sID: sID
-                },
-                dataType: "json",
-                success: function(data) {
-                    //console.log(data);
-                    $('#cart_details').html(data.cart_details);
-                    $('#totalPrice').text(data.total_price + '฿');
-                    $('#total').text(data.total_item);
-                    $('#bill').text("เลขที่บิล :");
-                    $('#customer').text("ลูกค้า : " + data.customer_name);
-                    cID = data.customer_id;
-                    totalPrice = data.total_price;
-
-                    $('#totalPrice').css("color", "black");
-                    $('#discountPrice').css("color", "black");
-                    $('#checkBill').prop('disabled', false);
-                    $('#note').prop('disabled', false);
-
-                }
-            });
-        }
-
-        function setCustomer(sID, cID) {
-            $.ajax({
-                url: "TabPOS/posAction.php",
-                method: "POST",
-                data: {
-                    sID: sID,
-                    cID: cID,
-                    action: 'setCustomer'
-                },
-                success: function(data) {}
-            });
-        }
-
-        function getThaiDate() {
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1; //January is 0!
-            var yyyy = today.getFullYear() + 543;
-
-            if (dd < 10) {
-                dd = '0' + dd
-            }
-
-            if (mm < 10) {
-                mm = '0' + mm
-            }
-
-            today = dd + '/' + mm + '/' + yyyy;
-
-            return today;
-        }
     });
+
+    function firstLoad(){
+    }
+
+    function getDateTime() {
+        var date = new Date();
+        var hour = date.getHours();
+        hour = (hour < 10 ? "0" : "") + hour;
+        var min = date.getMinutes();
+        min = (min < 10 ? "0" : "") + min;
+        var sec = date.getSeconds();
+        sec = (sec < 10 ? "0" : "") + sec;
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        month = (month < 10 ? "0" : "") + month;
+        var day = date.getDate();
+        day = (day < 10 ? "0" : "") + day;
+        return year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
+    }
+
+    function loadCate() {
+        $.ajax({
+            url: "./TabAddToStock/cate.php",
+            success: function(data) {
+
+                var json = $.parseJSON(data)
+                var str = '<option value="" selected>ทั้งหมด</option>'; // variable to store the options
+
+                for (let i = 0; i < json.length; i++) {
+                    //console.log(json[i].pCate);
+                    str += '<option value="' + json[i].pCate + '">' + json[i].pCate + '</option>';
+                }
+                $('#pCateSelect').html(str)
+
+            }
+        });
+    }
+
+    function load_product() {
+        $.ajax({
+            url: "./TabAllProduct/fetch_item.php",
+            method: "POST",
+            data: {
+                menu: 'tabPOS'
+            },
+            success: function(data) {
+                $('#display_item').html(data);
+                userList = new List('items', {
+                    valueNames: ['name', 'cate', 'bars'],
+                    page: 36,
+                    pagination: true
+                });
+            }
+        });
+    }
+
+    function load_cart_data() {
+
+        $.ajax({
+            url: "./TabAllProduct/fetch_cart.php",
+            method: "POST",
+            data: {
+                sID: sID ? sID : 's1'
+            },
+            dataType: "json",
+            success: function(data) {
+                //console.log(data);
+                $('#cart_details').html(data.cart_details);
+                $('#totalPrice').text(data.total_price + '฿');
+                $('#total').text(data.total_item);
+                $('#bill').text("เลขที่บิล :");
+                $('#customer').text("ลูกค้า : " + data.customer_name);
+                cID = data.customer_id;
+                totalPrice = data.total_price;
+
+                $('#totalPrice').css("color", "black");
+                $('#discountPrice').css("color", "black");
+                $('#checkBill').prop('disabled', false);
+                $('#note').prop('disabled', false);
+
+            }
+        });
+    }
+
+    function setCustomer(sID, cID) {
+        $.ajax({
+            url: "./TabPOS/posAction.php",
+            method: "POST",
+            data: {
+                sID: sID,
+                cID: cID,
+                action: 'setCustomer'
+            },
+            success: function(data) {}
+        });
+    }
+
+    function getThaiDate() {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear() + 543;
+
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        today = dd + '/' + mm + '/' + yyyy;
+
+        return today;
+    }
+
+    //Thai-English Keyboard Mapping
+    function ThaiToEng(string) {
+
+        let eng = "";
+        let mapKeyBoardJSON = {
+            'ๅ': '1',
+            '+': '!',
+            '1': '@',
+            '/': '2',
+            '-': '3',
+            '2': '#',
+            'ภ': '4',
+            '3': '$',
+            'ถ': '5',
+            '4': '%',
+            'ุ': '6',
+            'ู': '^',
+            'ึ': '7',
+            '฿': '&',
+            'ค': '8',
+            '5': '*',
+            'ต': '9',
+            '6': '(',
+            'จ': '0',
+            '7': ')',
+            'ข': '-',
+            '8': '_',
+            'ช': '=',
+            '9': '+',
+            'ๆ': 'q',
+            '0': 'Q',
+            'ไ': 'w',
+            '"': 'W',
+            'ำ': 'e',
+            'ฎ': 'E',
+            'พ': 'r',
+            'ฑ': 'R',
+            'ะ': 't',
+            'ธ': 'T',
+            'ั': 'y',
+            'ํ': 'Y',
+            'ี': 'u',
+            '๊': 'U',
+            'ร': 'i',
+            'ณ': 'I',
+            'น': 'o',
+            'ฯ': 'O',
+            'ย': 'p',
+            'ญ': 'P',
+            'บ': '[',
+            'ฐ': '{',
+            'ล': ']',
+            '`': '`',
+            'ฃ': '\\',
+            'ฅ': '`',
+            'ฟ': 'a',
+            'ฤ': 'A',
+            'ห': 's',
+            'ฆ': 'S',
+            'ก': 'd',
+            'ฏ': 'D',
+            'ด': 'f',
+            'โ': 'F',
+            'เ': 'g',
+            'ฌ': 'G',
+            '้': 'h',
+            '็': 'H',
+            '่': 'j',
+            '๋': 'J',
+            'า': 'k',
+            'ษ': 'K',
+            'ส': 'l',
+            'ศ': 'L',
+            'ว': ';',
+            'ซ': ':',
+            'ง': "'",
+            '.': '"',
+            'ผ': 'z',
+            '(': 'Z',
+            'ป': 'x',
+            ')': 'X',
+            'แ': 'c',
+            'ฉ': 'C',
+            'อ': 'v',
+            'ฮ': 'V',
+            'ิ': 'b',
+            'ฺ': 'B',
+            'ท': 'n',
+            '์': 'N',
+            'ท': 'm',
+            '?': 'M',
+            'ม': '`',
+            'ฒ': '<',
+            'ใ': '.',
+            'ฬ': '>',
+            'ฝ': '/',
+            'ฦ': '?',
+        }
+
+        for (let index = 0; index < string.length; index++) {
+            const element = string[index];
+            if (mapKeyBoardJSON[element] != undefined && 'กขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮฯะัาำิีึืุูเเแโใไๅๆ฿เแใไๆกขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮฯะัาำิีึืุูเเแโใไๅๆ฿เแใไๆกขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮฯะัาำิีึืุูเเแโใไๅๆ฿เแใไๆกขฃคฅฆงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรลวศษสหฬอฮฯ/-ขช'.includes(element)) {
+                eng += mapKeyBoardJSON[element];
+            } else {
+                eng += element;
+            }
+
+        }
+
+
+        return eng;
+    }
 
     //Function dont input Text in thai--
     function isEng(e) {

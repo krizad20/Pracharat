@@ -1,5 +1,5 @@
 <?php
-include("system\headerCustomer.php");
+include("./system/headerCustomer.php");
 //session_start()
 ?>
 <div class="container-fluid">
@@ -17,7 +17,7 @@ include("system\headerCustomer.php");
   $(document).ready(function() {
 
     $.ajax({
-      url: "TabAllProduct/getOrder.php",
+      url: "./TabAllProduct/getOrder.php",
       method: "POST",
       dataType: "json",
       success: function(data) {

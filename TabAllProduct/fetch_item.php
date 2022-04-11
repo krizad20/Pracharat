@@ -1,6 +1,6 @@
 <?php
 
-include("..\system\server.php");
+include(".././system/server.php");
 session_start();
 $menu = $_POST['menu'];
 //order by pFav and pID
@@ -16,7 +16,7 @@ while ($row = $list->fetch_assoc()) {
                 <div class="card-body d-flex flex-column">
                     <h3 class="name" style="display: none;">' . $row["pName"] . '</h3>
                     <h3 class="cate" style="display: none;">' . $row["pCate"] . '</h3>
-                    <img src="product_pic\\' . $row["img"] . '" width="auto" height="200" class="card-img-top" alt="P00000">
+                    <img src="product_pic\/' . $row["img"] . '" width="auto" height="200" class="card-img-top" alt="P00000">
                     <p class="fs-7 fw-bolder text-primary text-wrap">' . $row["pName"] . '</p>
                     <h5 class="text-danger">฿ ' . $row["pSP"] . '</h5>
                     <input type="number" name="quantity" id="quantity' . $row["pID"] . '" class="form-control" value="1" />
@@ -46,7 +46,7 @@ while ($row = $list->fetch_assoc()) {
                         <span class="isPacked" style="display: none;">' . $row["isPacked"] . '</span>
                         <span class="bars" value = "' . $row["pID"] . '" style="display: none;">' . $row["pBars"] . '</span>
                         <span class="position-relative">
-                            <img src="product_pic\\' . $row["img"] . '" width="auto" height="120" class="card-img-top">
+                            <img src="product_pic\/' . $row["img"] . '" width="auto" height="120" class="card-img-top">
                             
                         </span>
                         <span class="fs-10 fw-bolder text-primary text-wrap p-1">' . $row["pName"] . '</span>
@@ -118,7 +118,7 @@ while ($row = $list->fetch_assoc()) {
                         <span class="cate" style="display: none;">' . $row["pCate"] . '</span>
                         <span class="bars" value = "' . $row["pID"] . '" style="display: none;">' . $row["pBars"] . '</span>
                         <span class="position-relative">
-                            <img src="product_pic\\' . $row["img"] . '" width="auto" height="120" class="card-img-top">
+                            <img src="product_pic\/' . $row["img"] . '" width="auto" height="120" class="card-img-top">
                             ' . $favButton .
             '
                         </span>

@@ -1,5 +1,5 @@
 <?php
-include("system\header.php");
+include("./system/header.php");
 ?>
 
 <div class="container-fluid">
@@ -118,7 +118,7 @@ include("system\header.php");
             $('#addToStockTable').DataTable({
                 "processing": true,
                 "ajax": {
-                    "url": "TabReport/addToStock.php",
+                    "url": "./TabReport/addToStock.php",
                     "method": "POST",
                     data: {
                         dateFrom: dateFrom,

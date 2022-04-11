@@ -1,5 +1,5 @@
 <?php
-include('..\system\server.php');
+include('.././system/server.php');
 $pID = $_POST["pID"];
 
 $sql = "SELECT COALESCE(MAX(`id`)+1,1) AS id FROM quicklist WHERE id>0 ORDER BY `id` DESC LIMIT 1";

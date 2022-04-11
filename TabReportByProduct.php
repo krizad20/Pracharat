@@ -1,5 +1,5 @@
 <?php
-include("system\header.php");
+include("./syste/header.php");
 if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     echo "<script>window.location.href='index.php';</script>";
 }
@@ -112,7 +112,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
             $('#productReportTable').DataTable().destroy();
             table = $('#productReportTable').DataTable({
                 "ajax": {
-                    "url": "TabReport/productReport.php",
+                    "url": "./TabReport/productReport.php",
                     "method": "POST",
                     data: {
                         dateFrom: dateFrom,

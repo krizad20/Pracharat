@@ -1,5 +1,5 @@
 <?php
-include("system/server.php");
+include("./system/server.php");
 //delete sub barcode
 $barcode = $_POST['barcode'];
 $pID = $_POST['pID'];

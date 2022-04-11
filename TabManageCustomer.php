@@ -1,5 +1,5 @@
 <?php
-include("system\header.php");
+include("./system/header.php");
 if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
   echo "<script>window.location.href='index.php';</script>";
 }
@@ -113,7 +113,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
       var table = $('#customerTable').DataTable({
         "processing": true,
-        "ajax": "ajax/customer.php",
+        "ajax": "./ajax/customer.php",
         "columns": [{
             data: 'cID'
           },

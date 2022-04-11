@@ -1,5 +1,5 @@
 <?php
-include("system\header.php");
+include("./system/header.php");
 if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
   echo "<script>window.location.href='index.php';</script>";
 }
@@ -135,7 +135,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
       //Add Product
 
       $.ajax({
-        url: "TabAddToStock/cate.php",
+        url: "./TabAddToStock/cate.php",
         success: function(data) {
 
           var json = $.parseJSON(data)
@@ -151,7 +151,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
       });
 
       $.ajax({
-        url: "TabAddToStock/unit.php",
+        url: "./TabAddToStock/unit.php",
         success: function(data) {
 
           var json = $.parseJSON(data)
@@ -168,7 +168,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
       var addProductDataTable = $('#addProductTable').DataTable({
         "processing": true,
-        "ajax": "ajax/product.php",
+        "ajax": "./ajax/product.php",
         "columns": [{
             data: 'pID'
           },
@@ -283,7 +283,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           alert("กรุณากรอกข้อมูลให้ครบ");
         } else {
           $.ajax({
-            url: "TabManageProduct/manageProduct.php",
+            url: "./TabManageProduct/manageProduct.php",
             method: "POST",
             data: {
               pIDSave: pID,

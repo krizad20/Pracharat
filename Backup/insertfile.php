@@ -1,6 +1,6 @@
 <?php
 
-include("system\server.php");
+include("./system\server.php");
 
 $query = "SELECT * FROM product ORDER BY pID ASC";
 

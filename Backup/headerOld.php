@@ -95,14 +95,14 @@ session_start();
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                         <li class="nav-item">
-                            <a href="TabPOS.php" class="nav-link">
+                            <a href="./TabPOS.php" class="nav-link">
 
                                 หน้าจอขาย
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="TabManageProduct.php" class="nav-link">
+                            <a href="./TabManageProduct.php" class="nav-link">
 
                                 จัดการสินค้า
                             </a>
@@ -116,7 +116,7 @@ session_start();
                         </li>
 
                         <li class="nav-item">
-                            <a href="TabManageCustomer.php" class="nav-link">
+                            <a href="./TabManageCustomer.php" class="nav-link">
                                 จัดการลูกค้า
                             </a>
                         </li>
@@ -129,19 +129,19 @@ session_start();
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                                 <li class="dropdown-item">
-                                    <a href="TabReportByBill.php" class="nav-link">
+                                    <a href="./TabReportByBill.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         แยกตามบิล
                                     </a>
                                 </li>
                                 <li class="dropdown-item">
-                                    <a href="TabReportByCustomer.php" class="nav-link">
+                                    <a href="./TabReportByCustomer.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         แยกตามลูกค้า
                                     </a>
                                 </li>
                                 <li class="dropdown-item">
-                                    <a href="TabReportByProduct.php" class="nav-link">
+                                    <a href="./TabReportByProduct.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         แยกตามสินค้า
                                     </a>
@@ -150,33 +150,33 @@ session_start();
                         </li>
 
                         <li class="nav-item">
-                            <a href="TabReportAddtoStock.php" class="nav-link">
+                            <a href="./TabReportAddtoStock.php" class="nav-link">
                                 รายงานสินค้าเข้า
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="TabAddToStock.php" class="nav-link">
+                            <a href="./TabAddToStock.php" class="nav-link">
                                 รับสินค้าเข้าสต๊อค
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="TabPrintBarcode.php" class="nav-link">
+                            <a href="./TabPrintBarcode.php" class="nav-link">
 
                                 พิมพ์บาร์โค้ด
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="TabNeedToBuy.php" class="nav-link">
+                            <a href="./TabNeedToBuy.php" class="nav-link">
 
                                 สินค้าถึงจุดสั่งซื้อ
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="TabShowOrder.php" class="nav-link">
+                            <a href="./TabShowOrder.php" class="nav-link">
 
                                 รับออเดอร์
                             </a>

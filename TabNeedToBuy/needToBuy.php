@@ -1,5 +1,5 @@
 <?php
-include("..\system\server.php");
+include(".././system/server.php");
 $sql = "SELECT * FROM `product` WHERE pDel = 0 AND pVal <= 2 ORDER BY `pID` ASC";
 $res = mysqli_query($conn,$sql);
 

@@ -1,6 +1,6 @@
 <?php
-include("system\headerCustomer.php");
-include("system\server.php");
+include("./system\headerCustomer.php");
+include("./system\server.php");
 //session_start()
 ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -285,7 +285,7 @@ if ($last != 1) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="TabPOS.php" method="post" class="d-grid gap-2">
+        <form action="./TabPOS.php" method="post" class="d-grid gap-2">
           <input name="password" class="form-control" placeholder="******" type="password">
           <div class="form-group">
             <button type="submit" name="login" class="btn btn-primary">เข้าสู่ระบบ</button>
@@ -324,7 +324,7 @@ if ($last != 1) {
 
     function loadCate() {
       $.ajax({
-        url: "TabAddToStock/cate.php",
+        url: "./TabAddToStock/cate.php",
         success: function(data) {
 
           var json = $.parseJSON(data)
@@ -342,7 +342,7 @@ if ($last != 1) {
 
     function load_product() {
       $.ajax({
-        url: "TabAllProduct/fetch_item.php",
+        url: "./TabAllProduct/fetch_item.php",
         method: "POST",
         success: function(data) {
           $('#display_item').html(data);
@@ -360,7 +360,7 @@ if ($last != 1) {
 
     function load_cart_data() {
       $.ajax({
-        url: "TabAllProduct/fetch_cart.php",
+        url: "./TabAllProduct/fetch_cart.php",
         method: "POST",
         dataType: "json",
         success: function(data) {
@@ -380,7 +380,7 @@ if ($last != 1) {
       var action = "add";
       if (product_quantity > 0) {
         $.ajax({
-          url: "TabAllProduct/action.php",
+          url: "./TabAllProduct/action.php",
           method: "POST",
           data: {
             product_id: product_id,
@@ -404,7 +404,7 @@ if ($last != 1) {
       var action = 'remove';
       if (confirm("ยืนยันที่จะลบสินค้าหรือไม่?")) {
         $.ajax({
-          url: "TabAllProduct/action.php",
+          url: "./TabAllProduct/action.php",
           method: "POST",
           data: {
             product_id: product_id,
@@ -424,7 +424,7 @@ if ($last != 1) {
     $(document).on('click', '#clear_cart', function() {
       var action = 'empty';
       $.ajax({
-        url: "TabAllProduct/action.php",
+        url: "./TabAllProduct/action.php",
         method: "POST",
         data: {
           action: action
@@ -439,7 +439,7 @@ if ($last != 1) {
 
     $(document).on('click', '#check_out_cart', function() {
       $.ajax({
-        url: "TabAllProduct/sendOrder.php",
+        url: "./TabAllProduct/sendOrder.php",
         method: "POST",
         data: {},
         success: function() {

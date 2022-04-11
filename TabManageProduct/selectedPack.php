@@ -1,5 +1,5 @@
 <?php
-include("..\system\server.php");
+include(".././system/server.php");
 $sql = "SELECT pa.paID, pa.pID, pa.pBar, pa.paName, pa.paPerPack, p.pBP, p.pVal FROM packproduct pa , product p WHERE pa.pID = p.pID AND pa.paID = '" . $_POST['pID'] . "'";
 $res = mysqli_query($conn, $sql);
 

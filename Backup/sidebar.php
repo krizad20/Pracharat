@@ -43,27 +43,27 @@
                         </li> -->
 
                         <li class="nav-item">
-                            <a href="TabReportByBill.php" class="nav-link" id="reportByBill">
+                            <a href="./TabReportByBill.php" class="nav-link" id="reportByBill">
                                 <p>แสดงบิลทั้งหมด
                                 </p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="TabReportByCustomer.php" class="nav-link" id="reportByCustomer">
+                            <a href="./TabReportByCustomer.php" class="nav-link" id="reportByCustomer">
                                 <p>แสดงรายการลูกค้า</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="TabReportAddtoStock.php" class="nav-link" id="reportAddtoStock">
+                            <a href="./TabReportAddtoStock.php" class="nav-link" id="reportAddtoStock">
                                 <p>รายงานสินค้าเข้า
                                 </p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="TabReportByProduct.php" class="nav-link" id="reportByProduct">
+                            <a href="./TabReportByProduct.php" class="nav-link" id="reportByProduct">
                                 <p>รายงานแยกตามสินค้า
                                 </p>
                             </a>

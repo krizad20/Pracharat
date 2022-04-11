@@ -1,5 +1,5 @@
 <?php
-include("system\header.php");
+include("./system/header.php");
 if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
   echo "<script>window.location.href='index.php';</script>";
 }
@@ -589,7 +589,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     //Table Tab
     var table = $('#productTable').DataTable({
       "ajax": {
-        url: "ajax/product.php",
+        url: "./ajax/product.php",
       },
       "columns": [{
           data: 'pID'
@@ -902,7 +902,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
 
         $.ajax({
-          url: "TabManageProduct/manageProduct.php",
+          url: "./TabManageProduct/manageProduct.php",
           method: "POST",
           data: {
             mode: "getNewID"
@@ -1072,7 +1072,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
     //Select Product For Pack
     var selectDataProductTable = $('#selectProductTable').DataTable({
-      "ajax": "ajax/product.php",
+      "ajax": "./ajax/product.php",
       "columns": [{
           data: 'pID'
         },
@@ -1290,7 +1290,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     function loadCateAndUnit() {
       //Load Cate
       $.ajax({
-        url: "TabAddToStock/cate.php",
+        url: "./TabAddToStock/cate.php",
         success: function(data) {
 
           var json = $.parseJSON(data)
@@ -1311,7 +1311,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
       });
       //Load unit
       $.ajax({
-        url: "TabAddToStock/unit.php",
+        url: "./TabAddToStock/unit.php",
         success: function(data) {
 
           var json = $.parseJSON(data)
@@ -1329,7 +1329,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
     function load_product() {
       $.ajax({
-        url: "TabAllProduct/fetch_item.php",
+        url: "./TabAllProduct/fetch_item.php",
         method: "POST",
         data: {
           menu: 'manageProduct'
@@ -1350,7 +1350,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
         alert("กรุณากรอกข้อมูลให้ครบ");
       } else {
         $.ajax({
-          url: "TabManageProduct/manageProduct.php",
+          url: "./TabManageProduct/manageProduct.php",
           method: "POST",
           data: {
             mode: "add",
@@ -1389,7 +1389,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
         alert("กรุณากรอกข้อมูลให้ครบ");
       } else {
         $.ajax({
-          url: "TabManageProduct/savePack.php",
+          url: "./TabManageProduct/savePack.php",
           method: "POST",
           data: {
             paIDSave: pID,
@@ -1403,7 +1403,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
         });
 
         $.ajax({
-          url: "TabManageProduct/manageProduct.php",
+          url: "./TabManageProduct/manageProduct.php",
           method: "POST",
           data: {
             mode: "add",
@@ -1446,7 +1446,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
         alert("กรุณากรอกข้อมูลให้ครบ");
       } else {
         $.ajax({
-          url: "TabManageProduct/manageProduct.php",
+          url: "./TabManageProduct/manageProduct.php",
           method: "POST",
           data: {
             mode: "edit",
@@ -1489,7 +1489,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
         alert("กรุณากรอกข้อมูลให้ครบ");
       } else {
         $.ajax({
-          url: "TabManageProduct/savePack.php",
+          url: "./TabManageProduct/savePack.php",
           method: "POST",
           data: {
             paIDSave: pID,
@@ -1503,7 +1503,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
         });
 
         $.ajax({
-          url: "TabManageProduct/manageProduct.php",
+          url: "./TabManageProduct/manageProduct.php",
           method: "POST",
           data: {
             mode: "edit",
@@ -1543,7 +1543,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     function delProduct(id) {
       if (confirm("คุณต้องการลบสินค้านี้หรือไม่")) {
         $.ajax({
-          url: "TabManageProduct/manageProduct.php",
+          url: "./TabManageProduct/manageProduct.php",
           method: "POST",
           data: {
             mode: "del",

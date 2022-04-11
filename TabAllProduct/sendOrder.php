@@ -1,7 +1,7 @@
 <?php
 
 //session_start();
-include('..\system\server.php');
+include('.././system/server.php');
 
 $arr = [];
 foreach ($_SESSION["shopping_cart"] as $keys => $values) {

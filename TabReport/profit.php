@@ -1,5 +1,5 @@
 <?php
-include("..\system\server.php");
+include(".././system/server.php");
 //วันที่ขาย เลขที่บิล รหัสสินค้า ชื่อสินค้า จำนวน ราคาขาย ต้นทุน กำไร
 $dateFrom = $_POST["dateFrom"];
 $dateTo = $_POST["dateTo"];

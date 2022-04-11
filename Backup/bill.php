@@ -1,5 +1,5 @@
 <?php
-include("system\server.php");
+include("./system\server.php");
 $sql = "SELECT * FROM `bill` ORDER BY `bID` ASC";
 $res = mysqli_query($conn,$sql);
 

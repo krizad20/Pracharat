@@ -1,5 +1,5 @@
 <?php
-include("..\system\server.php");
+include(".././system/server.php");
 //session_start();
 
 $sID = $_POST["sID"];

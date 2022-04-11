@@ -205,7 +205,7 @@ include('system.php');
 					</li>
 					<?php
 						if (isset($_SESSION['seller'])) {
-							echo '<li class="nav-item"><a class="nav-link" href="TabSale.php">หน้าจอขาย</a></li>';
+							echo '<li class="nav-item"><a class="nav-link" href="./TabSale.php">หน้าจอขาย</a></li>';
 						}
 
 						if (isset($_SESSION['seller']) && $_SESSION['permission'] == 1) {
@@ -215,22 +215,22 @@ include('system.php');
 									จัดการสินค้า
 								</a>
 									<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="TabManageProduct.php">จัดการสินค้า</a></li>
+										<li><a class="dropdown-item" href="./TabManageProduct.php">จัดการสินค้า</a></li>
 										<li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#addToStockAndSelect">รับสินค้าเข้าสต็อค</a></li>
 									</ul>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="TabManageCustomer.php">จัดการลูกค้า</a>
+								<a class="nav-link" href="./TabManageCustomer.php">จัดการลูกค้า</a>
 							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 									รายงานการขาย
 								</a>
 									<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-										<li><a class="dropdown-item" href="TabReportByBill.php">แยกตามบิล</a></li>
-										<li><a class="dropdown-item" href="TabReportByCustomer.php">แยกตามลูกค้า</a></li>
-										<li><a class="dropdown-item" href="TabReportByProduct.php">แยกตามสินค้า</a></li>
-										<li><a class="dropdown-item" href="TabReportProfit.php">กำไร-ขาดทุน</a></li>
+										<li><a class="dropdown-item" href="./TabReportByBill.php">แยกตามบิล</a></li>
+										<li><a class="dropdown-item" href="./TabReportByCustomer.php">แยกตามลูกค้า</a></li>
+										<li><a class="dropdown-item" href="./TabReportByProduct.php">แยกตามสินค้า</a></li>
+										<li><a class="dropdown-item" href="./TabReportProfit.php">กำไร-ขาดทุน</a></li>
 
 
 									</ul>
@@ -259,6 +259,6 @@ include('system.php');
 
 
 
-		<script src="system\addToStock.js"></script>
+		<script src="./system/addToStock.js"></script>
 
 </body>

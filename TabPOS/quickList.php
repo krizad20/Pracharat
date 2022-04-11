@@ -1,5 +1,5 @@
 <?php
-include("..\system\server.php");
+include(".././system/server.php");
 $sql = "SELECT `id`, `pID`, `pName` FROM `quicklist` WHERE 1 ORDER BY `id`";
 $res = mysqli_query($conn,$sql);
 $arr = [];

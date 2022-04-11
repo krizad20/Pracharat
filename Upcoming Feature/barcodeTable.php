@@ -1,5 +1,5 @@
 <?php
-include("system/server.php");
+include("./system/server.php");
 $pID = $_POST['pID'];
 // $pID = "P00001";
 //fetches the barcode from the database

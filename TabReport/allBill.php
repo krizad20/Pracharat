@@ -1,5 +1,5 @@
 <?php
-include("..\system\server.php");
+include(".././system/server.php");
 $dateFrom = $_POST["dateFrom"];
 $dateTo = $_POST["dateTo"];
 $sql = "SELECT b.bDate,b.bID,c.cHouse,c.cName,b.bDetail,b.bTotal

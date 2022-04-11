@@ -1,5 +1,5 @@
 <?php
-include("system\header.php");
+include("./system/header.php");
 ?>
 
 <div class="container-fluid">
@@ -42,7 +42,7 @@ include("system\header.php");
         $('#needToBuyTable').DataTable({
             //"processing": true,
             "ajax": {
-                "url": "TabNeedToBuy/needToBuy.php",
+                "url": "./TabNeedToBuy/needToBuy.php",
             },
             "columns": [{
                     data: 'pID'

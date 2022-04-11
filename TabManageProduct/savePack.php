@@ -1,5 +1,5 @@
 <?php
-include('..\system\server.php');
+include('.././system/server.php');
 $paID = $_POST["paIDSave"];
 $pID = $_POST["pIDSave"];
 $paName = $_POST["paNameSave"];

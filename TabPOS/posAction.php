@@ -1,5 +1,5 @@
 <?php
-include("..\system\server.php");
+include(".././system/server.php");
 session_start();
 // session_unset();
 if (isset($_POST["action"])) {

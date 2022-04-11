@@ -1,7 +1,7 @@
 <?php
 
 //session_start();
-include('..\system\server.php');
+include('.././system/server.php');
 
 $query = "SELECT * FROM `order` WHERE 1";
 

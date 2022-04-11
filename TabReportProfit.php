@@ -1,5 +1,5 @@
 <?php
-include("system\header.php");
+include("./system/header.php");
 if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     echo "<script>window.location.href='index.php';</script>";
 }
@@ -123,7 +123,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
             $('#profitTable').DataTable().destroy();
             table = $('#profitTable').DataTable({
                 "ajax": {
-                    "url": "TabReport/profit.php",
+                    "url": "./TabReport/profit.php",
                     "method": "POST",
                     data: {
                         dateFrom: dateFrom,
@@ -227,7 +227,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
             let text = bID
             if (text.includes("edit")) {
                 $.ajax({
-                    url: "TabReport/billEdit.php",
+                    url: "./TabReport/billEdit.php",
                     method: "POST",
                     data: {
                         bID: text.slice(4),

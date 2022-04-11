@@ -1,5 +1,5 @@
 <?php
-include("..\system\server.php");
+include(".././system/server.php");
 $dateFrom = $_POST["dateFrom"];
 $dateTo = $_POST["dateTo"];
 $sql = "SELECT `apID`, `apName`, `aVal` FROM `addtostock` WHERE DATE(aDate) >= '$dateFrom' AND DATE(aDate) <= '$dateTo'";

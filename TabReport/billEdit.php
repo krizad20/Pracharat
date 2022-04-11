@@ -1,5 +1,5 @@
 <?php
-include('..\system\server.php');
+include('.././system/server.php');
 //session_start();
 $_SESSION['bIDEdit'] = $_POST["bID"];
 $_SESSION['fromEdit'] = 1;

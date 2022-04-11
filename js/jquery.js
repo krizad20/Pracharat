@@ -9570,7 +9570,7 @@ jQuery.extend( {
 
 		// Watch for a new set of requests
 		if ( fireGlobals && jQuery.active++ === 0 ) {
-			jQuery.event.trigger( "ajaxStart" );
+			jQuery.event.trigger( "./ajaxStart" );
 		}
 
 		// Uppercase the type
@@ -9670,7 +9670,7 @@ jQuery.extend( {
 
 			// Send global event
 			if ( fireGlobals ) {
-				globalEventContext.trigger( "ajaxSend", [ jqXHR, s ] );
+				globalEventContext.trigger( "./ajaxSend", [ jqXHR, s ] );
 			}
 
 			// If request was aborted inside ajaxSend, stop there
@@ -9803,7 +9803,7 @@ jQuery.extend( {
 			statusCode = undefined;
 
 			if ( fireGlobals ) {
-				globalEventContext.trigger( isSuccess ? "ajaxSuccess" : "ajaxError",
+				globalEventContext.trigger( isSuccess ? "./ajaxSuccess" : "./ajaxError",
 					[ jqXHR, s, isSuccess ? success : error ] );
 			}
 
@@ -9811,11 +9811,11 @@ jQuery.extend( {
 			completeDeferred.fireWith( callbackContext, [ jqXHR, statusText ] );
 
 			if ( fireGlobals ) {
-				globalEventContext.trigger( "ajaxComplete", [ jqXHR, s ] );
+				globalEventContext.trigger( "./ajaxComplete", [ jqXHR, s ] );
 
 				// Handle the global AJAX counter
 				if ( !( --jQuery.active ) ) {
-					jQuery.event.trigger( "ajaxStop" );
+					jQuery.event.trigger( "./ajaxStop" );
 				}
 			}
 		}
@@ -10693,12 +10693,12 @@ jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 
 
 jQuery.each( [
-	"ajaxStart",
-	"ajaxStop",
-	"ajaxComplete",
-	"ajaxError",
-	"ajaxSuccess",
-	"ajaxSend"
+	"./ajaxStart",
+	"./ajaxStop",
+	"./ajaxComplete",
+	"./ajaxError",
+	"./ajaxSuccess",
+	"./ajaxSend"
 ], function( _i, type ) {
 	jQuery.fn[ type ] = function( fn ) {
 		return this.on( type, fn );

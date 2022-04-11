@@ -1,5 +1,5 @@
 <?php
-include("..\system\server.php");
+include(".././system/server.php");
 $sql = "select * from customer where cID = '" . $_POST['cID'] . "'";
 $res = mysqli_query($conn, $sql);
 

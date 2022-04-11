@@ -1,5 +1,5 @@
 <?php
-    include("..\system\server.php");
+    include(".././system/server.php");
     $sql = "select * from product where pID = '".$_POST['pID']."'";
     $res = mysqli_query($conn,$sql);
 

@@ -1,7 +1,7 @@
 <?php
 
 //session_start();
-include('..\system\server.php');
+include('.././system/server.php');
 
 if (isset($_POST["action"])) {
 	if ($_POST["action"] == "add") {

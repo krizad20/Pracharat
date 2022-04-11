@@ -1,5 +1,5 @@
 <?php
-    include("..\system\server.php");
+    include(".././system/server.php");
     $sql = "SELECT `pCate` FROM `product` GROUP BY `pCate` ORDER BY `pCate` ASC";
     $res = mysqli_query($conn,$sql);
 

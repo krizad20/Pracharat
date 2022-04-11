@@ -1,5 +1,5 @@
 <?php
-include("system\header.php");
+include("./system/header.php");
 ?>
 
 <div class="container-fluid">
@@ -39,7 +39,7 @@ include("system\header.php");
         $('#allOrder').DataTable({
             "processing": true,
             "ajax": {
-                "url": "TabGetOrder/getOrder.php"
+                "url": "./TabGetOrder/getOrder.php"
             },
             "columns": [{
                     data: 'pID'
@@ -81,7 +81,7 @@ include("system\header.php");
             let text = bID
             if (text.includes("edit")) {
                 $.ajax({
-                    url: "TabReport/billEdit.php",
+                    url: "./TabReport/billEdit.php",
                     method: "POST",
                     data: {
                         bID: text.slice(4),

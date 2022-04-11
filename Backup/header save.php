@@ -67,7 +67,7 @@
                     </a>
                 </li> -->
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="TabPOS.php" class="nav-link">Home</a>
+                    <a href="./TabPOS.php" class="nav-link">Home</a>
                 </li>
             </ul>
         </nav>
@@ -89,7 +89,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="TabPOS.php" class="nav-link">
+                            <a href="./TabPOS.php" class="nav-link">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="cash-register" x="0px" y="0px" viewBox="0 0 1010 959.6426" enable-background="new 0 0 1010 959.6426" xml:space="preserve">
                                     <g>
                                         <g id="cash-register-cash-register">
@@ -163,7 +163,7 @@
 
                         <!-- <li class="nav-header">จัดการ</li> -->
                         <li class="nav-item">
-                            <a href="TabManageProduct.php" class="nav-link">
+                            <a href="./TabManageProduct.php" class="nav-link">
                                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
                                     <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                                     <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -189,7 +189,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="TabManageCustomer.php" class="nav-link">
+                            <a href="./TabManageCustomer.php" class="nav-link">
                                 <img width="24" height="24" src="https://image.flaticon.com/icons/png/512/3126/3126649.png" alt="Customer free icon" title="Customer free icon" class="loaded">
                                 <p>
                                     จัดการลูกค้า
@@ -206,19 +206,19 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="TabReportByBill.php" class="nav-link">
+                                    <a href="./TabReportByBill.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>แยกตามบิล</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="TabReportByCustomer.php" class="nav-link">
+                                    <a href="./TabReportByCustomer.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>แยกตามลูกค้า</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="TabReportByProduct.php" class="nav-link">
+                                    <a href="./TabReportByProduct.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>แยกตามสินค้า</p>
                                     </a>
@@ -227,7 +227,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="TabReportAddtoStock.php" class="nav-link">
+                            <a href="./TabReportAddtoStock.php" class="nav-link">
                                 <img width="24" height="24" src="https://image.flaticon.com/icons/png/512/2311/2311991.png" alt="Add free icon" title="Add free icon" class="loaded">
                                 <p>
                                     รายงานสินค้าเข้า
@@ -236,7 +236,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="TabAddToStock.php" class="nav-link">
+                            <a href="./TabAddToStock.php" class="nav-link">
                                 <img width="24" height="24" src="https://image.flaticon.com/icons/png/512/2311/2311991.png" alt="Add free icon" title="Add free icon" class="loaded">
                                 <p>
                                     รับสินค้าเข้าสต๊อค
@@ -245,7 +245,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="TabPrintBarcode.php" class="nav-link">
+                            <a href="./TabPrintBarcode.php" class="nav-link">
                                 <img width="24" height="24" src="https://image.flaticon.com/icons/png/512/2311/2311991.png" alt="Add free icon" title="Add free icon" class="loaded">
                                 <p>
                                     พิมพ์บาร์โค้ด
@@ -254,7 +254,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="TabNeedToBuy.php" class="nav-link">
+                            <a href="./TabNeedToBuy.php" class="nav-link">
                                 <img width="24" height="24" src="https://image.flaticon.com/icons/png/512/2311/2311991.png" alt="Add free icon" title="Add free icon" class="loaded">
                                 <p>
                                     สินค้าถึงจุดสั่งซื้อ

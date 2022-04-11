@@ -1,5 +1,5 @@
 <?php
-include("..\system\server.php");
+include(".././system/server.php");
 $dateFrom = $_POST["dateFrom"];
 $dateTo = $_POST["dateTo"];
 

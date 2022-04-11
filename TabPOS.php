@@ -1,7 +1,7 @@
 <?php
 
 
-include("system\header.php");
+include("./system/header.php");
 ?>
 
 
@@ -525,7 +525,7 @@ include("system\header.php");
             "retrieve": true,
             "processing": true,
             "ajax": {
-                "url": "TabPOS/nowBill.php"
+                "url": "./TabPOS/nowBill.php"
             },
             "columns": [{
                     data: 'pID'
@@ -686,7 +686,7 @@ include("system\header.php");
 
         //Select Product
         var selectDataProductTable = $('#selectProductTable').DataTable({
-            "ajax": "ajax/product.php",
+            "ajax": "./ajax/product.php",
             "columns": [{
                     data: 'pID'
                 },
@@ -751,7 +751,7 @@ include("system\header.php");
 
         //Select Customer
         var selectDataCustomerTable = $('#selectCustomerTable').DataTable({
-            "ajax": "ajax/customer.php",
+            "ajax": "./ajax/customer.php",
             "columns": [{
                     data: 'cHouse'
                 },
@@ -812,7 +812,7 @@ include("system\header.php");
         //Add Product
         var addProductDataTable = $('#addProductTable').DataTable({
             "processing": true,
-            "ajax": "ajax/product.php",
+            "ajax": "./ajax/product.php",
             "columns": [{
                     data: 'pID'
                 },
@@ -932,7 +932,7 @@ include("system\header.php");
                 alert("กรุณากรอกข้อมูลให้ครบ");
             } else {
                 $.ajax({
-                    url: "TabManageProduct/manageProduct.php",
+                    url: "./TabManageProduct/manageProduct.php",
                     method: "POST",
                     data: {
                         pIDSave: pID,
@@ -1037,7 +1037,7 @@ include("system\header.php");
 
         //Quick List
         var quickListSelectProduct = $('#quickListSelectProduct').DataTable({
-            "ajax": "ajax/product.php",
+            "ajax": "./ajax/product.php",
             "columns": [{
                     data: 'pID'
                 },
@@ -1058,7 +1058,7 @@ include("system\header.php");
         });
 
         var quickListInModal = $('#quickListInModal').DataTable({
-            "ajax": "TabPOS/quickList.php",
+            "ajax": "./TabPOS/quickList.php",
             "columns": [{
                     data: 'id'
                 },
@@ -1087,7 +1087,7 @@ include("system\header.php");
         });
 
         var quickListInPOS = $('#quickListInPOS').DataTable({
-            "ajax": "TabPOS/quickList.php",
+            "ajax": "./TabPOS/quickList.php",
             "columns": [{
                     data: 'pID'
                 },
@@ -1213,7 +1213,7 @@ include("system\header.php");
                 clearPOS();
             }
             $.ajax({
-                url: "TabPOS/addToPOS.php",
+                url: "./TabPOS/addToPOS.php",
                 method: "POST",
                 data: {
                     pIDAdd: pID, 
@@ -1243,7 +1243,7 @@ include("system\header.php");
 
         function editVal(pID, newVal) {
             $.ajax({
-                url: "TabPOS/editValPOS.php",
+                url: "./TabPOS/editValPOS.php",
                 method: "POST",
                 data: {
                     sID: sID,
@@ -1266,7 +1266,7 @@ include("system\header.php");
 
         function delPOS(pID) {
             $.ajax({
-                url: "TabPOS/delPOS.php",
+                url: "./TabPOS/delPOS.php",
                 method: "POST",
                 data: {
                     sID: sID,
@@ -1280,7 +1280,7 @@ include("system\header.php");
 
         function clearPOS() {
             $.ajax({
-                url: "TabPOS/clearPOS.php",
+                url: "./TabPOS/clearPOS.php",
                 method: "POST",
                 data: {
                     sID: sID
@@ -1295,7 +1295,7 @@ include("system\header.php");
 
         function sendSaleSession(sID1) {
             $.ajax({
-                url: "TabPOS/nowBill.php",
+                url: "./TabPOS/nowBill.php",
                 method: "POST",
                 data: {
                     sID: sID1
@@ -1310,7 +1310,7 @@ include("system\header.php");
         function getCustomer(sID) {
 
             $.ajax({
-                url: "TabPOS/getcID.php",
+                url: "./TabPOS/getcID.php",
                 method: "POST",
                 data: {
                     sID: sID,
@@ -1326,7 +1326,7 @@ include("system\header.php");
         function setCustomer(sID, cID) {
 
             $.ajax({
-                url: "TabPOS/setCustomer.php",
+                url: "./TabPOS/setCustomer.php",
                 method: "POST",
                 data: {
                     sID: sID,
@@ -1343,7 +1343,7 @@ include("system\header.php");
         function insertBill(posArray) {
             //Insert Bill
             $.ajax({
-                url: "TabPOS/insertBill.php",
+                url: "./TabPOS/insertBill.php",
                 method: "POST",
                 data: {
                     sID: sID,
@@ -1368,7 +1368,7 @@ include("system\header.php");
                     for (let i = 0; i < posArray.length; i++) {
                         let data = posDataTable.rows(i).data()[0]
                         $.ajax({
-                            url: "TabPOS/insertBillDetail.php",
+                            url: "./TabPOS/insertBillDetail.php",
                             method: "POST",
                             data: {
                                 bID: bID,
@@ -1388,7 +1388,7 @@ include("system\header.php");
         function editBill(posArray) {
             //Insert Bill
             $.ajax({
-                url: "TabPOS/billEditDelete.php",
+                url: "./TabPOS/billEditDelete.php",
                 method: "POST",
                 data: {
                     sID: sID,
@@ -1409,7 +1409,7 @@ include("system\header.php");
                     for (let i = 0; i < posArray.length; i++) {
                         let data = posDataTable.rows(i).data()[0]
                         $.ajax({
-                            url: "TabPOS/insertBillDetail.php",
+                            url: "./TabPOS/insertBillDetail.php",
                             method: "POST",
                             data: {
                                 bID: bID,
@@ -1431,7 +1431,7 @@ include("system\header.php");
 
         function getProductArr() {
             $.ajax({
-                url: "TabManageProduct/product.php",
+                url: "./TabManageProduct/product.php",
                 async: false,
                 success: function(data) {
                     productData = data;
@@ -1442,7 +1442,7 @@ include("system\header.php");
 
         function addToQuickList(pID) {
             $.ajax({
-                url: "TabPOS/addToQuickList.php",
+                url: "./TabPOS/addToQuickList.php",
                 method: "POST",
                 data: {
                     pID: pID,
@@ -1456,7 +1456,7 @@ include("system\header.php");
 
         function delFromQuickList(ID) {
             $.ajax({
-                url: "TabPOS/delFromQuickList.php",
+                url: "./TabPOS/delFromQuickList.php",
                 method: "POST",
                 data: {
                     ID: ID,
@@ -1470,7 +1470,7 @@ include("system\header.php");
 
         function changeQuickList(ID, status) {
             $.ajax({
-                url: "TabPOS/changeQuickList.php",
+                url: "./TabPOS/changeQuickList.php",
                 method: "POST",
                 data: {
                     ID: ID,

@@ -1,5 +1,5 @@
 <?php
-include("..\system\server.php");
+include(".././system/server.php");
 //session_start();
 if (isset($_POST["sID"])) {
     $_SESSION['sIDAjax'] = $_POST["sID"];
