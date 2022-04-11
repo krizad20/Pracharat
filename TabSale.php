@@ -290,10 +290,7 @@ if (!isset($_SESSION['seller'])) {
     var cID = "";
     var totalPrice = 0;
     var date = getThaiDate();
-    $('input[type=radio][name=saleID]').change(function() {
-        sID = this.value;
-        load_cart_data();
-    });
+
 
     load_product();
     loadCate();
@@ -312,6 +309,11 @@ if (!isset($_SESSION['seller'])) {
             }
         })
 
+        $('input[type=radio][name=saleID]').change(function() {
+            sID = this.value;
+            load_cart_data();
+        });
+
 
         $('#date').text("วันที่ : " + getThaiDate());
 
@@ -326,22 +328,7 @@ if (!isset($_SESSION['seller'])) {
 
 
             if (product_quantity > 0 && product_quantity <= pStock) {
-                $.ajax({
-                    url: "./TabPOS/posAction.php",
-                    method: "POST",
-                    data: {
-                        sID: sID,
-                        cID: "C0001",
-                        pID: product_id,
-                        quantity: product_quantity,
-                        action: action
-                    },
-                    success: function(data) {
-                        load_cart_data();
-                        load_product();
-                        $('#searchBar').val('');
-                    }
-                });
+                addToCart(product_id);
             } else {
                 alert("จำนวนสินค้าไม่พอ");
             }
@@ -393,19 +380,9 @@ if (!isset($_SESSION['seller'])) {
         $(document).on('click', '.delete', function() {
             var product_id = $(this).parent().parent().attr("id");
             var action = 'remove';
-            $.ajax({
-                url: "./TabPOS/posAction.php",
-                method: "POST",
-                data: {
-                    sID: sID,
-                    pID: product_id,
-                    action: action
-                },
-                success: function() {
-                    load_cart_data();
-                    load_product();
-                }
-            })
+            let oldVal = $(this).parent().parent().find('input').val();
+            deleteFromCart(product_id,oldVal);
+
         });
 
         $(document).on('click', '#clearCart', function() {
@@ -427,7 +404,6 @@ if (!isset($_SESSION['seller'])) {
         });
 
         $(document).on('change', '.quantity', function() {
-
             //get old value
             var old_quantity = $(this).attr("name");
             var product_id = $(this).parent().parent().attr("id");
@@ -451,7 +427,9 @@ if (!isset($_SESSION['seller'])) {
                             load_product();
                         } else {
                             alert("จำนวนสินค้าไม่พอ");
-                            $('#' + product_id).val(old_quantity);
+                            load_cart_data();
+
+                            // $(this).val(old_quantity);
                         }
                     }
                 });
@@ -699,9 +677,6 @@ if (!isset($_SESSION['seller'])) {
 
     });
 
-    function firstLoad(){
-    }
-
     function getDateTime() {
         var date = new Date();
         var hour = date.getHours();
@@ -720,7 +695,7 @@ if (!isset($_SESSION['seller'])) {
 
     function loadCate() {
         $.ajax({
-            url: "./TabAddToStock/cate.php",
+            url: "./ajax/cate.php",
             success: function(data) {
 
                 var json = $.parseJSON(data)
@@ -780,6 +755,72 @@ if (!isset($_SESSION['seller'])) {
 
             }
         });
+    }
+
+    function addToCart(pID) {
+        $.ajax({
+            url: "./TabPOS/posAction.php",
+            method: "POST",
+            data: {
+                sID: sID,
+                cID: "C0001",
+                pID: pID,
+                quantity: 1,
+                action: "add"
+            },
+            success: function(data) {
+                load_cart_data();
+                // load_product();
+                // $('#searchBar').val('');
+                $('.bars').each(function() {
+                    if ($(this).text().toLowerCase().indexOf(pID.toLowerCase()) > -1) {
+                        id = $(this).attr("value");
+                        let newVal = parseInt($('#' + id).attr("value")) - 1;
+                        $('#' + id).attr("value", newVal);
+                        $('#' + id + 'Text').text("เหลืออยู่ " + newVal);
+
+                        if (newVal == 0) {
+                            $('#' + id).addClass("d-none");
+                            let addToStockButton = '<button type="button" name="add_to_cart" id="' + id + '"class="btn btn-danger add_to_stock btn-xs" value = "' + newVal + '">เพิ่มสต็อค</button>'
+                            $('#' + id).parent().append(addToStockButton);
+                        }
+                    }
+                });
+
+
+
+            }
+        });
+    }
+
+    function deleteFromCart(pID, oldVal) {
+        $.ajax({
+            url: "./TabPOS/posAction.php",
+            method: "POST",
+            data: {
+                sID: sID,
+                pID: pID,
+                action: "remove"
+            },
+            success: function() {
+                load_cart_data();
+                $('.bars').each(function() {
+                    if ($(this).text().toLowerCase().indexOf(pID.toLowerCase()) > -1) {
+                        id = $(this).attr("value");
+                        let newVal = parseInt($('#' + id).attr("value")) + parseInt(oldVal);
+                        $('#' + id).attr("value", newVal);
+                        $('#' + id + 'Text').text("เหลืออยู่ " + newVal);
+
+                        if (newVal == oldVal) {
+                            console.log($(this).find('.add_to_stock'));
+                            $(this).parent().find('.add_to_stock').addClass("d-none");
+                            $(this).parent().find('.add_to_cart').removeClass("d-none");
+
+                        }
+                    }
+                });
+            }
+        })
     }
 
     function setCustomer(sID, cID) {

@@ -44,7 +44,7 @@ include("./system\server.php");
 
     function loadAjax() {
       $.ajax({
-        url: "./TabAddToStock/cate.php",
+        url: "./ajax/cate.php",
         success: function(data) {
 
           var json = $.parseJSON(data)

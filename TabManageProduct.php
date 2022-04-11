@@ -1290,7 +1290,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     function loadCateAndUnit() {
       //Load Cate
       $.ajax({
-        url: "./TabAddToStock/cate.php",
+        url: "./ajax/cate.php",
         success: function(data) {
 
           var json = $.parseJSON(data)
@@ -1311,7 +1311,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
       });
       //Load unit
       $.ajax({
-        url: "./TabAddToStock/unit.php",
+        url: "./ajax/unit.php",
         success: function(data) {
 
           var json = $.parseJSON(data)

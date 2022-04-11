@@ -324,7 +324,7 @@ if ($last != 1) {
 
     function loadCate() {
       $.ajax({
-        url: "./TabAddToStock/cate.php",
+        url: "./ajax/cate.php",
         success: function(data) {
 
           var json = $.parseJSON(data)

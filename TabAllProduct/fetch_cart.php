@@ -25,7 +25,7 @@ $output = '
 				<th width="10%">จำนวน</th>  
 				<th width="20%">ราคา</th>  
 				<th width="15%">ราคารวม</th>  
-				<th width="5%">ลบสินค้า</th>  
+				<th width="5%">ลบ</th>  
 			</tr>
 		</thead>
 		<tbody class="overflow-auto">

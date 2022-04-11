@@ -92,10 +92,10 @@ while ($row = $list->fetch_assoc()) {
             }
         }
 
-        $button = '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-success add_to_cart btn-xs" value = "' . $pValText . '">เพิ่ม</button>';
+        $button =       '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-success add_to_cart btn-xs" value = "' . $pValText . '">ใส่ตะกร้า</button>';
         if ($pValText <= 0) {
-            $button = '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-success add_to_cart d-none btn-sm" value = "' . $pValText . '">เพิ่ม</button>' .
-                '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-danger add_to_stock btn-xs" value = "' . $pValText . '">เพิ่มสต็อค</button>';
+            $button =   '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-success add_to_cart d-none btn-sm" value = "' . $pValText . '">ใส่ตะกร้า</button>' .
+                        '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-danger add_to_stock btn-xs" value = "' . $pValText . '">เพิ่มสต็อค</button>';
         }
 
         $favButton = '<span type="button" class="position-absolute top-0 end-0 ms-auto btn btn-secondary btn-xs add_fav" value = "' . $row["pID"] . '">
@@ -128,7 +128,7 @@ while ($row = $list->fetch_assoc()) {
                     </div>
                     <div class="card-footer d-flex bd-highlight p-1">
                         <span class="fs-6 fw-bolder text-danger d-flex align-items-center">฿ ' . $row["pSP"] . '</span>            
-                        <span class="ms-auto d-flex align-items-center">เหลืออยู่ ' . $pValText . '</span>
+                        <span class="ms-auto d-flex align-items-center pValText" value = "' . $pValText . '" id = "' . $row["pID"] . 'Text">เหลืออยู่ ' . $pValText . '</span>
                     </div>
                 </div>
             </div>
