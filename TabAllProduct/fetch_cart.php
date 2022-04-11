@@ -21,11 +21,11 @@ $output = '
 	<table class="table table-bordered table-striped" id="order_table" > 
 		<thead>
 			<tr style="position:sticky;top: 0;background: white;">  
-				<th width="40%">ชื่อสินค้า</th>  
-				<th width="10%">จำนวน</th>  
-				<th width="20%">ราคา</th>  
-				<th width="15%">ราคารวม</th>  
-				<th width="5%">ลบ</th>  
+				<th width="auto">ชื่อสินค้า</th>  
+				<th width="5%">จำนวน</th>  
+				<th width="auto">ราคา</th>  
+				<th width="auto">ราคารวม</th>  
+				<th width="auto">ลบ</th>  
 			</tr>
 		</thead>
 		<tbody class="overflow-auto">
@@ -37,11 +37,11 @@ if (!empty($_SESSION['product'][$sID])) {
 		if (!str_contains($keys, "pack")) {
 			$output .= '
 		<tr id="' . $values["pID"] . '">
-			<td>' . $values["pName"] . '</td>
-			<td align="center"><input class="form-control form-control-sm quantity"  type="number" onkeydown="return event.keyCode !== 69" name="' . $values['pQuantity'] . '" value="' . $values['pQuantity'] . '" size="2" min="1"max="100"/></td>
-			<td align="right">฿ ' . $values["pSP"] . '</td>
-			<td align="right">฿ ' . $values["pTotal"] . '</td>
-			<td><button name="delete" class="btn btn-danger btn-xs delete">ลบ</button></td>
+			<td class="p-1">' . $values["pName"] . '</td>
+			<td class="p-1" align="center"><input class="form-control form-control-sm quantity p-1"  type="number" onkeydown="return event.keyCode !== 69" name="' . $values['pQuantity'] . '" value="' . $values['pQuantity'] . '" min="1"/></td>
+			<td class="p-1" align="right"> ' . $values["pSP"] . '</td>
+			<td class="p-1" align="right"> ' . number_format($values["pTotal"],2) . '</td>
+			<td class="p-1" ><button name="delete" class="btn btn-danger btn-sm p-0 delete" style="width:100%">ลบ</button></td>
 		</tr>
 		';
 			$total_price = $total_price + ($values["pQuantity"] * $values["pSP"]);

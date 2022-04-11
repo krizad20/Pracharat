@@ -6,22 +6,13 @@ if (!isset($_SESSION['seller'])) {
 
 ?>
 
-<style>
-    /* Chrome, Safari, Edge, Opera */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-</style>
-
 <div class="row overflow-auto" style="height: 90%;">
     <div class="d-flex col-md-6">
         <?php include("./TabManageProduct/allProductGrid.php"); ?>
     </div>
     <div class="d-flex col-md-6">
         <div class="card" style="width: 100%;">
-            <div class="card-header sticky-top" style="height: fit-content;">
+            <div class="card-header sticky-top p-2" style="height: fit-content;">
                 <div class="row d-flex justify-content-between align-items-end">
                     <div class="div">
                         <div class=" form-check form-check-inline">
@@ -59,7 +50,7 @@ if (!isset($_SESSION['seller'])) {
                 </div>
             </div>
             <!-- /.card-header -->
-            <div class="card-body overflow-auto position-sticky">
+            <div class="card-body overflow-auto position-sticky p-2">
                 <div id="cart_details"></div>
             </div>
             <!-- /.card-body -->
@@ -777,11 +768,11 @@ if (!isset($_SESSION['seller'])) {
                         id = $(this).attr("value");
                         let newVal = parseInt($('#' + id).attr("value")) - 1;
                         $('#' + id).attr("value", newVal);
-                        $('#' + id + 'Text').text("เหลืออยู่ " + newVal);
+                        $('#' + id + 'Text').text("เหลือ " + newVal);
 
                         if (newVal == 0) {
                             $('#' + id).addClass("d-none");
-                            let addToStockButton = '<button type="button" name="add_to_cart" id="' + id + '"class="btn btn-danger add_to_stock btn-xs" value = "' + newVal + '">เพิ่มสต็อค</button>'
+                            let addToStockButton = '<button type="button" name="add_to_cart" id="' + id + '"class="btn btn-danger add_to_stock btn-sm" value = "' + newVal + '">เพิ่มสต็อค</button>'
                             $('#' + id).parent().append(addToStockButton);
                         }
                     }
@@ -809,7 +800,7 @@ if (!isset($_SESSION['seller'])) {
                         id = $(this).attr("value");
                         let newVal = parseInt($('#' + id).attr("value")) + parseInt(oldVal);
                         $('#' + id).attr("value", newVal);
-                        $('#' + id + 'Text').text("เหลืออยู่ " + newVal);
+                        $('#' + id + 'Text').text("เหลือ " + newVal);
 
                         if (newVal == oldVal) {
                             console.log($(this).find('.add_to_stock'));

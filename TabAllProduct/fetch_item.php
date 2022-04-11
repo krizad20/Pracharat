@@ -25,7 +25,7 @@ while ($row = $list->fetch_assoc()) {
                     <button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-success add_to_cart mt-2">ใส่ตะกร้า</button>
                 </div>
                 <div class="card-footer d-flex bd-highlight">
-                    <span class="ms-auto bd-highlight">เหลืออยู่ ' . $row["pVal"] . '</span>
+                    <span class="ms-auto bd-highlight">เหลือ ' . $row["pVal"] . '</span>
                 </div>
             </div>
         </div>
@@ -51,14 +51,14 @@ while ($row = $list->fetch_assoc()) {
                         </span>
                         <span class="fs-10 fw-bolder text-primary text-wrap p-1">' . $row["pName"] . '</span>
                         <div class="d-flex justify-content-center me-2">
-                            <button type="button" name="edit" id="pEditGrid" class="btn btn-warning btn-xs edit" data-bs-toggle="modal" data-bs-target="#editProductModal">แก้ไข</button>
-                            <button type="button" name="delete" id="pDelGrid" class="btn btn-danger btn-xs delete">ลบ</button>
+                            <button type="button" name="edit" id="pEditGrid" class="btn btn-warning btn-sm edit" data-bs-toggle="modal" data-bs-target="#editProductModal">แก้ไข</button>
+                            <button type="button" name="delete" id="pDelGrid" class="btn btn-danger btn-sm delete">ลบ</button>
                         </div>
                         
                         			
                     </div>
                     <div class="card-footer d-flex bd-highlight p-1">          
-                        <span class="ms-auto d-flex align-items-center">เหลืออยู่ ' . $row["pVal"] . '</span>
+                        <span class="ms-auto d-flex align-items-center">เหลือ ' . $row["pVal"] . '</span>
                     </div>
                 </div>
             </div>
@@ -92,25 +92,25 @@ while ($row = $list->fetch_assoc()) {
             }
         }
 
-        $button =       '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-success add_to_cart btn-xs" value = "' . $pValText . '">ใส่ตะกร้า</button>';
+        $button =       '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-success add_to_cart btn-sm" value = "' . $pValText . '">ใส่ตะกร้า</button>';
         if ($pValText <= 0) {
             $button =   '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-success add_to_cart d-none btn-sm" value = "' . $pValText . '">ใส่ตะกร้า</button>' .
-                        '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-danger add_to_stock btn-xs" value = "' . $pValText . '">เพิ่มสต็อค</button>';
+                        '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-danger add_to_stock btn-sm" value = "' . $pValText . '">เพิ่มสต็อค</button>';
         }
 
-        $favButton = '<span type="button" class="position-absolute top-0 end-0 ms-auto btn btn-secondary btn-xs add_fav" value = "' . $row["pID"] . '">
+        $favButton = '<span type="button" class="position-absolute top-0 end-0 ms-auto btn btn-secondary btn-sm add_fav" value = "' . $row["pID"] . '">
                         <i class="far fa-star"></i>
                         </span>';
         if ($row["pFav"] > 0) {
-            $favButton = '<span type="button" class="position-absolute top-0 end-0 ms-auto btn btn-primary btn-xs add_fav " value = "' . $row["pID"] . '">
+            $favButton = '<span type="button" class="position-absolute top-0 end-0 ms-auto btn btn-primary btn-sm add_fav " value = "' . $row["pID"] . '">
                         <i class="fas fa-star"></i>
                         </span>';
         }
 
         $output .= '
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-2">
+            <div class="item">
                 <div class="card mt-2">
-                    <div class="card-body d-flex flex-column p-0">
+                    <div class="card-body d-flex flex-column justify-content-between p-0">
                         <span class="name" style="display: none;">' . $row["pName"] . '</span>
                         <span class="bar" style="display: none;">' . $row["pBar"] . '</span>
                         <span class="bp" style="display: none;">' . $row["pBP"] . '</span>
@@ -128,7 +128,7 @@ while ($row = $list->fetch_assoc()) {
                     </div>
                     <div class="card-footer d-flex bd-highlight p-1">
                         <span class="fs-6 fw-bolder text-danger d-flex align-items-center">฿ ' . $row["pSP"] . '</span>            
-                        <span class="ms-auto d-flex align-items-center pValText" value = "' . $pValText . '" id = "' . $row["pID"] . 'Text">เหลืออยู่ ' . $pValText . '</span>
+                        <span class="ms-auto d-flex align-items-center pValText" value = "' . $pValText . '" id = "' . $row["pID"] . 'Text">เหลือ ' . $pValText . '</span>
                     </div>
                 </div>
             </div>

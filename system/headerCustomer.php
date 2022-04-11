@@ -22,11 +22,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.js" integrity="sha512-bvQAGUdz84PpeKWrShm1eEp20Fkcv7PJespsVWVtkTB74C8rNmg75Hru8w1AXnfiNHXnT/XF2jqZskyU3bIaMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
-<style>
-    .pagination li {
-        display: inline-block;
-        padding: 5px;
-    }
-</style>
+
 
 <body style="font-size:80%;">

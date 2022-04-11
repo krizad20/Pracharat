@@ -67,22 +67,6 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.4/JsBarcode.all.min.js" integrity="sha512-9KXy/GLQQ+pPW7VwnI74DzjzUix9GINtAAPwWl4vzaaEqgfOeDgkea6UWM4xAvCeoeiBxzYepep2xxbkX3w/pg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
-<style>
-    html,
-    body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        overflow: hidden;
-        min-height: 100vh;
-
-
-    }
-</style>
 
 <body style="font-size:80%;">
     <div class="container-fluid" style="height: 100vh;">
