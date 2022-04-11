@@ -1,6 +1,6 @@
 <?php
 // session_start();
-include("./system\header.php");
+include("./system/header.php");
 
 //check login
 if (isset($_SESSION['seller'])) {

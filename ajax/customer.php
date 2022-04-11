@@ -1,5 +1,5 @@
 <?php
-include("..\system\server.php");
+include(".././system/server.php");
 $sql = "SELECT * FROM `customer` ORDER BY `cID` ASC";
 $res = mysqli_query($conn,$sql);
 

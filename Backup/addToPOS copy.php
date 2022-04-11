@@ -1,5 +1,5 @@
 <?php
-include('..\system\server.php');
+include('../system/server.php');
 $pID = $_POST["pIDAdd"];
 $sID = $_POST["sIDNow"];
 

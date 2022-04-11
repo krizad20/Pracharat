@@ -1,5 +1,5 @@
 <?php
-include('system\server.php');
+include('system/server.php');
 
 $pID = $_POST["pID"];
 $barcode = $_POST["barcode"];

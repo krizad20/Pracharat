@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('system.php');
+include('server.php');
 
 ?>
 
