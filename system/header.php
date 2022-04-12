@@ -42,7 +42,6 @@ include('server.php');
 	<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
 
 	<script src="js/list.js"></script>
-	<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script> -->
 
 
 </head>
