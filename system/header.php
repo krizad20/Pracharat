@@ -41,7 +41,8 @@ include('server.php');
 	<script src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
 	<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
 
-	<script src="js/List.js"></script>
+	<script src="js/list.js"></script>
+	<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script> -->
 
 
 </head>
@@ -174,9 +175,9 @@ include('server.php');
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item">
+					<!-- <li class="nav-item">
 						<a class="nav-link active" aria-current="page" href="OnlineCart.php">Home</a>
-					</li>
+					</li> -->
 					<?php
 					if (isset($_SESSION['seller'])) {
 						echo '<li class="nav-item"><a class="nav-link" href="./TabSale.php">หน้าจอขาย</a></li>';

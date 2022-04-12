@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap 5 Simple Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/select/1.3.3/css/select.dataTables.min.css" rel="stylesheet">
+    <link rel="icon" href="img\logo.jpg">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="/css/adminlte.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-center mx-auto">
+            <a class="navbar-brand" href="#">
+                ร้านค้าประชารัฐ หมู่ 12 บ้านหนองสองตอน
+            </a>
+            <button class="navbar-toggler d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky">
+                    <ul class="nav flex-column nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./TabSale.php">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home">
+                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                </svg>
+                                <span class="ml-2">หน้าจอขาย</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file">
+                                    <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                    <polyline points="13 2 13 9 20 9"></polyline>
+                                </svg>
+                                <span class="ml-2">รายการสินค้าทั้งหมด</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+                                    <circle cx="9" cy="21" r="1"></circle>
+                                    <circle cx="20" cy="21" r="1"></circle>
+                                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                                </svg>
+                                <span class="ml-2">จัดการรายการสินค้า</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="./TabManageCustomer.php">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                                <span class="ml-2">จัดการรายชื่อลูกค้า</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="./TabReportByCustomer.php">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2">
+                                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                                </svg>
+                                <span class="ml-2">รายงานการขาย</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+            <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+                <div class="container-fluid px-3">
+                    <div class="row mb-2 p-2">
+                        <div class=" col">
+                            <div class="row">
+                                <p id="bill">เลขที่บิล : </p>
+                            </div>
+                            <div class="row">
+                                <p id="date">วันที่ : </p>
+                            </div>
+                            <div class="row">
+                                <p id="customer">ลูกค้า : </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <center>
+                                <label class="display-1 p-2" id="totalPrice"></label>
+                            </center>
+                        </div>
+                    </div>
+                    <div class="row mb-2 p-2">
+                        <div class="col-sm-2">
+                            รายการด่วน
+                        </div>
+
+                        <div class="col-sm-8">
+                            <table id="posTable" class="table table-bordered">
+                                <thead>
+                                    <th scope="col">
+                                        <center>รหัสสินค้า</center>
+                                    </th>
+                                    <th scope="col">
+                                        <center>บาร์โค้ดสินค้า</center>
+                                    </th>
+                                    <th scope="col">
+                                        <center>ชื่อสินค้า</center>
+                                    </th>
+                                    <th scope="col">
+                                        <center>ราคา</center>
+                                    </th>
+                                    <th scope="col">
+                                        <center>จำนวน</center>
+                                    </th>
+                                    <th scope="col">
+                                        <center>ราคารวม</center>
+                                    </th>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <label class="row-form-label">เลือกหน้าจอขาย</label><br>
+                            <div class=" form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="saleID" id="s1" value="s1" checked>
+                                <label class="form-check-label" for="s1">1</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="saleID" id="s2" value="s2">
+                                <label class="form-check-label" for="s2">2</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="saleID" id="s3" value="s3">
+                                <label class="form-check-label" for="s3">3</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="saleID" id="s4" value="s4">
+                                <label class="form-check-label" for="s4">4</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="saleID" id="s5" value="s5">
+                                <label class="form-check-label" for="s5">5</label>
+                            </div>
+                            <br>
+                            <button type="button" class="btn btn-secondary my-1" style="width: 10rem;" data-bs-toggle="modal" data-bs-target="#addNote">เพิ่มหมายเหตุ</button>
+                            <button type="button" class="btn btn-secondary my-1" style="width: 10rem;" data-bs-toggle="modal" data-bs-target="#addToStock">รับสินค้าเข้าสต็อก</button>
+                            <button type="button" class="btn btn-primary my-1" style="width: 10rem;" data-bs-toggle="modal" data-bs-target="#selectCustomer">เลือกรายชื่อลูกค้า</button>
+                            <button type="button" class="btn btn-primary my-1" style="width: 10rem;" data-bs-toggle="modal" data-bs-target="#selectProduct">เลือกรายการสินค้า</button>
+                            <button type="button" class="btn btn-danger my-1" style="width: 10rem;" id="clearPOS">เคลียร์บิล</button>
+                            <button type=" button" class="btn btn-success my-1" style="width: 10rem; height: 5rem;" id="cashier">ชำระเงิน</button>
+                        </div>
+                    </div>
+                    <div class="row mb-2 p-2">
+                        <div class="col-sm-2">
+
+                        </div>
+
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-warning mx-2" id="sDiscount" disabled>ส่วนลด</button>
+                            <button type="button" class="btn btn-secondary mx-2" id="sEditVal" disabled>แก้ไขจำนวนขาย</button>
+                            <button type="button" class="btn btn-danger mx-2" id="sDel" disabled>ยกเลิกสินค้า</button>
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" style="width: 15rem;" id="searchBarOrID" placeholder="รหัสสินค้า/บาร์โค้ดสินค้า">
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
+    <script src="https://cdn.datatables.net/rowgroup/1.1.3/js/dataTables.rowGroup.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE -->
+    <script src="/js/adminlte.js"></script>
+</body>
+
+</html>
