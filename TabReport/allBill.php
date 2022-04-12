@@ -15,4 +15,4 @@ $dataset = array(
     "data" => $arr
 );
 
-echo json_encode($dataset);
+echo json_encode($dataset,JSON_UNESCAPED_UNICODE);
