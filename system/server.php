@@ -12,9 +12,9 @@ mysqli_set_charset($conn, "utf8");
 
 if (!$conn) {
     $servername = "localhost";
-    $username = "id18766967_krizad";
-    $password = "Moomint1812!!";
-    $dbname = "id18766967_pracharat";
+    $username = "u396242790_krizad";
+    $password = "Moomint1812";
+    $dbname = "u396242790_pracharat";
 
     //Connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
