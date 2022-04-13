@@ -1,5 +1,3 @@
-
-
 let selectProductTable = $("#selectProductA2S").DataTable({
   ajax: {
     url: "./ajax/product.php",
@@ -122,6 +120,8 @@ function selectProduct(data) {
   $("#pSPA2S").val(data.pSP);
   $("#pValA2S").val(data.pVal);
   $("#pAddVal").focus();
+
+  $("#pNowBP, #pAddVal, #pNewBP, #pNewSP").val("");
 
   let sumOldBP = parseFloat(product_BP) * pStock;
   $("#pNowBP, #pAddVal").on("keyup", function () {
