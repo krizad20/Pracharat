@@ -26,6 +26,7 @@ if (isset($_POST['login'])) {
   $confirmPassword = $_POST['confirmPassword'];
   $permission = $_POST['permission'];
   if ($confirmPassword == "25092514") {
+    $password = md5($password);
     $sql = "INSERT INTO seller (username, password, permission) VALUES ('$username', '$password', '$permission')";
     $result = $conn->query($sql);
     if ($result) {

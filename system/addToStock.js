@@ -63,7 +63,7 @@ $("#addToStockAndSelect").on("shown.bs.modal", function (event) {
     if (e.keyCode == 13 && $("#selectProductA2S tbody tr").length == 1) {
       //get data from search
       // console.log(row.data());
-      let rowData = table
+      let rowData = selectProductTable
         .row(":eq(0)", {
           page: "current",
         })
@@ -83,7 +83,7 @@ $("#addToStockAndSelect").on("shown.bs.modal", function (event) {
 });
 
 //dblclick
-$("#selectProductA2S tbody").on("dblclick", "tr", function () {
+$("#selectProductA2S tbody").on("click", "tr", function () {
   let row = $("#selectProductA2S").DataTable().row(this).data();
   let data = {
     pID: row.pID,
