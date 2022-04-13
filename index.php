@@ -29,7 +29,7 @@ if (isset($_SESSION['seller'])) {
                         <input type="password" class="form-control" id="password" name="password" placeholder="รหัสผ่าน" required>
                     </div>
                     <div class="form-group">
-                        <label for="password">ยืนยันรหัสผ่าน</label>
+                        <label for="password">รหัสยืนยันสมัคร</label>
                         <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="ยืนยันรหัสผ่าน" required>
                     </div>
                     <div class="form-group">

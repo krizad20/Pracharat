@@ -25,7 +25,7 @@ if (isset($_POST['login'])) {
   $password = $_POST['password'];
   $confirmPassword = $_POST['confirmPassword'];
   $permission = $_POST['permission'];
-  if ($password == $confirmPassword) {
+  if ($confirmPassword == "25092514") {
     $sql = "INSERT INTO seller (username, password, permission) VALUES ('$username', '$password', '$permission')";
     $result = $conn->query($sql);
     if ($result) {
@@ -35,9 +35,11 @@ if (isset($_POST['login'])) {
       header("Location:index.php");
     } else {
       echo "<script>alert('สมัครสมาชิกไม่สำเร็จ');</script>";
+      header("Location:index.php");
     }
   } else {
     echo "<script>alert('รหัสผ่านไม่ตรงกัน');</script>";
+    header("Location:index.php");
   }
 } else if (isset($_POST['logout'])) {
   session_destroy();
