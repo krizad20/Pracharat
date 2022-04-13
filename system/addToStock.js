@@ -119,9 +119,9 @@ function selectProduct(data) {
   $("#pBPA2S").val(data.pBP);
   $("#pSPA2S").val(data.pSP);
   $("#pValA2S").val(data.pVal);
-  $("#pAddVal").focus();
 
   $("#pNowBP, #pAddVal, #pNewBP, #pNewSP").val("");
+  $("#pAddVal").focus();
 
   let sumOldBP = parseFloat(product_BP) * pStock;
   $("#pNowBP, #pAddVal").on("keyup", function () {
@@ -223,12 +223,9 @@ function selectProduct(data) {
               // $("#saveAddToStock").prop("disabled", true);
               $("#selectProductA2S_filter input").val("");
 
-
-              clearInput()
-
+              clearInput();
 
               load_product();
-
             },
           });
         }
