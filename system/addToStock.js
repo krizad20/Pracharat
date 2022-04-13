@@ -56,11 +56,13 @@ $("#addToStockAndSelect").on("shown.bs.modal", function (event) {
   //focus search
   $("#selectProductA2S_filter input").focus();
   selectProductTable.columns.adjust().draw();
+  selectProductTable.search("").draw();
+  selectProductTable.row(".selected").deselect();
+  clearInput();
 
-  $("#selectProductA2S_filter input").on("keyup", function (e) {
-    if (e.keyCode == 13 && $("#selectProductA2S tbody tr").length == 1) {
-      //get data from search
-      // console.log(row.data());
+  $("#selectProductA2S_filter input").on("keypress", function (e) {
+    if (e.keyCode === 13 && $("#selectProductA2S tbody tr").length == 1) {
+
       let rowData = selectProductTable
         .row(":eq(0)", {
           page: "current",
@@ -246,13 +248,13 @@ function selectProduct(data) {
           success: function (result) {
             $("#pValA2S").val(parseInt(data.pVal) + parseInt(product_quantity));
             $("#pValA2S").css("background-color", "#dff0d8");
-            $("#saveAddToStock").prop("disabled", true);
-            $("#pAddVal").prop("disabled", true);
-            $("#pNowBP").prop("disabled", true);
-            $("#pNewBP").prop("disabled", true);
-            $("#pNewSP").prop("disabled", true);
+            // $("#saveAddToStock").prop("disabled", true);
+            // $("#pAddVal").prop("disabled", true);
+            // $("#pNowBP").prop("disabled", true);
+            // $("#pNewBP").prop("disabled", true);
+            // $("#pNewSP").prop("disabled", true);
             load_product();
-            $("#addToStockAndSelect").modal("hide");
+            // $("#addToStockAndSelect").modal("hide");
           },
         });
       } else {
