@@ -105,7 +105,7 @@ $("#addToStockAndSelect").on("hidden.bs.modal", function (event) {
 function selectProduct(data) {
   var product_id = data.pID;
   var product_quantity = 0;
-  var pStock = parseInt($("#" + product_id).attr("value"));
+  var pStock = parseInt(data.pVal);
   var action = "addToStock";
 
   var product_bar = data.pBar;
