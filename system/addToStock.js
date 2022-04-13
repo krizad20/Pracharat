@@ -54,12 +54,13 @@ let selectProductTable = $("#selectProductA2S").DataTable({
 
 $("#addToStockAndSelect").on("shown.bs.modal", function (event) {
   //focus search
-  $("#selectProductA2S_filter input").focus();
-  selectProductTable.columns.adjust().draw();
-  selectProductTable.search("").draw();
-  selectProductTable.row(".selected").deselect();
-  selectProductTable.ajax.reload();
-  clearInput();
+  if ($("#selectProductCol").is(":visible")) {
+    $("#selectProductA2S_filter input").focus();
+    selectProductTable.columns.adjust().draw();
+    selectProductTable.search("").draw();
+    selectProductTable.row(".selected").deselect();
+    selectProductTable.ajax.reload();
+  }
 
   $("#selectProductA2S_filter input").on("keypress", function (e) {
     if (e.keyCode === 13 && $("#selectProductA2S tbody tr").length == 1) {
@@ -298,7 +299,7 @@ function showModal(mode) {
       $("#selectProductA2S_filter input").val("");
       selectProductTable.row(".selected").deselect();
       $("#selectProductCol").show();
-
+      // clearInput();
       clearInput();
     });
   }

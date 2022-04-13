@@ -608,6 +608,8 @@ if (!isset($_SESSION['seller'])) {
                                     $('#bill').html("เลขที่บิล : " + result);
                                     $('#checkBill').prop('disabled', true);
                                     $('#note').prop('disabled', true);
+
+                                    $('#searchBar').val("");
                                     load_product();
 
                                 } else {
