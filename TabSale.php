@@ -401,7 +401,7 @@ if (!isset($_SESSION['seller'])) {
             var quantity = parseInt($(this).val());
             var action = 'quantity_change';
             var pStock = parseInt($('#' + product_id).attr("value"));
-
+            
             if (quantity > 0) {
                 $.ajax({
                     url: "./TabPOS/posAction.php",
@@ -425,7 +425,7 @@ if (!isset($_SESSION['seller'])) {
                     }
                 });
 
-            } else if (quantity != '' && quantity <= 0) {
+            } else if (quantity != '' || quantity <= 0) {
                 alert("จำนวนสินค้าต้องมากกว่า 0");
                 $(this).val(old_quantity);
             }
@@ -461,7 +461,11 @@ if (!isset($_SESSION['seller'])) {
             //modol show check
             if ($('.modal').is(':visible')) {
 
-            } else {
+            } 
+            else if (($('.quantity').is(':focus'))){
+
+            }
+            else {
                 $('#searchBar').focus();
                 if ($('#searchBar').focus() != true) {
                     $('#searchBar').focus();

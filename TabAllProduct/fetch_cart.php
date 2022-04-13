@@ -38,8 +38,8 @@ if (!empty($_SESSION['product'][$sID])) {
 		if (!str_contains($keys, "pack")) {
 			$output .= '
 		<tr id="' . $values["pID"] . '" style="height: 0;">
-			<td class="p-1" align="left">' . $values["pID"] . '</td>
-			<td class="p-1" align="left">' . $values["pName"] . '</td>
+			<td class="p-1 id" align="left">' . $values["pID"] . '</td>
+			<td class="p-1 name" align="left">' . $values["pName"] . '</td>
 			<td class="p-1" align="center"><input class="form-control form-control-sm quantity p-0 text-center"  type="number" onkeydown="return event.keyCode !== 69" name="' . $values['pQuantity'] . '" value="' . $values['pQuantity'] . '" min="1"/></td>
 			<td class="p-1" align="center"> ' . $values["pSP"] . '</td>
 			<td class="p-1" align="center"> ' . number_format($values["pTotal"], 2) . '</td>
