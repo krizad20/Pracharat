@@ -220,14 +220,15 @@ function selectProduct(data) {
                 parseInt(data.pVal) + parseInt(product_quantity)
               );
               $("#pValA2S").css("background-color", "#dff0d8");
-              $("#saveAddToStock").prop("disabled", true);
-              $("#pAddVal").prop("disabled", true);
-              $("#pNowBP").prop("disabled", true);
-              $("#pNewBP").prop("disabled", true);
-              $("#pNewSP").prop("disabled", true);
+              // $("#saveAddToStock").prop("disabled", true);
+              $("#selectProductA2S_filter input").val("");
+
+
+              clearInput()
+
+
               load_product();
 
-              $("#addToStockAndSelect").modal("hide");
             },
           });
         }
@@ -285,7 +286,7 @@ function showModal(mode) {
     $("#selectProductCol").hide();
     $("#addToStockAndSelect").modal("show");
     $("#addToStockAndSelect").on("shown.bs.modal", function (event) {
-        $("#pAddVal").focus();
+      $("#pAddVal").focus();
     });
 
     $("#addToStockAndSelect").on("hidden.bs.modal", function (event) {
@@ -296,5 +297,5 @@ function showModal(mode) {
 
       clearInput();
     });
-  } 
+  }
 }
