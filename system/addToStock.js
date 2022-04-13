@@ -58,11 +58,11 @@ $("#addToStockAndSelect").on("shown.bs.modal", function (event) {
   selectProductTable.columns.adjust().draw();
   selectProductTable.search("").draw();
   selectProductTable.row(".selected").deselect();
+  selectProductTable.ajax.reload();
   clearInput();
 
   $("#selectProductA2S_filter input").on("keypress", function (e) {
     if (e.keyCode === 13 && $("#selectProductA2S tbody tr").length == 1) {
-
       let rowData = selectProductTable
         .row(":eq(0)", {
           page: "current",
@@ -98,9 +98,9 @@ $("#selectProductA2S tbody").on("click", "tr", function () {
 });
 
 $("#addToStockAndSelect").on("hidden.bs.modal", function (event) {
-  // selectProductTable.draw();
   $("#selectProductA2S_filter input").val("");
   selectProductTable.row(".selected").deselect();
+  selectProductTable.ajax.reload();
   clearInput();
 });
 
@@ -123,7 +123,12 @@ function selectProduct(data) {
   $("#pValA2S").val(data.pVal);
 
   $("#pNowBP, #pAddVal, #pNewBP, #pNewSP").val("");
+
   $("#pAddVal").focus();
+
+  $("#pBPA2S").css("background-color", "#f2f2f2");
+  $("#pSPA2S").css("background-color", "#f2f2f2");
+  $("#pValA2S").css("background-color", "#f2f2f2");
 
   let sumOldBP = parseFloat(product_BP) * pStock;
   $("#pNowBP, #pAddVal").on("keyup", function () {
@@ -209,6 +214,8 @@ function selectProduct(data) {
               pNewSP: newSP,
             },
             success: function (result) {
+              selectProductTable.ajax.reload();
+              load_product();
               if (editBPOnly) {
                 $("#pBPA2S").val(newBP.toFixed(2));
                 $("#pBPA2S").css("background-color", "#dff0d8");
@@ -224,10 +231,6 @@ function selectProduct(data) {
               $("#pValA2S").css("background-color", "#dff0d8");
               // $("#saveAddToStock").prop("disabled", true);
               $("#selectProductA2S_filter input").val("");
-
-              clearInput();
-
-              load_product();
             },
           });
         }
@@ -246,6 +249,8 @@ function selectProduct(data) {
             pNewSP: newSP,
           },
           success: function (result) {
+            selectProductTable.ajax.reload();
+            load_product();
             $("#pValA2S").val(parseInt(data.pVal) + parseInt(product_quantity));
             $("#pValA2S").css("background-color", "#dff0d8");
             // $("#saveAddToStock").prop("disabled", true);
@@ -253,7 +258,7 @@ function selectProduct(data) {
             // $("#pNowBP").prop("disabled", true);
             // $("#pNewBP").prop("disabled", true);
             // $("#pNewSP").prop("disabled", true);
-            load_product();
+
             // $("#addToStockAndSelect").modal("hide");
           },
         });
