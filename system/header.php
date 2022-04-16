@@ -165,6 +165,36 @@ include('server.php');
 		</div>
 	</div>
 
+	<!-- Report Per Day -->
+	<div class="modal fade" id="reportPerDay" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="reportPerDayLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="reportPerDayLabel">สรุปยอดขายรายวัน</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body overflow-auto">
+					<table id="reportPerDayTable" class="table table-bordered display" style="height: 0;width:100%">
+						<thead>
+							<tr>
+								<th width="1%" class="text-center text-nowrap" scope="col">วันที่ขาย</th>
+								<th width="1%" class="text-center text-nowrap" scope="col">เลขที่บิลขาย</th>
+								<th width="1%" class="text-center text-nowrap" scope="col">รหัสสินค้า</th>
+								<th class="text-center text-nowrap" scope="col">ชื่อสินค้า</th>
+								<th width="1%" class="text-center text-nowrap" scope="col">จำนวน</th>
+								<th width="1%" class="text-center text-nowrap" scope="col">ราคา</th>
+								<th width="1%" class="text-center text-nowrap" scope="col">ราคารวม</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
 		<div class="container-fluid">
@@ -210,7 +240,9 @@ include('server.php');
 					}
 
 					if (isset($_SESSION['seller'])) {
-						echo '<li class="nav-item dropdown">
+						echo '
+						<li class="nav-item"><a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#reportPerDay">สรุปยอดขายรายวัน</a></li>
+						<li class="nav-item dropdown">
 										<a class="nav-link dropdown-toggle me-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">' . $_SESSION['seller'] . '</a>
 											<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 												<li><a class="dropdown-item" href="#">แก้ไขข้อมูล</a></li>
@@ -229,6 +261,71 @@ include('server.php');
 	<div class="container-fluid mt-2 overflow-auto">
 
 
-	<script src="./system/addToStock.js"></script>
 
 </body>
+<script src="./system/addToStock.js"></script>
+<script>
+	$(document).ready(function() {
+
+		$('#reportPerDay').on('shown.bs.modal', function(e) {
+			$('#reportPerDayTable').DataTable({
+				"ajax": {
+					"url": "./TabReport/todayReport.php",
+					"method": "POST"
+				},
+				"columns": [{
+						data: 'bDate'
+					},
+					{
+						data: 'bID'
+					},
+					{
+						data: 'pID'
+					},
+					{
+						data: 'pName'
+					},
+					{
+						data: 'pQuantity'
+					},
+					{
+						data: 'pSP'
+					},
+					{
+						data: 'pSum'
+					}
+
+				],
+				"info": false,
+				"lengthChange": false,
+				paginate: false,
+				"language": {
+					"lengthMenu": "แสดง _MENU_ รายการ",
+					"zeroRecords": "ไม่พบข้อมูล",
+					"info": "แสดง _START_ ถึง _END_ จาก _TOTAL_ รายการ",
+					"infoEmpty": "ไม่พบข้อมูล",
+					"emptyTable": "เลือกเวลาเพื่อค้นหา...",
+					"infoFiltered": "(กรองจาก _MAX_ รายการทั้งหมด)",
+					"search": "",
+				},
+				"order": [],
+				"columnDefs": [{
+					"targets": [0, 1, 2, 3, 4, 5, 6],
+					"searchable": false,
+					"orderable": false
+
+				}],
+
+
+			});
+			$('.dataTables_wrapper .dataTables_filter input').hide();
+			$('.dt-button').hide();
+
+		});
+
+		$('#reportPerDay').on('hidden.bs.modal', function(e) {
+			$('#reportPerDayTable').DataTable().destroy();
+		})
+
+	});
+</script>

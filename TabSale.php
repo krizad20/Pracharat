@@ -278,7 +278,7 @@ if (!isset($_SESSION['seller'])) {
 
     var userList;
     var sID = $("input[type=radio][name=saleID]:checked").val()
-    var cID = "C0001";
+    var cID = "";
     var totalPrice = 0;
     var date = getThaiDate();
 
@@ -543,7 +543,7 @@ if (!isset($_SESSION['seller'])) {
 
         //checkBill
         $('#checkBill').on('click', function() {
-            if (cID == "") {
+            if (!cID) {
                 alert("กรุณาเลือกลูกค้า");
             } else if (totalPrice == 0) {
                 alert("กรุณาเลือกสินค้า");

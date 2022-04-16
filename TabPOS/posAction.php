@@ -253,7 +253,8 @@ if (isset($_POST["action"])) {
                     $row = mysqli_fetch_assoc($result);
                     $detail[] = array(
                         'pID' => $values["pID"],
-                        'pName' => $row["pName"],
+                        //replace ' with /'
+                        'pName' => str_replace("'", "", $row["pName"]),
                         'pQuantity' => $values["pQuantity"],
                         'pBP' => $row["pBP"],
                         'pSP' => $row["pSP"]
@@ -291,7 +292,8 @@ if (isset($_POST["action"])) {
             unset($_SESSION['product'][$sID]);
             unset($_SESSION['customer'][$sID]);
             echo $genID;;
-        } else {
+        } 
+        else {
             echo "fail";
         }
     }
