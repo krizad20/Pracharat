@@ -236,25 +236,36 @@ include('server.php');
 										<li><a class="dropdown-item" href="./TabReportByProduct.php">แยกตามสินค้า</a></li>
 										<li><a class="dropdown-item" href="./TabReportProfit.php">กำไร-ขาดทุน</a></li>
 									</ul>
-							</li>';
+							</li>
+							<li class="nav-item"><a class="nav-link" href="./TabReportAddToStock.php">รายงานสินค้าเข้าสต็อค</a></li>
+							<li class="nav-item"><a class="nav-link" href="./TabReportNeedToBuy.php">รายงานสินค้าถึงจุดสั่งซื้อ</a></li>
+
+							
+							';
 					}
 
 					if (isset($_SESSION['seller'])) {
 						echo '
 						<li class="nav-item"><a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#reportPerDay">สรุปยอดขายรายวัน</a></li>
-						<li class="nav-item dropdown">
-										<a class="nav-link dropdown-toggle me-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">' . $_SESSION['seller'] . '</a>
-											<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-												<li><a class="dropdown-item" href="#">แก้ไขข้อมูล</a></li>
-												<li><form action="login.php" method="post">
-												<button type="submit" class="dropdown-item" name="logout">ออกจากระบบ</form></li>
-												</button>
-											</ul>
-										</li>';
+						
+						</ul>
+						<ul class="navbar-nav ml-auto">
+						<li class="nav-item dropdown d-flex">
+						<a class="nav-link dropdown-toggle me-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">' . $_SESSION['seller'] . '</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li><a class="dropdown-item" href="#">แก้ไขข้อมูล</a></li>
+								<li><form action="login.php" method="post">
+								<button type="submit" class="dropdown-item" name="logout">ออกจากระบบ</form></li>
+								</button>
+							</ul>
+					</li>
+						</ul>
+						
+						';
 					}
 					?>
 
-				</ul>
+
 			</div>
 		</div>
 	</nav>

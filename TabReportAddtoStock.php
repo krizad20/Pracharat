@@ -61,20 +61,16 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
     <div class="card">
         <div class="card-body p-2">
-            <table id="profitTable" class="table table-bordered display" style="width:100%">
+            <table id="addToStockTable" class="table table-bordered">
                 <thead>
-                    <tr>
-                        <th scope="col">วันที่ขาย</th>
-                        <th scope="col">เลขที่บิลขาย</th>
-                        <th scope="col">รหัสสินค้า</th>
-                        <th scope="col">ชื่อสินค้า</th>
-                        <th scope="col">จำนวน</th>
-                        <th scope="col">ราคาขาย</th>
-                        <th scope="col">ต้นทุน</th>
-                        <th scope="col">กำไรรวม</th>
-
-                    </tr>
+                    <th width="1%" class="text-center text-nowrap" scope="col">วันที่</th>
+                    <th width="1%" class="text-center text-nowrap" scope="col">รหัสสินค้า</th>
+                    <th scope="col">ชื่อสินค้า</th>
+                    <th width="1%" class="text-center text-nowrap" scope="col">ราคาซื้อ</th>
+                    <th width="1%" class="text-center text-nowrap" scope="col">จำนวนนำเข้า</th>
                 </thead>
+                <tbody>
+                </tbody>
             </table>
         </div>
     </div>
@@ -96,12 +92,6 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
         },
         //no order
         "order": [],
-        "columnDefs": [{
-            "targets": [0, 1, 2, 3, 4, 5, 6, 7],
-            "searchable": false,
-            "orderable": false
-
-        }],
 
 
     });
@@ -113,16 +103,16 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
         var table;
 
         setDate();
-        $('#profitTable').DataTable();
+        $('#addToStockTable').DataTable();
         $('.dataTables_wrapper .dataTables_filter input').hide();
 
 
         $('#searchButton').on('click', function() {
             modeSelect($('input[type=radio][name=flexRadioDefault]:checked').val())
-            $('#profitTable').DataTable().destroy();
-            table = $('#profitTable').DataTable({
+            $('#addToStockTable').DataTable().destroy();
+            table = $('#addToStockTable').DataTable({
                 "ajax": {
-                    "url": "./TabReport/profit.php",
+                    "url": "./TabReport/addToStockReport.php",
                     "method": "POST",
                     data: {
                         dateFrom: dateFrom,
@@ -130,46 +120,37 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
                     }
                 },
                 "columns": [{
-                        data: 'bDate'
-                    },
-                    {
-                        data: 'bID'
-                    },
-                    {
-                        data: 'pID'
-                    },
-                    {
-                        data: 'pName'
-                    },
-                    {
-                        data: 'pQuantity'
-                    },
-                    {
-                        data: 'pSP'
-                    },
-                    {
-                        data: 'pBP'
-                    },
-                    {
-                        data: 'pProfit'
-                    }
+                        data: 'aDate',
+                        render: function(data, type, row, meta) {
+                            //text nowarp
+                            return '<div class="text-nowrap">' + data + '</div>';
+                        }
 
+                    }, {
+                        data: 'apID'
+                    },
+                    {
+                        data: 'apName'
+                    },
+                    {
+                        data: 'aBP'
+                    },
+                    {
+                        data: 'aVal'
+                    }
                 ],
                 "dom": 'Bfrtip',
                 "buttons": [{
                     extend: 'excelHtml5',
                     autoFilter: false,
                     sheetName: 'รายงานกำไรขาดทุน',
-                    exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7]
-                    },
                     //filename
                     filename: function() {
                         var d = new Date();
                         var n = d.getTime();
-                        return 'รายงานกำไรขาดทุน' + n;
+                        return 'รายงานสินค้าเข้าสต็อค' + n;
                     },
-                    title: "รายงานกำไรขาดทุน"
+                    title: "รายงานสินค้าเข้าสต็อค"
 
                 }]
 

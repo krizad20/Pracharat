@@ -2,7 +2,7 @@
 include(".././system/server.php");
 $dateFrom = $_POST["dateFrom"];
 $dateTo = $_POST["dateTo"];
-$sql = "SELECT `apID`, `apName`, `aVal` FROM `addtostock` WHERE DATE(aDate) >= '$dateFrom' AND DATE(aDate) <= '$dateTo'";
+$sql = "SELECT * FROM `addtostock` WHERE DATE(aDate) >= '$dateFrom' AND DATE(aDate) <= '$dateTo'";
 $res = mysqli_query($conn,$sql);
 $arr = [];
 while($row = mysqli_fetch_array($res,MYSQLI_ASSOC)){
