@@ -278,7 +278,7 @@ if (!isset($_SESSION['seller'])) {
 
     var userList;
     var sID = $("input[type=radio][name=saleID]:checked").val()
-    var cID = "";
+    var cID = "C0001";
     var totalPrice = 0;
     var date = getThaiDate();
 
@@ -760,7 +760,7 @@ if (!isset($_SESSION['seller'])) {
             method: "POST",
             data: {
                 sID: sID,
-                cID: "C0001",
+                cID: cID,
                 pID: pID,
                 quantity: 1,
                 action: "add"
