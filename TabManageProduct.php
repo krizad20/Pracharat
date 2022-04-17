@@ -41,7 +41,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
                 <center>รายละเอียดสินค้า</center>
               </h5>
 
-              <form method="post" id="tableEditFrom">
+              <div>
                 <div class="mb-1 row">
                   <label class="col-sm-4 col-form-label">รหัสสินค้า</label>
                   <div class="col-sm-8">
@@ -137,10 +137,10 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
                 </div>
 
                 <div class="mt-3 d-flex justify-content-center">
-                  <button class="btn btn-success mx-3" type="submit" name="pSaveEditTable" id="pSaveEditTable" disabled>บันทึก</button>
+                  <button class="btn btn-success mx-3" name="pSaveEditTable" id="pSaveEditTable" disabled>บันทึก</button>
                   <button class="btn btn-danger mx-3" name="pDelTable" id="pDelTable" disabled>ลบสินค้า</button>
                 </div>
-              </form>
+              </div>
 
 
             </div>
@@ -1170,17 +1170,17 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
       if ($('#isPackedAdd').is(':checked')) {
         $('#pBPAdd').val($('#ppaBPerPack').val());
         $('#pSPAdd').val($('#ppaSP').val());
-        $('#pValAdd').val((subProductVal / $('#ppaPerPacked').val()).toFixed(0));
+        $('#pValAdd').val(Math.floor(subProductVal / $('#ppaPerPacked').val()).toFixed(0));
         $('#pCateAdd').val(paCate);
       } else if ($('#isPackedEditTable').is(':checked')) {
         $('#pBPEditTable').val($('#ppaBPerPack').val());
         $('#pSPEditTable').val($('#ppaSP').val());
-        $('#pValEditTable').val((subProductVal / $('#ppaPerPacked').val()).toFixed(0));
+        $('#pValEditTable').val(Math.floor(subProductVal / $('#ppaPerPacked').val()).toFixed(0));
         $('#pCateEditTable').val(paCate);
       } else if ($('#isPackedEditGrid').is(':checked')) {
         $('#pBPEditGrid').val($('#ppaBPerPack').val());
         $('#pSPEditGrid').val($('#ppaSP').val());
-        $('#pValEditGrid').val((subProductVal / $('#ppaPerPacked').val()).toFixed(0));
+        $('#pValEditGrid').val(Math.floor(subProductVal / $('#ppaPerPacked').val()).toFixed(0));
         $('#pCateEditGrid').val(paCate);
       }
 
@@ -1266,7 +1266,6 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     });
 
     //upload img
-
     $('#selectImg').change(function(e) {
       imgFile = e.target.files[0];
       var reader = new FileReader();
@@ -1371,7 +1370,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
     function addProduct(data) {
       let pID = data.pID;
-      
+
       if (data.pID == '' || data.pBar == '' || data.pName == '' || data.pBP == '' || data.pSP == '' || data.pVal == '' || data.pCate == '' || data.pUnit == '') {
         alert("กรุณากรอกข้อมูลให้ครบ");
       } else {
@@ -1391,8 +1390,8 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           },
           success: function(data) {
             if (data.trim() == "success") {
-              table.ajax.reload();
-              load_product();
+              // table.ajax.reload();
+              // load_product();
               detailBox("disable", "Add");
               $('#pSaveEditTable').attr("disabled", true);
               $('#pDelTable').attr("disabled", true);
@@ -1463,8 +1462,8 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           },
           success: function(data) {
             if (data.trim() == "success") {
-              table.ajax.reload();
-              load_product();
+              // table.ajax.reload();
+              // load_product();
               detailBox("disable", "Add");
               $('#pSaveEditTable').attr("disabled", true);
               $('#pDelTable').attr("disabled", true);
@@ -1509,7 +1508,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
             console.log(data);
             if (data.trim() == "success") {
               // table.ajax.reload();
-              load_product();
+              // load_product();
               $('#editProductModal').modal('hide');
               detailBox("disable", "EditTable");
               $('#pSaveEditTable').attr("disabled", true);
@@ -1585,7 +1584,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           success: function(data) {
             if (data.trim() == "success") {
               // table.ajax.reload();
-              load_product();
+              // load_product();
               detailBox("disable", "Add");
               $('#pSaveEditTable').attr("disabled", true);
               $('#pDelTable').attr("disabled", true);
