@@ -372,7 +372,7 @@ if (!isset($_SESSION['seller'])) {
             var product_id = $(this).parent().parent().attr("id");
             var action = 'remove';
             let oldVal = $(this).parent().parent().find('input').val();
-            deleteFromCart(product_id,oldVal);
+            deleteFromCart(product_id, oldVal);
 
         });
 
@@ -401,7 +401,7 @@ if (!isset($_SESSION['seller'])) {
             var quantity = parseInt($(this).val());
             var action = 'quantity_change';
             var pStock = parseInt($('#' + product_id).attr("value"));
-            
+
             if (quantity > 0) {
                 $.ajax({
                     url: "./TabPOS/posAction.php",
@@ -461,11 +461,9 @@ if (!isset($_SESSION['seller'])) {
             //modol show check
             if ($('.modal').is(':visible')) {
 
-            } 
-            else if (($('.quantity').is(':focus'))){
+            } else if (($('.quantity').is(':focus'))) {
 
-            }
-            else {
+            } else {
                 $('#searchBar').focus();
                 if ($('#searchBar').focus() != true) {
                     $('#searchBar').focus();
@@ -473,6 +471,41 @@ if (!isset($_SESSION['seller'])) {
             }
 
         });
+
+        //Add To Stock
+        $(document).on('click', '.add_to_stock', function() {
+
+            var product_id = $(this).attr("id");
+            var product_quantity = 0;
+            var pStock = parseInt($('#' + product_id).attr("value"));
+            var action = "addToStock";
+
+            var product_bar = $(this).parent().find('.bar').text()
+            var product_name = $(this).parent().find('.name').text()
+            var product_BP = $(this).parent().find('.bp').text()
+            var product_SP = $(this).parent().find('.sp').text()
+
+
+
+
+            showModal("noSelect");
+
+
+            let data = {
+                pID: product_id,
+                pName: product_name,
+                pBP: product_BP,
+                pSP: product_SP,
+                pVal: pStock,
+                pBar: product_bar,
+            };
+
+            selectProduct(data);
+            load_product();
+
+
+        });
+
 
 
 
@@ -637,39 +670,6 @@ if (!isset($_SESSION['seller'])) {
             $('#change').off('keyup');
         });
 
-        //Add To Stock
-        $(document).on('click', '.add_to_stock', function() {
-
-            var product_id = $(this).attr("id");
-            var product_quantity = 0;
-            var pStock = parseInt($('#' + product_id).attr("value"));
-            var action = "addToStock";
-
-            var product_bar = $(this).parent().find('.bar').text()
-            var product_name = $(this).parent().find('.name').text()
-            var product_BP = $(this).parent().find('.bp').text()
-            var product_SP = $(this).parent().find('.sp').text()
-
-
-
-
-            showModal("noSelect");
-
-
-            let data = {
-                pID: product_id,
-                pName: product_name,
-                pBP: product_BP,
-                pSP: product_SP,
-                pVal: pStock,
-                pBar: product_bar,
-            };
-
-            selectProduct(data);
-            load_product();
-
-
-        });
 
 
     });
@@ -782,8 +782,34 @@ if (!isset($_SESSION['seller'])) {
                             $('#' + id).parent().append(addToStockButton);
                         }
                     }
-                });
 
+                    if ($(this).parent().find('.hasPacked').text().toLowerCase().indexOf(pID.toLowerCase()) > -1) {
+                        id = $(this).attr("value");
+                        let newVal = parseInt($('#' + id).attr("value") - $(this).parent().find('.hasPacked').attr("value"));
+                        $('#' + id).attr("value", newVal);
+                        $('#' + id + 'Text').text("เหลือ " + newVal);
+
+                        if (newVal == 0) {
+                            $('#' + id).addClass("d-none");
+                            let addToStockButton = '<button type="button" name="add_to_cart" id="' + id + '"class="btn btn-danger add_to_stock btn-sm" value = "' + newVal + '">เพิ่มสต็อค</button>'
+                            $('#' + id).parent().append(addToStockButton);
+                        }
+                    }
+
+                    if ($(this).parent().find('.isPacked').text().toLowerCase().indexOf(pID.toLowerCase()) > -1) {
+                        id = $(this).attr("value");
+                        id2 = $(this).parent().find('.isPacked').text();
+                        let newVal = Math.floor(($('#' + id2).attr("value") - 1) / $(this).parent().find('.isPacked').attr("value"));
+                        $('#' + id).attr("value", newVal);
+                        $('#' + id + 'Text').text("เหลือ " + newVal);
+
+                        if (newVal == 0 && $('#' + id).parent().find('.add_to_stock').length == 0) {
+                            $('#' + id).addClass("d-none");
+                            let addToStockButton = '<button type="button" name="add_to_cart" id="' + id + '"class="btn btn-danger add_to_stock btn-sm" value = "' + newVal + '">เพิ่มสต็อค</button>'
+                            $('#' + id).parent().append(addToStockButton);
+                        }
+                    }
+                });
 
 
             }
@@ -809,10 +835,34 @@ if (!isset($_SESSION['seller'])) {
                         $('#' + id + 'Text').text("เหลือ " + newVal);
 
                         if (newVal == oldVal) {
-                            console.log($(this).find('.add_to_stock'));
                             $(this).parent().find('.add_to_stock').addClass("d-none");
                             $(this).parent().find('.add_to_cart').removeClass("d-none");
 
+                        }
+                    }
+
+                    if ($(this).parent().find('.hasPacked').text().toLowerCase().indexOf(pID.toLowerCase()) > -1) {
+                        id = $(this).attr("value");
+                        let newVal = parseInt($('#' + id).attr("value")) + parseInt($(this).parent().find('.hasPacked').attr("value"));
+                        $('#' + id).attr("value", newVal);
+                        $('#' + id + 'Text').text("เหลือ " + newVal);
+
+                        if (newVal == $(this).parent().find('.hasPacked').attr("value")) {
+                            $(this).parent().find('.add_to_stock').addClass("d-none");
+                            $(this).parent().find('.add_to_cart').removeClass("d-none");
+                        }
+                    }
+
+                    if ($(this).parent().find('.isPacked').text().toLowerCase().indexOf(pID.toLowerCase()) > -1) {
+                        id = $(this).attr("value");
+                        id2 = $(this).parent().find('.isPacked').text();
+                        let newVal = Math.floor((parseInt($('#' + id2).attr("value")) + parseInt(oldVal)) / $(this).parent().find('.isPacked').attr("value"));
+                        $('#' + id).attr("value", newVal);
+                        $('#' + id + 'Text').text("เหลือ " + newVal);
+
+                        if (Math.floor(oldVal/$(this).parent().find('.isPacked').attr("value")) == newVal) {
+                            $(this).parent().find('.add_to_stock').addClass("d-none");
+                            $(this).parent().find('.add_to_cart').removeClass("d-none");
                         }
                     }
                 });

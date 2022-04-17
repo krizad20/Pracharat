@@ -1144,7 +1144,6 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
       $('#selectProduct').on('keyup', function(e) {
         if (e.keyCode === 13) {
           pID = selectDataProductTable.row('.selected').data()['pID']
-          addToPOS(pID);
           $('#selectProduct').modal('hide');
         }
       })

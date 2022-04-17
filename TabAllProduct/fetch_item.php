@@ -14,9 +14,9 @@ while ($row = $list->fetch_assoc()) {
         <div class="col-lg-2 col-md-3 col-sm-6 col-xs-2">
             <div class="card mt-2">
                 <div class="card-body d-flex flex-column">
+                    <img src="product_pic\/' . $row["img"] . '" width="auto" height="200" class="card-img-top" alt="">
                     <h3 class="name" style="display: none;">' . $row["pName"] . '</h3>
                     <h3 class="cate" style="display: none;">' . $row["pCate"] . '</h3>
-                    <img src="product_pic\/' . $row["img"] . '" width="auto" height="200" class="card-img-top" alt="P00000">
                     <p class="fs-7 fw-bolder text-primary text-wrap">' . $row["pName"] . '</p>
                     <h5 class="text-danger">฿ ' . $row["pSP"] . '</h5>
                     <input type="number" name="quantity" id="quantity' . $row["pID"] . '" class="form-control" value="1" />
@@ -65,6 +65,24 @@ while ($row = $list->fetch_assoc()) {
             ';
     } else if ($menu == "tabPOS") {
 
+        $inPackBars = "";
+        $packBars = "";
+        if ($row['isPacked'] == '1') {
+            $sql = "SELECT pa.paPerPack,pa.pID FROM packproduct pa, product p WHERE pa.paID = '" . $row["pID"] . "' AND pa.pID = p.pID";
+            $result = $conn->query($sql);
+            while ($row2 = $result->fetch_assoc()) {
+                $inPackBars .= '<span class="isPacked" value = "' . $row2["paPerPack"] . '" style="display: none;">' . $row2["pID"] . '</span>';
+            }
+        }
+
+        if ($row['hasPacked'] == '1') {
+            $sql = "SELECT pa.paPerPack,pa.paID FROM packproduct pa, product p WHERE pa.pID = '" . $row["pID"] . "' AND pa.pID = p.pID";
+            $result = $conn->query($sql);
+            while ($row2 = $result->fetch_assoc()) {
+                $packBars .= '<span class="hasPacked" value = "' . $row2["paPerPack"] . '" style="display: none;">' . $row2["paID"] . '</span>';
+            }
+        }
+
         $pValText = $row["pVal"];
         if (isset($_SESSION['product'])) {
             if ($row['isPacked'] == '1') {
@@ -95,7 +113,7 @@ while ($row = $list->fetch_assoc()) {
         $button =       '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-success add_to_cart btn-sm" value = "' . $pValText . '">ใส่ตะกร้า</button>';
         if ($pValText <= 0) {
             $button =   '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-success add_to_cart d-none btn-sm" value = "' . $pValText . '">ใส่ตะกร้า</button>' .
-                        '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-danger add_to_stock btn-sm" value = "' . $pValText . '">เพิ่มสต็อค</button>';
+                '<button type="button" name="add_to_cart" id="' . $row["pID"] . '"class="btn btn-danger add_to_stock btn-sm" value = "' . $pValText . '">เพิ่มสต็อค</button>';
         }
 
         $favButton = '<span type="button" class="position-absolute top-0 end-0 ms-auto btn btn-secondary btn-sm add_fav" value = "' . $row["pID"] . '">
@@ -116,7 +134,8 @@ while ($row = $list->fetch_assoc()) {
                         <span class="bp" style="display: none;">' . $row["pBP"] . '</span>
                         <span class="sp" style="display: none;">' . $row["pSP"] . '</span>
                         <span class="cate" style="display: none;">' . $row["pCate"] . '</span>
-                        <span class="bars" value = "' . $row["pID"] . '" style="display: none;">' . $row["pBars"] . '</span>
+                        <span class="bars" value = "' . $row["pID"] . '" style="display: none;">' . $row["pBars"] . '</span>' . $inPackBars . $packBars . '
+
                         <span class="position-relative">
                             <img src="product_pic\/' . $row["img"] . '" width="auto" height="120" class="card-img-top">
                             ' . $favButton .
