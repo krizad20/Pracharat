@@ -3,8 +3,6 @@ include("./system/header.php");
 if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
   echo "<script>window.location.href='index.php';</script>";
 }
-
-
 ?>
 
 <div class="container-fluid" id="items">
@@ -67,28 +65,45 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
                     <input class="form-control form-control-sm" type="text" autocomplete="chrome-off" name="pNameEditTable" id="pNameEditTable" placeholder="ชื่อสินค้า" disabled required>
                   </div>
                 </div>
-
-                <div class="mb-1 row">
-                  <label class="col-sm-4 col-form-label">ราคาซื้อ</label>
+                <div class="row">
                   <div class="col-sm-8">
-                    <input class="form-control form-control-sm" type="float" autocomplete="chrome-off" name="pBPEditTable" id="pBPEditTable" placeholder="ราคาซื้อ" required disabled>
+                    <div class="mb-1 row">
+                      <label class="col-sm-6 col-form-label">ราคาซื้อ</label>
+                      <div class="col-sm-6">
+                        <input class="form-control form-control-sm" type="float" autocomplete="chrome-off" name="pBPEditTable" id="pBPEditTable" placeholder="ราคาซื้อ" required disabled>
+                      </div>
+                    </div>
+
+                    <div class="mb-1 row">
+                      <label class="col-sm-6 col-form-label">ราคาขาย</label>
+                      <div class="col-sm-6">
+                        <input class="form-control form-control-sm" type="float" autocomplete="chrome-off" name="pSPEditTable" id="pSPEditTable" placeholder="ราคาขาย" required disabled>
+                      </div>
+                    </div>
+
+                    <div class="mb-1 row">
+                      <label class="col-sm-6 col-form-label">คงเหลือ</label>
+                      <div class="col-sm-6">
+                        <input class="form-control form-control-sm" type="number" autocomplete="chrome-off" name="pValEditTable" id="pValEditTable" placeholder="คงเหลือ" required disabled>
+                      </div>
+
+                    </div>
+
+                    <div class="mb-1 row">
+                      <label class="col-sm-6 col-form-label">หน่วยนับ</label>
+                      <div class="col-sm-6">
+                        <input class="form-control form-control-sm" list="pUnitDatalist" type="text" autocomplete="chrome-off" name="pUnitEditTable" id="pUnitEditTable" placeholder="หน่วยนับ" required disabled>
+                        <datalist id="pUnitDatalist">
+                        </datalist>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4 align-self-center">
+                    <img class="img" id="pImgEditTable" src="./product_pic/P00000.png" alt="" width="100px" height="100px">
                   </div>
                 </div>
 
-                <div class="mb-1 row">
-                  <label class="col-sm-4 col-form-label">ราคาขาย</label>
-                  <div class="col-sm-8">
-                    <input class="form-control form-control-sm" type="float" autocomplete="chrome-off" name="pSPEditTable" id="pSPEditTable" placeholder="ราคาขาย" required disabled>
-                  </div>
-                </div>
-
-                <div class="mb-1 row">
-                  <label class="col-sm-4 col-form-label">คงเหลือ</label>
-                  <div class="col-sm-8">
-                    <input class="form-control form-control-sm" type="number" autocomplete="chrome-off" name="pValEditTable" id="pValEditTable" placeholder="คงเหลือ" required disabled>
-                  </div>
-
-                </div>
 
                 <div class="mb-1 row">
                   <label class="col-sm-4 col-form-label">หมวดหมู่</label>
@@ -99,14 +114,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
                   </div>
                 </div>
 
-                <div class="mb-1 row">
-                  <label class="col-sm-4 col-form-label">หน่วยนับ</label>
-                  <div class="col-sm-8">
-                    <input class="form-control form-control-sm" list="pUnitDatalist" type="text" autocomplete="chrome-off" name="pUnitEditTable" id="pUnitEditTable" placeholder="หน่วยนับ" required disabled>
-                    <datalist id="pUnitDatalist">
-                    </datalist>
-                  </div>
-                </div>
+
 
                 <div class="mb-1 row">
                   <div class="col-sm-4 d-flex">
@@ -124,8 +132,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
                 <div class="mb-1 row">
                   <div class="col d-flex">
-                    <input class="form-control form-control-sm" type="file" name="file" id="formFileEditTable" disabled>
-                    <input class="d-none" type="submit" name="submit" value="Upload" id="subButEditTable">
+                    <input class="form-control form-control-sm image" type="file" name="image" id="selectImg">
                   </div>
                 </div>
 
@@ -561,12 +568,16 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     var pVal;
     var pCate;
     var pUnit;
+    var imgFile;
 
     var subID = ""
     var subProductVal = ""
     var perPack = ""
     var paSP = ""
     var paCate = ""
+
+
+
 
 
 
@@ -689,6 +700,9 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           $('#pValEditTable').val(json[0].pVal)
           $('#pCateEditTable').val(json[0].pCate)
           $('#pUnitEditTable').val(json[0].pUnit)
+          $('#pImgEditTable').attr('src', './product_pic/' + json[0].img)
+
+
           $('#isPackedEditTable').prop("checked", json[0].isPacked == 1);
           $('#managePackEditTable').attr("disabled", json[0].isPacked != 1);
 
@@ -758,9 +772,6 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
         editProduct(data);
 
       }
-
-
-
     })
 
     //DELETE
@@ -1254,6 +1265,19 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
       });
     });
 
+    //upload img
+
+    $('#selectImg').change(function(e) {
+      imgFile = e.target.files[0];
+      var reader = new FileReader();
+      reader.onloadend = function() {
+        $('#pImgEditTable').attr('src', reader.result);
+      }
+      reader.readAsDataURL(imgFile);
+
+    });
+
+
     function detailBox(mode, type) {
       if (mode == "enable") {
         $('#pBar' + type).attr("disabled", false);
@@ -1346,6 +1370,8 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     }
 
     function addProduct(data) {
+      let pID = data.pID;
+      
       if (data.pID == '' || data.pBar == '' || data.pName == '' || data.pBP == '' || data.pSP == '' || data.pVal == '' || data.pCate == '' || data.pUnit == '') {
         alert("กรุณากรอกข้อมูลให้ครบ");
       } else {
@@ -1370,9 +1396,27 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
               detailBox("disable", "Add");
               $('#pSaveEditTable').attr("disabled", true);
               $('#pDelTable').attr("disabled", true);
-              $('#subButAdd').click()
 
-              alert("เพิ่มสินค้าเรียบร้อย");
+              if (imgFile != undefined) {
+                formData = new FormData();
+                if (!!imgFile.type.match(/image.*/)) {
+                  formData.append("image", imgFile);
+                  formData.append("pID", pID);
+                  $.ajax({
+                    url: "./TabManageProduct/uploadImg.php",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(data) {
+
+                    }
+                  });
+                } else {
+                  alert('รูปภาพไม่ถูกต้อง');
+                }
+              }
+
             } else if (data.trim() == "duplicate") {
               alert("บาร์โค้ดซ้ำ");
             } else {
@@ -1441,10 +1485,11 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     }
 
     function editProduct(data) {
-
+      let pID = data.pID;
       if (data.pID == '' || data.pBar == '' || data.pName == '' || data.pBP == '' || data.pSP == '' || data.pVal == '' || data.pCate == '' || data.pUnit == '') {
         alert("กรุณากรอกข้อมูลให้ครบ");
       } else {
+
         $.ajax({
           url: "./TabManageProduct/manageProduct.php",
           method: "POST",
@@ -1469,7 +1514,27 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
               detailBox("disable", "EditTable");
               $('#pSaveEditTable').attr("disabled", true);
               $('#Table').attr("disabled", true);
-              $('#subBut').click()
+
+              if (imgFile != undefined) {
+                formData = new FormData();
+                if (!!imgFile.type.match(/image.*/)) {
+                  formData.append("image", imgFile);
+                  formData.append("pID", pID);
+                  $.ajax({
+                    url: "./TabManageProduct/uploadImg.php",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(data) {
+
+                    }
+                  });
+                } else {
+                  alert('รูปภาพไม่ถูกต้อง');
+                }
+              }
+
               alert("บันทึกการแก้ไขสินค้าเรียบร้อย");
             } else if (data.trim() == "duplicate") {
               alert("บาร์โค้ดซ้ำ");

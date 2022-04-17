@@ -35,13 +35,12 @@ if ($mode == "add") {
     $result = mysqli_query($conn, $sql);
     if ($result) {
         echo "success";
-    } 
-    else {
+    } else {
         echo "fail";
         echo $sql;
         echo $result;
-
     }
+
 }
 //EDIT
 else if ($mode == "edit") {
