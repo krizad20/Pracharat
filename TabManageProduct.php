@@ -1508,7 +1508,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           success: function(data) {
             console.log(data);
             if (data.trim() == "success") {
-              table.ajax.reload();
+              // table.ajax.reload();
               load_product();
               $('#editProductModal').modal('hide');
               detailBox("disable", "EditTable");
@@ -1584,7 +1584,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           },
           success: function(data) {
             if (data.trim() == "success") {
-              table.ajax.reload();
+              // table.ajax.reload();
               load_product();
               detailBox("disable", "Add");
               $('#pSaveEditTable').attr("disabled", true);
