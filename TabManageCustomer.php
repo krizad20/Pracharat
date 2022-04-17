@@ -23,35 +23,35 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
               <div class="mb-1 row">
                 <label class="col-form-label" style="width: 30%;">รหัสลูกค้า</label>
                 <div class="col" style="width: 70%;">
-                  <input class="col form-control" type="text" autocomplete="chrome-off" name="cID" id="cID" placeholder="" disabled>
+                  <input class="col form-control" type="text" autocomplete="off" name="cID" id="cID" placeholder="" disabled>
                 </div>
               </div>
 
               <div class="mb-1 row">
                 <label class="col-form-label" style="width: 30%;">ชื่อ</label>
                 <div class="col" style="width: 70%;">
-                  <input class="col form-control" type="text" autocomplete="chrome-off" name="cName" id="cName" placeholder="" disabled>
+                  <input class="col form-control" type="text" autocomplete="off" name="cName" id="cName" placeholder="" disabled>
                 </div>
               </div>
 
               <div class="mb-1 row">
                 <label class="col-form-label" style="width: 30%;">นามสกุล</label>
                 <div class="col" style="width: 70%;">
-                  <input class="col form-control" type="text" autocomplete="chrome-off" name="cSer" id="cSer" placeholder="" disabled>
+                  <input class="col form-control" type="text" autocomplete="off" name="cSer" id="cSer" placeholder="" disabled>
                 </div>
               </div>
 
               <div class="mb-1 row">
                 <label class="col-form-label" style="width: 30%;">บ้านเลขที่</label>
                 <div class="col" style="width: 70%;">
-                  <input class="col form-control" type="float" autocomplete="chrome-off" name="cHouse" id="cHouse" placeholder="" disabled>
+                  <input class="col form-control" type="float" autocomplete="off" name="cHouse" id="cHouse" placeholder="" disabled>
                 </div>
               </div>
 
               <div class="mb-1 row">
                 <label class="col-form-label" style="width: 30%;">หมู่ที่</label>
                 <div class="col" style="width: 70%;">
-                  <input class="col form-control" type="float" autocomplete="chrome-off" name="cMoo" id="cMoo" placeholder="" disabled>
+                  <input class="col form-control" type="float" autocomplete="off" name="cMoo" id="cMoo" placeholder="" disabled>
                 </div>
               </div>
 

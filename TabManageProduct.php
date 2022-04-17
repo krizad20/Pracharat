@@ -45,7 +45,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
                 <div class="mb-1 row">
                   <label class="col-sm-4 col-form-label">รหัสสินค้า</label>
                   <div class="col-sm-8">
-                    <input class="form-control form-control-sm" type="text" autocomplete="chrome-off" name="pIDEditTable" id="pIDEditTable" placeholder="รหัสสินค้า" readonly required>
+                    <input class="form-control form-control-sm" type="text" autocomplete="off" name="pIDEditTable" id="pIDEditTable" placeholder="รหัสสินค้า" readonly required>
                   </div>
                 </div>
 
@@ -53,7 +53,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
                   <label class="col-sm-4 col-form-label">บาร์โค้ดสินค้า</label>
                   <div class="col-sm-8">
                     <div class="input-group">
-                      <input class="form-control form-control-sm" type="text" autocomplete="chrome-off" name="pBarEditTable" id="pBarEditTable" placeholder="บาร์โค้ดสินค้า" disabled required>
+                      <input class="form-control form-control-sm" type="text" autocomplete="off" name="pBarEditTable" id="pBarEditTable" placeholder="บาร์โค้ดสินค้า" disabled required>
                       <button class="btn btn-sm btn-outline-secondary" type="button" id="barManage" data-bs-toggle="modal" data-bs-target="#subBarcode" disabled>จัดการ</button>
                     </div>
                   </div>
@@ -62,7 +62,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
                 <div class="mb-1 row">
                   <label class="col-sm-4 col-form-label">ชื่อสินค้า</label>
                   <div class="col-sm-8">
-                    <input class="form-control form-control-sm" type="text" autocomplete="chrome-off" name="pNameEditTable" id="pNameEditTable" placeholder="ชื่อสินค้า" disabled required>
+                    <input class="form-control form-control-sm" type="text" autocomplete="off" name="pNameEditTable" id="pNameEditTable" placeholder="ชื่อสินค้า" disabled required>
                   </div>
                 </div>
                 <div class="row">
@@ -70,21 +70,21 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
                     <div class="mb-1 row">
                       <label class="col-sm-6 col-form-label">ราคาซื้อ</label>
                       <div class="col-sm-6">
-                        <input class="form-control form-control-sm" type="float" autocomplete="chrome-off" name="pBPEditTable" id="pBPEditTable" placeholder="ราคาซื้อ" required disabled>
+                        <input class="form-control form-control-sm" type="float" autocomplete="off" name="pBPEditTable" id="pBPEditTable" placeholder="ราคาซื้อ" required disabled>
                       </div>
                     </div>
 
                     <div class="mb-1 row">
                       <label class="col-sm-6 col-form-label">ราคาขาย</label>
                       <div class="col-sm-6">
-                        <input class="form-control form-control-sm" type="float" autocomplete="chrome-off" name="pSPEditTable" id="pSPEditTable" placeholder="ราคาขาย" required disabled>
+                        <input class="form-control form-control-sm" type="float" autocomplete="off" name="pSPEditTable" id="pSPEditTable" placeholder="ราคาขาย" required disabled>
                       </div>
                     </div>
 
                     <div class="mb-1 row">
                       <label class="col-sm-6 col-form-label">คงเหลือ</label>
                       <div class="col-sm-6">
-                        <input class="form-control form-control-sm" type="number" autocomplete="chrome-off" name="pValEditTable" id="pValEditTable" placeholder="คงเหลือ" required disabled>
+                        <input class="form-control form-control-sm" type="number" autocomplete="off" name="pValEditTable" id="pValEditTable" placeholder="คงเหลือ" required disabled>
                       </div>
 
                     </div>
@@ -92,7 +92,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
                     <div class="mb-1 row">
                       <label class="col-sm-6 col-form-label">หน่วยนับ</label>
                       <div class="col-sm-6">
-                        <input class="form-control form-control-sm" list="pUnitDatalist" type="text" autocomplete="chrome-off" name="pUnitEditTable" id="pUnitEditTable" placeholder="หน่วยนับ" required disabled>
+                        <input class="form-control form-control-sm" list="pUnitDatalist" type="text" autocomplete="off" name="pUnitEditTable" id="pUnitEditTable" placeholder="หน่วยนับ" required disabled>
                         <datalist id="pUnitDatalist">
                         </datalist>
                       </div>
@@ -108,7 +108,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
                 <div class="mb-1 row">
                   <label class="col-sm-4 col-form-label">หมวดหมู่</label>
                   <div class="col-sm-8">
-                    <input class="form-control form-control-sm" list="pCateDatalist" type="text" autocomplete="chrome-off" name="pCateEditTable" id="pCateEditTable" placeholder="หมวดหมู่" required disabled>
+                    <input class="form-control form-control-sm" list="pCateDatalist" type="text" autocomplete="off" name="pCateEditTable" id="pCateEditTable" placeholder="หมวดหมู่" required disabled>
                     <datalist id="pCateDatalist">
                     </datalist>
                   </div>
@@ -205,7 +205,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">รหัสสินค้า</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" type="text" autocomplete="chrome-off" name="pID" id="pIDAdd" placeholder="รหัสสินค้า" readonly required>
+              <input class="form-control form-control-sm" type="text" autocomplete="off" name="pID" id="pIDAdd" placeholder="รหัสสินค้า" readonly required>
             </div>
           </div>
 
@@ -213,7 +213,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
             <label class="col-sm-4 col-form-label">บาร์โค้ดสินค้า</label>
             <div class="col-sm-8">
               <div class="input-group">
-                <input class="form-control form-control-sm" type="text" autocomplete="chrome-off" name="pBar" id="pBarAdd" placeholder="บาร์โค้ดสินค้า" disabled required>
+                <input class="form-control form-control-sm" type="text" autocomplete="off" name="pBar" id="pBarAdd" placeholder="บาร์โค้ดสินค้า" disabled required>
               </div>
             </div>
           </div>
@@ -221,28 +221,28 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">ชื่อสินค้า</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" type="text" autocomplete="chrome-off" name="pName" id="pNameAdd" placeholder="ชื่อสินค้า" disabled required>
+              <input class="form-control form-control-sm" type="text" autocomplete="off" name="pName" id="pNameAdd" placeholder="ชื่อสินค้า" disabled required>
             </div>
           </div>
 
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">ราคาซื้อ</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" type="float" autocomplete="chrome-off" name="pBP" id="pBPAdd" placeholder="ราคาซื้อ" disabled readonly>
+              <input class="form-control form-control-sm" type="float" autocomplete="off" name="pBP" id="pBPAdd" placeholder="ราคาซื้อ" disabled readonly>
             </div>
           </div>
 
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">ราคาขาย</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" type="float" autocomplete="chrome-off" name="pSP" id="pSPAdd" placeholder="ราคาขาย" required disabled>
+              <input class="form-control form-control-sm" type="float" autocomplete="off" name="pSP" id="pSPAdd" placeholder="ราคาขาย" required disabled>
             </div>
           </div>
 
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">คงเหลือ</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" type="number" autocomplete="chrome-off" name="pVal" id="pValAdd" placeholder="คงเหลือ" required readonly>
+              <input class="form-control form-control-sm" type="number" autocomplete="off" name="pVal" id="pValAdd" placeholder="คงเหลือ" required readonly>
             </div>
 
           </div>
@@ -250,7 +250,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">หมวดหมู่</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" list="pCateDatalist" type="text" autocomplete="chrome-off" name="pCate" id="pCateAdd" placeholder="หมวดหมู่" required readonly>
+              <input class="form-control form-control-sm" list="pCateDatalist" type="text" autocomplete="off" name="pCate" id="pCateAdd" placeholder="หมวดหมู่" required readonly>
               <datalist id="pCateDatalist">
               </datalist>
             </div>
@@ -259,7 +259,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">หน่วยนับ</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" list="pUnitDatalist" type="text" autocomplete="chrome-off" name="pUnit" id="pUnitAdd" placeholder="หน่วยนับ" required disabled>
+              <input class="form-control form-control-sm" list="pUnitDatalist" type="text" autocomplete="off" name="pUnit" id="pUnitAdd" placeholder="หน่วยนับ" required disabled>
               <datalist id="pUnitDatalist">
               </datalist>
             </div>
@@ -308,7 +308,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">รหัสสินค้า</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" type="text" autocomplete="chrome-off" name="pIDEditGrid" id="pIDEditGrid" placeholder="รหัสสินค้า" readonly required>
+              <input class="form-control form-control-sm" type="text" autocomplete="off" name="pIDEditGrid" id="pIDEditGrid" placeholder="รหัสสินค้า" readonly required>
             </div>
           </div>
 
@@ -316,7 +316,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
             <label class="col-sm-4 col-form-label">บาร์โค้ดสินค้า</label>
             <div class="col-sm-8">
               <div class="input-group">
-                <input class="form-control form-control-sm" type="text" autocomplete="chrome-off" name="pBarEditGrid" id="pBarEditGrid" placeholder="บาร์โค้ดสินค้า" required>
+                <input class="form-control form-control-sm" type="text" autocomplete="off" name="pBarEditGrid" id="pBarEditGrid" placeholder="บาร์โค้ดสินค้า" required>
                 <button class="btn btn-sm btn-outline-secondary" type="button" id="barManage" data-bs-toggle="modal" data-bs-target="#subBarcode" disabled>จัดการ</button>
               </div>
             </div>
@@ -325,28 +325,28 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">ชื่อสินค้า</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" type="text" autocomplete="chrome-off" name="pNameEditGrid" id="pNameEditGrid" placeholder="ชื่อสินค้า" required>
+              <input class="form-control form-control-sm" type="text" autocomplete="off" name="pNameEditGrid" id="pNameEditGrid" placeholder="ชื่อสินค้า" required>
             </div>
           </div>
 
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">ราคาซื้อ</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" type="float" autocomplete="chrome-off" name="pBPEditGrid" id="pBPEditGrid" placeholder="ราคาซื้อ" required>
+              <input class="form-control form-control-sm" type="float" autocomplete="off" name="pBPEditGrid" id="pBPEditGrid" placeholder="ราคาซื้อ" required>
             </div>
           </div>
 
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">ราคาขาย</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" type="float" autocomplete="chrome-off" name="pSPEditGrid" id="pSPEditGrid" placeholder="ราคาขาย" required>
+              <input class="form-control form-control-sm" type="float" autocomplete="off" name="pSPEditGrid" id="pSPEditGrid" placeholder="ราคาขาย" required>
             </div>
           </div>
 
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">คงเหลือ</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" type="number" autocomplete="chrome-off" name="pValEditGrid" id="pValEditGrid" placeholder="คงเหลือ" required>
+              <input class="form-control form-control-sm" type="number" autocomplete="off" name="pValEditGrid" id="pValEditGrid" placeholder="คงเหลือ" required>
             </div>
 
           </div>
@@ -354,7 +354,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">หมวดหมู่</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" list="pCateDatalist" type="text" autocomplete="chrome-off" name="pCateEditGrid" id="pCateEditGrid" placeholder="หมวดหมู่" required>
+              <input class="form-control form-control-sm" list="pCateDatalist" type="text" autocomplete="off" name="pCateEditGrid" id="pCateEditGrid" placeholder="หมวดหมู่" required>
               <datalist id="pCateDatalist">
               </datalist>
             </div>
@@ -363,7 +363,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">หน่วยนับ</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" list="pUnitDatalist" type="text" autocomplete="chrome-off" name="pUnitEditGrid" id="pUnitEditGrid" placeholder="หน่วยนับ" required>
+              <input class="form-control form-control-sm" list="pUnitDatalist" type="text" autocomplete="off" name="pUnitEditGrid" id="pUnitEditGrid" placeholder="หน่วยนับ" required>
               <datalist id="pUnitDatalist">
               </datalist>
             </div>
@@ -411,56 +411,56 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
         <div class="mb-1 row">
           <label class="col-form-label" style="width: 40%;">รหัสแพ็คสินค้า</label>
           <div class="col" style="width: 60%;">
-            <input class="col form-control" type="text" autocomplete="chrome-off" name="ppaID" id="ppaID" placeholder="" disabled>
+            <input class="col form-control" type="text" autocomplete="off" name="ppaID" id="ppaID" placeholder="" disabled>
           </div>
         </div>
 
         <div class="mb-1 row">
           <label class="col-form-label" style="width: 40%;">รหัสสินค้าในแพ็ค</label>
           <div class="col" style="width: 60%;">
-            <input class="col form-control" type="text" autocomplete="chrome-off" name="ppID" id="ppID" placeholder="" disabled>
+            <input class="col form-control" type="text" autocomplete="off" name="ppID" id="ppID" placeholder="" disabled>
           </div>
         </div>
 
         <div class="mb-1 row">
           <label class="col-form-label" style="width: 40%;">บาร์โค้ดสินค้าในแพ็ค</label>
           <div class="col" style="width: 60%;">
-            <input class="col form-control" type="text" autocomplete="chrome-off" name="ppBar" id="ppBar" placeholder="" disabled>
+            <input class="col form-control" type="text" autocomplete="off" name="ppBar" id="ppBar" placeholder="" disabled>
           </div>
         </div>
 
         <div class="mb-1 row">
           <label class="col-form-label" style="width: 40%;">ชื่อสินค้า</label>
           <div class="col" style="width: 60%;">
-            <input class="col form-control" type="text" autocomplete="chrome-off" name="ppaName" id="ppaName" placeholder="" disabled>
+            <input class="col form-control" type="text" autocomplete="off" name="ppaName" id="ppaName" placeholder="" disabled>
           </div>
         </div>
 
         <div class="mb-1 row">
           <label class="col-form-label" style="width: 40%;">จำนวนชิ้นต่อแพ็ค</label>
           <div class="col" style="width: 60%;">
-            <input class="col form-control" type="number" autocomplete="chrome-off" name="ppaPerPacked" id="ppaPerPacked" placeholder="">
+            <input class="col form-control" type="number" autocomplete="off" name="ppaPerPacked" id="ppaPerPacked" placeholder="">
           </div>
         </div>
 
         <div class="mb-1 row">
           <label class="col-form-label" style="width: 40%;">ราคาซื้อต่อชิ้น</label>
           <div class="col" style="width: 60%;">
-            <input class="col form-control" type="float" autocomplete="chrome-off" name="ppaBPerOne" id="ppaBPerOne" placeholder="" disabled>
+            <input class="col form-control" type="float" autocomplete="off" name="ppaBPerOne" id="ppaBPerOne" placeholder="" disabled>
           </div>
         </div>
 
         <div class="mb-1 row">
           <label class="col-form-label" style="width: 40%;">ราคาซื้อต่อแพ็ค</label>
           <div class="col" style="width: 60%;">
-            <input class="col form-control" type="float" autocomplete="chrome-off" name="ppaBPerPack" id="ppaBPerPack" placeholder="" disabled>
+            <input class="col form-control" type="float" autocomplete="off" name="ppaBPerPack" id="ppaBPerPack" placeholder="" disabled>
           </div>
         </div>
 
         <div class="mb-1 row">
           <label class="col-form-label" style="width: 40%;">ราคาขายต่อแพ็ค</label>
           <div class="col" style="width: 60%;">
-            <input class="col form-control" type="float" autocomplete="chrome-off" name="ppaSP" id="ppaSP" placeholder="">
+            <input class="col form-control" type="float" autocomplete="off" name="ppaSP" id="ppaSP" placeholder="">
           </div>
         </div>
 

@@ -249,8 +249,6 @@ include('server.php');
 						echo '
 						<li class="nav-item"><a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#reportPerDay">สรุปยอดขายรายวัน</a></li>
 						
-						</ul>
-						<ul class="navbar-nav ml-auto">
 						<li class="nav-item dropdown d-flex">
 						<a class="nav-link dropdown-toggle me-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">' . $_SESSION['seller'] . '</a>
 							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -260,6 +258,7 @@ include('server.php');
 								</button>
 							</ul>
 					</li>
+						
 						</ul>
 						
 						';

@@ -22,15 +22,15 @@ if (isset($_SESSION['seller'])) {
                 <form action="login.php" method="post">
                     <div class="form-group">
                         <label for="username" class="form-label">ชื่อผู้ขาย</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="ชื่อ" required>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="ชื่อ" autocomplete="off" required>
                     </div>
                     <div class="form-group">
                         <label for="password">รหัสผ่าน</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="รหัสผ่าน" required>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="รหัสผ่าน" autocomplete="off" required>
                     </div>
                     <div class="form-group">
                         <label for="password">รหัสยืนยันสมัคร</label>
-                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="ยืนยันรหัสผ่าน" required>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="ยืนยันรหัสผ่าน" autocomplete="off" required>
                     </div>
                     <div class="form-group">
                         <label for="permission">ตำแหน่ง</label>
@@ -57,10 +57,10 @@ if (isset($_SESSION['seller'])) {
                 <div class="panel-body">
                     <form action="login.php" method="post">
                         <div class="form-group mb-3">
-                            <input class="form-control" placeholder="ชื่อผู้ขาย" name="username" autofocus>
+                            <input class="form-control" placeholder="ชื่อผู้ขาย" name="username" autocomplete="off" autofocus>
                         </div>
                         <div class="form-group mb-3">
-                            <input class="form-control" placeholder="รหัสผ่าน" name="password" type="password" value="">
+                            <input class="form-control" placeholder="รหัสผ่าน" name="password" autocomplete="off" type="password" value="">
                         </div>
 
                         <button type="submit" class="btn btn-lg btn-success btn-block" name="login">เข้าสู่ระบบ</button>

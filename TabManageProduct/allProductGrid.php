@@ -21,7 +21,7 @@
     <div class="card-header">
       <div class="d-flex justify-content-between">
         <div class="d-flex">
-          <input class="search form-control me-2" type="search" id="searchBar" placeholder="ค้นหาสินค้า" aria-label="Search" autofocus>
+          <input class="search form-control me-2" type="search" id="searchBar" placeholder="ค้นหาสินค้า" aria-label="Search" autocomplete="off" autofocus>
           <button class="sort btn btn-success text-nowrap" type="button" data-sort="name" style="width: fit-content;font-size: 50%;"> เรียงตามชื่อ</button>
         </div>
         <div class="d-flex">
