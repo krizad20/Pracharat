@@ -59,7 +59,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
         </div>
     </div>
 
-    <div class="card">
+    <div class="card mb-2">
         <div class="card-body p-2">
             <table id="addToStockTable" class="table table-bordered">
                 <thead>
