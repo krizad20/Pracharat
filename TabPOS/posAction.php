@@ -143,8 +143,8 @@ if (isset($_POST["action"])) {
         // $sql = "UPDATE product SET pVal = pVal + $pQuantity,pBP = '$pNewBP', pSP = '$pNewSP' WHERE pID = '$pID'";
         // $result = mysqli_query($conn, $sql);    
 
-        $sql = "INSERT INTO `addtostock`(`aDate`, `apID`, `apName`, `aBP`, `aVal`) 
-                VALUES ('$time','$pID','$pName','$pNewBP','$pQuantity')";
+        $sql = "INSERT INTO `addtostock`(`aDate`, `apID`, `apName`, `aBP`, `aSP`, `aVal`) 
+                VALUES ('$time','$pID','$pName','$pNewBP','$pNewSP','$pQuantity')";
         $result = mysqli_query($conn, $sql);
     }
 

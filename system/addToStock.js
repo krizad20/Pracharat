@@ -150,8 +150,8 @@ function selectProduct(data) {
       $("#pNewBP").val(parseFloat($("#pNewBP").val()).toFixed(2));
 
       let askConfirm = "";
-      let newBP = parseFloat(product_BP);
-      let newSP = parseFloat(product_SP);
+      let newBP = parseFloat($("#pNewBP").val());
+      let newSP = parseFloat($("#pNewSP").val());
       let product_quantity = parseInt($("#pAddVal").val() - 0);
 
       let editBPOnly =
@@ -215,6 +215,7 @@ function selectProduct(data) {
               pNewSP: newSP,
             },
             success: function (result) {
+              alert(result);
               selectProductTable.ajax.reload();
               load_product();
               if (editBPOnly) {
