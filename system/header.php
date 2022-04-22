@@ -241,7 +241,7 @@ include('server.php');
 										<li><a class="dropdown-item" href="./TabReportProfit.php">กำไร-ขาดทุน</a></li>
 									</ul>
 							</li>
-							<li class="nav-item"><a class="nav-link" href="./TabReportAddToStock.php">รายงานสินค้าเข้าสต็อค</a></li>
+							<li class="nav-item"><a class="nav-link" href="./TabReportAdd2Stock.php">รายงานสินค้าเข้าสต็อค</a></li>
 							<li class="nav-item"><a class="nav-link" href="./TabReportNeedToBuy.php">รายงานสินค้าถึงจุดสั่งซื้อ</a></li>
 
 							
