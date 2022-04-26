@@ -47,8 +47,8 @@ for ($i=0; $i < sizeof($arr) ; $i++) {
             "pID" => $pID,
             "pName" => $pName,
             "pQuantity" => $pQuantity,
-            "pSP" => $pSP,
-            "pBP" => $pBP,
+            "pSP" => number_format($pSP, 2, '.', ''),
+            "pBP" => number_format($pBP, 2, '.', ''),
             "pProfit" => number_format((float)$pProfit, 2, '.', '')
         );
         $bDate = "";
