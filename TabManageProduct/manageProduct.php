@@ -40,7 +40,6 @@ if ($mode == "add") {
         echo $sql;
         echo $result;
     }
-
 }
 //EDIT
 else if ($mode == "edit") {
@@ -86,14 +85,79 @@ else if ($mode == "edit") {
 //DELETE
 else if ($mode == "del") {
     $pID = $_POST["pID"];
-    $sql1 = "UPDATE product SET pDel = 1 WHERE pID = '$pID' AND pID = (SELECT paID FROM packproduct WHERE pID = '$pID')";
-    $result1 = mysqli_query($conn, $sql1);
-    $sql2 = "DELETE FROM packproduct WHERE pID = '$pID' OR paID = '$pID'";
-    $result2 = mysqli_query($conn, $sql2);
-    if ($result1 && $result2) {
-        echo "success";
-    } else {
-        echo "fail";
+
+    $sql = "SELECT isPacked,hasPacked FROM `product` WHERE `pID` = '$pID' AND pDel = 0";
+    $result = mysqli_query($conn, $sql);
+    $row = $result->fetch_assoc();
+    $isPacked = $row["isPacked"];
+    $hasPacked = $row["hasPacked"];
+
+    if ($isPacked == 1 && $hasPacked == 0) {
+        $sql = "UPDATE product SET pDel = 1 WHERE pID='$pID'";
+        $result = mysqli_query($conn, $sql);
+
+        $sql1 = "DELETE FROM packproduct WHERE paID = '$pID'";
+        $result1 = mysqli_query($conn, $sql1);
+
+        if ($result && $result1) {
+            echo "ลบสินค้าสำเร็จ";
+        } else {
+            echo "ลบสินค้าไม่สำเร็จ";
+        }
+    } else if ($isPacked == 0 && $hasPacked == 0) {
+        $sql = "UPDATE product SET pDel = 1 WHERE pID='$pID'";
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            echo "ลบสินค้าสำเร็จ";
+        } else {
+            echo "ลบสินค้าไม่สำเร็จ";
+        }
+    } else if ($isPacked == 0 && $hasPacked == 1) {
+        $sql = "UPDATE product SET pDel = 1 WHERE pID='$pID'";
+        $result = mysqli_query($conn, $sql);
+
+        //All pack that has this product
+        $sql1 = "SELECT * FROM packproduct WHERE pID = '$pID'";
+        $result1 = mysqli_query($conn, $sql1);
+        while ($row1 = $result1->fetch_assoc()) {
+            $paID = $row1["paID"];
+            $sql2 = "UPDATE product SET pDel = 1 WHERE pID = '$paID'";
+            $result2 = mysqli_query($conn, $sql2);
+        }
+
+        $sql3 = "DELETE FROM packproduct WHERE pID = '$pID'";
+        $result3 = mysqli_query($conn, $sql3);
+        if ($result && $result1 && $result2 && $result3) {
+            echo "ลบสินค้าสำเร็จ";
+        } else {
+            echo "ลบสินค้าไม่สำเร็จ";
+        }
+    }
+}
+//Ask Delete
+else if ($mode == "askDel") {
+    $pID = $_POST["pID"];
+
+    $sql = "SELECT isPacked,hasPacked FROM `product` WHERE `pID` = '$pID' AND pDel = 0";
+    $result = mysqli_query($conn, $sql);
+    $row = $result->fetch_assoc();
+    $isPacked = $row["isPacked"];
+    $hasPacked = $row["hasPacked"];
+
+    if ($isPacked == 0 && $hasPacked == 1) {
+        $text = "หากลบแล้วสินค้าแพ็คจะถูกลบไปด้วย\n";
+        //All pack that has this product
+        $sql1 = "SELECT * FROM packproduct WHERE pID = '$pID'";
+        $result1 = mysqli_query($conn, $sql1);
+        while ($row1 = $result1->fetch_assoc()) {
+            $paID = $row1["paID"];
+            $paName = $row1["paName"];
+            $text .=  $paID ." ".$paName. "\n";
+        }
+        echo $text;
+    }
+    else{
+        echo "คุณต้องการลบสินค้านี้หรือไม่";
     }
 }
 //Get ID

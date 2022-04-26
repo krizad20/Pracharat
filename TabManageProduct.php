@@ -228,7 +228,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">ราคาซื้อ</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" type="float" autocomplete="off" name="pBP" id="pBPAdd" placeholder="ราคาซื้อ" disabled readonly>
+              <input class="form-control form-control-sm" type="float" autocomplete="off" name="pBP" id="pBPAdd" placeholder="ราคาซื้อ" required disabled> 
             </div>
           </div>
 
@@ -242,7 +242,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">คงเหลือ</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" type="number" autocomplete="off" name="pVal" id="pValAdd" placeholder="คงเหลือ" required readonly>
+              <input class="form-control form-control-sm" type="number" autocomplete="off" name="pVal" id="pValAdd" placeholder="คงเหลือ" disabled required>
             </div>
 
           </div>
@@ -250,7 +250,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">หมวดหมู่</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" list="pCateDatalist" type="text" autocomplete="off" name="pCate" id="pCateAdd" placeholder="หมวดหมู่" required readonly>
+              <input class="form-control form-control-sm" list="pCateDatalist" type="text" autocomplete="off" name="pCate" id="pCateAdd" placeholder="หมวดหมู่" required disabled>
               <datalist id="pCateDatalist">
               </datalist>
             </div>
@@ -1604,33 +1604,46 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     }
 
     function delProduct(id) {
-      if (confirm("คุณต้องการลบสินค้านี้หรือไม่")) {
-        $.ajax({
-          url: "./TabManageProduct/manageProduct.php",
-          method: "POST",
-          data: {
-            mode: "del",
-            pID: id,
-          },
-          success: function(data) {
-            table.ajax.reload();
-            load_product();
-            detailBox("disable", "EditTable");
-            alert(data);
+      $.ajax({
+        url: "./TabManageProduct/manageProduct.php",
+        method: "POST",
+        data: {
+          mode: "askDel",
+          pID: id,
+        },
+        success: function(data) {
+          if (confirm(data)) {
+            $.ajax({
+              url: "./TabManageProduct/manageProduct.php",
+              method: "POST",
+              data: {
+                mode: "del",
+                pID: id,
+              },
+              success: function(data) {
+                table.ajax.reload();
+                load_product();
+                detailBox("disable", "EditTable");
+                alert(data);
 
-            $('#pIDEditTable').val("")
-            $('#pBarEditTable').val("")
-            $('#pNameEditTable').val("")
-            $('#pBPEditTable').val("")
-            $('#pSPEditTable').val("")
-            $('#pValEditTable').val("")
-            $('#pCateEditTable').val("")
-            $('#pUnitEditTable').val("")
+                $('#pIDEditTable').val("")
+                $('#pBarEditTable').val("")
+                $('#pNameEditTable').val("")
+                $('#pBPEditTable').val("")
+                $('#pSPEditTable').val("")
+                $('#pValEditTable').val("")
+                $('#pCateEditTable').val("")
+                $('#pUnitEditTable').val("")
+              }
+            });
+          } else {
+            alert("ยกเลิกการลบสินค้า");
           }
-        });
-      } else {
-        alert("ยกเลิกการลบสินค้า");
-      }
+        }
+      });
+
+
+
 
 
     }
