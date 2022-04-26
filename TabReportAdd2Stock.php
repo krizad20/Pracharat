@@ -67,6 +67,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
                     <th width="1%" class="text-center text-nowrap" scope="col">รหัสสินค้า</th>
                     <th scope="col">ชื่อสินค้า</th>
                     <th width="1%" class="text-center text-nowrap" scope="col">ราคาซื้อ</th>
+                    <th width="1%" class="text-center text-nowrap" scope="col">ราคาขาย</th>
                     <th width="1%" class="text-center text-nowrap" scope="col">จำนวนนำเข้า</th>
                 </thead>
                 <tbody>
@@ -134,6 +135,9 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
                     },
                     {
                         data: 'aBP'
+                    },
+                    {
+                        data: 'aSP'
                     },
                     {
                         data: 'aVal'
