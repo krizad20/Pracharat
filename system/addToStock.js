@@ -130,6 +130,8 @@ function selectProduct(data) {
   $("#pBPA2S").css("background-color", "#f2f2f2");
   $("#pSPA2S").css("background-color", "#f2f2f2");
   $("#pValA2S").css("background-color", "#f2f2f2");
+  $("#saveAddToStock").prop("disabled", false);
+
 
   let sumOldBP = parseFloat(product_BP) * pStock;
   $("#pNowBP, #pAddVal").on("keyup", function () {
@@ -215,7 +217,6 @@ function selectProduct(data) {
               pNewSP: newSP,
             },
             success: function (result) {
-              alert(result);
               selectProductTable.ajax.reload();
               load_product();
               if (editBPOnly) {
@@ -231,8 +232,10 @@ function selectProduct(data) {
                 parseInt(data.pVal) + parseInt(product_quantity)
               );
               $("#pValA2S").css("background-color", "#dff0d8");
-              // $("#saveAddToStock").prop("disabled", true);
+              $("#saveAddToStock").prop("disabled", true);
               $("#selectProductA2S_filter input").val("");
+              alert("เพิ่มสินค้าเรียบร้อยแล้ว");
+
             },
           });
         }
@@ -247,15 +250,17 @@ function selectProduct(data) {
             pID: product_id,
             pName: product_name,
             pQuantity: product_quantity,
-            pNewBP: newBP,
-            pNewSP: newSP,
+            pNewBP: product_BP,
+            pNewSP: product_SP,
           },
           success: function (result) {
             selectProductTable.ajax.reload();
             load_product();
             $("#pValA2S").val(parseInt(data.pVal) + parseInt(product_quantity));
             $("#pValA2S").css("background-color", "#dff0d8");
-            // $("#saveAddToStock").prop("disabled", true);
+            $("#saveAddToStock").prop("disabled", true);
+            alert("เพิ่มสินค้าเรียบร้อยแล้ว");
+
             // $("#pAddVal").prop("disabled", true);
             // $("#pNowBP").prop("disabled", true);
             // $("#pNewBP").prop("disabled", true);
@@ -272,6 +277,8 @@ function selectProduct(data) {
       }
     });
 }
+
+
 
 function clearInput() {
   $("#pAddVal").val("");
