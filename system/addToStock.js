@@ -132,7 +132,6 @@ function selectProduct(data) {
   $("#pValA2S").css("background-color", "#f2f2f2");
   $("#saveAddToStock").prop("disabled", false);
 
-
   let sumOldBP = parseFloat(product_BP) * pStock;
   $("#pNowBP, #pAddVal").on("keyup", function () {
     if ($("#pNowBP").val() != "") {
@@ -152,8 +151,8 @@ function selectProduct(data) {
       $("#pNewBP").val(parseFloat($("#pNewBP").val()).toFixed(2));
 
       let askConfirm = "";
-      let newBP = parseFloat($("#pNewBP").val());
-      let newSP = parseFloat($("#pNewSP").val());
+      // let newBP = parseFloat($("#pNewBP").val());
+      // let newSP = parseFloat($("#pNewSP").val());
       let product_quantity = parseInt($("#pAddVal").val() - 0);
 
       let editBPOnly =
@@ -173,24 +172,26 @@ function selectProduct(data) {
           " เป็น " +
           $("#pNewSP").val() +
           " ใช่หรือไม่";
+        product_BP = parseFloat($("#pNewBP").val() - 0);
+        product_SP = parseFloat($("#pNewSP").val() - 0);
       } else {
         if (editBPOnly) {
-          newBP = parseFloat($("#pNewBP").val());
           askConfirm =
             "ยืนยันแก้ราคาซื้อจาก " +
             product_BP +
             " เป็น " +
             $("#pNewBP").val() +
             " ใช่หรือไม่";
+          product_BP = parseFloat($("#pNewBP").val() - 0);
         }
         if (editSPOnly) {
-          newSP = parseFloat($("#pNewSP").val());
           askConfirm =
             "ยืนยันแก้ราคาขายจาก " +
             product_SP +
             " เป็น " +
             $("#pNewSP").val() +
             " ใช่หรือไม่";
+          product_SP = parseFloat($("#pNewSP").val() - 0);
         }
       }
 
@@ -213,18 +214,18 @@ function selectProduct(data) {
               pID: product_id,
               pName: product_name,
               pQuantity: product_quantity,
-              pNewBP: newBP,
-              pNewSP: newSP,
+              pNewBP: product_BP,
+              pNewSP: product_SP,
             },
             success: function (result) {
               selectProductTable.ajax.reload();
-              load_product();
+              // load_product();
               if (editBPOnly) {
-                $("#pBPA2S").val(newBP.toFixed(2));
+                $("#pBPA2S").val(product_BP.toFixed(2));
                 $("#pBPA2S").css("background-color", "#dff0d8");
               }
               if (editSPOnly) {
-                $("#pSPA2S").val(newSP.toFixed(2));
+                $("#pSPA2S").val(product_SP.toFixed(2));
                 $("#pSPA2S").css("background-color", "#dff0d8");
               }
 
@@ -235,7 +236,6 @@ function selectProduct(data) {
               $("#saveAddToStock").prop("disabled", true);
               $("#selectProductA2S_filter input").val("");
               alert("เพิ่มสินค้าเรียบร้อยแล้ว");
-
             },
           });
         }
@@ -255,7 +255,7 @@ function selectProduct(data) {
           },
           success: function (result) {
             selectProductTable.ajax.reload();
-            load_product();
+            // load_product();
             $("#pValA2S").val(parseInt(data.pVal) + parseInt(product_quantity));
             $("#pValA2S").css("background-color", "#dff0d8");
             $("#saveAddToStock").prop("disabled", true);
@@ -277,8 +277,6 @@ function selectProduct(data) {
       }
     });
 }
-
-
 
 function clearInput() {
   $("#pAddVal").val("");

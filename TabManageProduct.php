@@ -577,11 +577,6 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     var paCate = ""
 
 
-
-
-
-
-
     load_product();
 
     loadCateAndUnit()
