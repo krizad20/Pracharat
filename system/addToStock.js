@@ -147,51 +147,54 @@ function selectProduct(data) {
   $("#saveAddToStock")
     .off()
     .on("click", function () {
-      $("#pNewSP").val(parseFloat($("#pNewSP").val()).toFixed(2));
-      $("#pNewBP").val(parseFloat($("#pNewBP").val()).toFixed(2));
-
       let askConfirm = "";
       // let newBP = parseFloat($("#pNewBP").val());
       // let newSP = parseFloat($("#pNewSP").val());
       let product_quantity = parseInt($("#pAddVal").val() - 0);
+      let editBPOnly;
+      let editSPOnly;
+      let editBPAndSP;
+      if ($("#pNewSP").val() != "" || $("#pNewBP").val() != "") {
+        $("#pNewSP").val(parseFloat($("#pNewSP").val()).toFixed(2));
+        $("#pNewBP").val(parseFloat($("#pNewBP").val()).toFixed(2));
+        editBPOnly =
+          $("#pNewBP").val() != "" && $("#pNewBP").val() != product_BP;
+        editSPOnly =
+          $("#pNewSP").val() != "" && $("#pNewSP").val() != product_SP;
+        editBPAndSP = editBPOnly && editSPOnly;
 
-      let editBPOnly =
-        $("#pNewBP").val() != "" && $("#pNewBP").val() != product_BP;
-      let editSPOnly =
-        $("#pNewSP").val() != "" && $("#pNewSP").val() != product_SP;
-      let editBPAndSP = editBPOnly && editSPOnly;
-
-      if (editBPAndSP) {
-        askConfirm =
-          "ยืนยันแก้ราคาซื้อจาก " +
-          product_BP +
-          " เป็น " +
-          $("#pNewBP").val() +
-          "\n และราคาขายจาก " +
-          product_SP +
-          " เป็น " +
-          $("#pNewSP").val() +
-          " ใช่หรือไม่";
-        product_BP = parseFloat($("#pNewBP").val() - 0);
-        product_SP = parseFloat($("#pNewSP").val() - 0);
-      } else {
-        if (editBPOnly) {
+        if (editBPAndSP) {
           askConfirm =
             "ยืนยันแก้ราคาซื้อจาก " +
             product_BP +
             " เป็น " +
             $("#pNewBP").val() +
-            " ใช่หรือไม่";
-          product_BP = parseFloat($("#pNewBP").val() - 0);
-        }
-        if (editSPOnly) {
-          askConfirm =
-            "ยืนยันแก้ราคาขายจาก " +
+            "\n และราคาขายจาก " +
             product_SP +
             " เป็น " +
             $("#pNewSP").val() +
             " ใช่หรือไม่";
+          product_BP = parseFloat($("#pNewBP").val() - 0);
           product_SP = parseFloat($("#pNewSP").val() - 0);
+        } else {
+          if (editBPOnly) {
+            askConfirm =
+              "ยืนยันแก้ราคาซื้อจาก " +
+              product_BP +
+              " เป็น " +
+              $("#pNewBP").val() +
+              " ใช่หรือไม่";
+            product_BP = parseFloat($("#pNewBP").val() - 0);
+          }
+          if (editSPOnly) {
+            askConfirm =
+              "ยืนยันแก้ราคาขายจาก " +
+              product_SP +
+              " เป็น " +
+              $("#pNewSP").val() +
+              " ใช่หรือไม่";
+            product_SP = parseFloat($("#pNewSP").val() - 0);
+          }
         }
       }
 
