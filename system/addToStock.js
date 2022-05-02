@@ -185,6 +185,7 @@ function selectProduct(data) {
               $("#pNewBP").val() +
               " ใช่หรือไม่";
             product_BP = parseFloat($("#pNewBP").val() - 0);
+            product_SP = data.pSP;
           }
           if (editSPOnly) {
             askConfirm =
@@ -194,6 +195,7 @@ function selectProduct(data) {
               $("#pNewSP").val() +
               " ใช่หรือไม่";
             product_SP = parseFloat($("#pNewSP").val() - 0);
+            product_BP = data.pBP;
           }
         }
       }
