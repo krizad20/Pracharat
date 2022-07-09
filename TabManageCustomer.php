@@ -59,15 +59,21 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
                 <label class="col-form-label" style="width: 30%;">การเป็นสมาชิก</label>
                 <div class="col" style="width: 70%;">
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="cMem" disabled checked>
+                    <input class="form-check-input MemStatus" value="1" type="radio" name="flexRadioDefault" id="cMem" disabled checked>
                     <label class="form-check-label" for="cMem">
-                      เป็นสมาชิก
+                      เป็นสมาชิกซื้อหุ้น
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="cNotMem" disabled>
+                    <input class="form-check-input MemStatus" value="2" type="radio" name="flexRadioDefault" id="cNotMem" disabled>
                     <label class="form-check-label" for="cNotMem">
-                      ไม่เป็นสมาชิก
+                      ไม่เป็นสมาชิกซื้อหุ้น
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input MemStatus" value="3" type="radio" name="flexRadioDefault" id="cNotMoo" disabled>
+                    <label class="form-check-label" for="cNotMoo">
+                      สมาชิกนอกหมู่บ้าน
                     </label>
                   </div>
                 </div>
@@ -164,14 +170,18 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
             console.log(json[0].cIsMem)
             if (json[0].cIsMem == "1") {
               $('#cMem').prop("checked", true);
-            } else {
+            } else if (json[0].cIsMem == "2") {
               $('#cNotMem').prop("checked", true);
+            } else if (json[0].cIsMem == "3") {
+              $('#cNotMoo').prop("checked", true);
             }
 
             $('#cSave').attr("disabled", false);
             $('#cDel').attr("disabled", false);
             $('#cMem').attr("disabled", false);
             $('#cNotMem').attr("disabled", false);
+            $('#cNotMoo').attr("disabled", false);
+
           }
         })
       });
@@ -188,9 +198,6 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           $('#cHouse').val("")
           $('#cMoo').val("")
           $('#cMem').prop("checked", true);
-
-
-
 
           $.ajax({
             url: "./TabManageCustomer/manageCustomer.php",
@@ -217,12 +224,22 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
       //save onclick
       $('#cSave').click(function(event) {
         event.preventDefault();
+
+
         let cID = $('#cID').val()
         let cName = $('#cName').val()
         let cSer = $('#cSer').val()
         let cHouse = $('#cHouse').val()
         let cMoo = $('#cMoo').val()
-        let cIsMem = $('#cMem').prop("checked");
+        let cIsMem = 0;
+        if ($('#cMem').prop("checked")) {
+          cIsMem = $('#cMem').val()
+        } else if ($('#cNotMem').prop("checked")) {
+          cIsMem = $('#cNotMem').val()
+        } else if ($('#cNotMoo').prop("checked")) {
+          cIsMem = $('#cNotMoo').val()
+        }
+        
 
         let data = {
           cID: cID,
@@ -272,7 +289,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
             if (data.trim() == "success") {
               alert("บันทึกการแก้ไขเรียบร้อย");
 
-              $('#customerTable').DataTable().ajax.reload();
+              $('#customerTable').DataTable().ajax.reload(null, false);
 
               $('#pSave').attr("disabled", true);
               $('#pDel').attr("disabled", true);
