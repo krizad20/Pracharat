@@ -322,7 +322,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
             if (data.trim() == "success") {
               alert("ลบรายชื่อลูกค้าเรียบร้อย");
 
-              $('#customerTable').DataTable().ajax.reload();
+              $('#customerTable').DataTable().ajax.reload(null, false);
 
               $('#pDel').attr("disabled", true);
               $('#pSave').attr("disabled", true);
