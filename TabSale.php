@@ -576,7 +576,7 @@ if (!isset($_SESSION['seller'])) {
 
         //checkBill
         $('#checkBill').on('click', function() {
-            if (!cID) {
+            if (!cID || cID == "") {
                 alert("กรุณาเลือกลูกค้า");
             } else if (totalPrice == 0) {
                 alert("กรุณาเลือกสินค้า");
@@ -585,8 +585,6 @@ if (!isset($_SESSION['seller'])) {
             } else {
                 $('#change').modal('show');
             }
-
-
         });
         $("#change").on('shown.bs.modal', function() {
             let price = totalPrice;
@@ -647,6 +645,8 @@ if (!isset($_SESSION['seller'])) {
                                     $('#note').prop('disabled', true);
 
                                     $('#searchBar').val("");
+                                    cID = ""
+                                    $('#customer').text("ลูกค้า : ");
                                     load_product();
 
                                 } else {
@@ -768,7 +768,7 @@ if (!isset($_SESSION['seller'])) {
             success: function(data) {
                 load_cart_data();
                 // load_product();
-                // $('#searchBar').val('');
+                $('#searchBar').focus();
                 $('.bars').each(function() {
                     if ($(this).text().toLowerCase().indexOf(pID.toLowerCase()) > -1) {
                         id = $(this).attr("value");
@@ -860,7 +860,7 @@ if (!isset($_SESSION['seller'])) {
                         $('#' + id).attr("value", newVal);
                         $('#' + id + 'Text').text("เหลือ " + newVal);
 
-                        if (Math.floor(oldVal/$(this).parent().find('.isPacked').attr("value")) == newVal) {
+                        if (Math.floor(oldVal / $(this).parent().find('.isPacked').attr("value")) == newVal) {
                             $(this).parent().find('.add_to_stock').addClass("d-none");
                             $(this).parent().find('.add_to_cart').removeClass("d-none");
                         }
