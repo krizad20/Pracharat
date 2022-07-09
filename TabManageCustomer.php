@@ -75,8 +75,10 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
               </div>
 
               <div class="mt-3 row">
-                <button class="col btn btn-primary mx-3" type="" id="cAdd"">เพิ่มลูกค้า</button>
-                <button class=" col btn btn-success mx-3" id="cSave" disabled>บันทึก</button>
+                <button class="col btn btn-primary mx-3" id="cAdd">เพิ่มลูกค้า</button>
+                <button class="col btn btn-success mx-3" id="cSave" disabled>บันทึก</button>
+                <button class="col btn btn-danger mx-3" id="cDel" disabled>ลบ</button>
+
               </div>
             </form>
           </div>
@@ -167,6 +169,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
             }
 
             $('#cSave').attr("disabled", false);
+            $('#cDel').attr("disabled", false);
             $('#cMem').attr("disabled", false);
             $('#cNotMem').attr("disabled", false);
           }
@@ -177,6 +180,35 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
       $('#cAdd').click(function(event) {
         {
           event.preventDefault();
+          var newID = "";
+          table.row('.selected').deselect()
+          $('#cID').val("")
+          $('#cName').val("")
+          $('#cSer').val("")
+          $('#cHouse').val("")
+          $('#cMoo').val("")
+          $('#cMem').prop("checked", true);
+
+
+
+
+          $.ajax({
+            url: "./TabManageCustomer/manageCustomer.php",
+            method: "POST",
+            data: {
+              mode: "getNewID"
+            },
+            success: function(data) {
+              newID = data;
+              $('#cID').val(newID)
+              $('#cName').focus()
+              $('#cName').val("")
+              $('#cSer').val("")
+              $('#cHouse').val("")
+              $('#cMoo').val("")
+              $('#cMem').prop("checked", true);
+            }
+          });
 
 
         }
@@ -185,11 +217,110 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
       //save onclick
       $('#cSave').click(function(event) {
         event.preventDefault();
+        let cID = $('#cID').val()
+        let cName = $('#cName').val()
+        let cSer = $('#cSer').val()
+        let cHouse = $('#cHouse').val()
+        let cMoo = $('#cMoo').val()
+        let cIsMem = $('#cMem').prop("checked");
+
+        let data = {
+          cID: cID,
+          cName: cName,
+          cSer: cSer,
+          cHouse: cHouse,
+          cMoo: cMoo,
+          cIsMem: cIsMem
+        }
+
+        editCustomer(data)
+
+      })
+
+      //save onclick
+      $('#cDel').click(function(event) {
+        event.preventDefault();
+        let cID = $('#cID').val()
+
+        deleteCustomer(cID)
+
       })
 
 
-
     });
+
+    function editCustomer(data) {
+      if (data.cID == '' || data.cName == '') {
+        alert("กรุณากรอกข้อมูลให้ครบ");
+      } else {
+
+        $.ajax({
+          url: "./TabManageCustomer/manageCustomer.php",
+          method: "POST",
+          data: {
+            mode: "edit",
+            cID: data.cID,
+            cName: data.cName,
+            cSer: data.cSer,
+            cHouse: data.cHouse,
+            cMoo: data.cMoo,
+            cIsMem: data.cIsMem
+
+          },
+          success: function(data) {
+            console.log(data);
+            if (data.trim() == "success") {
+              alert("บันทึกการแก้ไขเรียบร้อย");
+
+              $('#customerTable').DataTable().ajax.reload();
+
+              $('#pSave').attr("disabled", true);
+              $('#pDel').attr("disabled", true);
+
+
+            } else if (data.trim() == "duplicate") {
+              alert("บาร์โค้ดซ้ำ");
+            } else {
+              alert("บันทึกการแก้ไขสินค้าไม่สำเร็จ");
+            }
+
+          }
+        });
+      }
+
+
+    }
+
+    function deleteCustomer(cID) {
+      if (confirm("ยืนยันลบรายชื่อลูกค้า")) {
+        $.ajax({
+          url: "./TabManageCustomer/manageCustomer.php",
+          method: "POST",
+          data: {
+            mode: "del",
+            cID: cID
+          },
+          success: function(data) {
+            console.log(data);
+            if (data.trim() == "success") {
+              alert("ลบรายชื่อลูกค้าเรียบร้อย");
+
+              $('#customerTable').DataTable().ajax.reload();
+
+              $('#pDel').attr("disabled", true);
+              $('#pSave').attr("disabled", true);
+
+            } else if (data.trim() == "duplicate") {
+              alert("บาร์โค้ดซ้ำ");
+            } else {
+              alert("ลบรายชื่อลูกค้าไม่สำเร็จ");
+            }
+
+          }
+        });
+      }
+
+    }
   </script>
 
 </body>
