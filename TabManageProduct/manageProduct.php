@@ -164,7 +164,7 @@ else if ($mode == "askDel") {
 else if ($mode == "getNewID") {
     $genID = "";
 
-    $sql = "SELECT `pID` FROM `product` WHERE `pDel` = 1 LIMIT 1";
+    $sql = "SELECT `pID` FROM `product` WHERE `pDel` = 1 ORDER BY `pID` LIMIT 1";
     $getDel = mysqli_query($conn, $sql);
     $del = mysqli_fetch_array($getDel, MYSQLI_ASSOC);
 
