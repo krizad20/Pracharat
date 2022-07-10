@@ -327,8 +327,6 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
               $('#pDel').attr("disabled", true);
               $('#pSave').attr("disabled", true);
 
-            } else if (data.trim() == "duplicate") {
-              alert("บาร์โค้ดซ้ำ");
             } else {
               alert("ลบรายชื่อลูกค้าไม่สำเร็จ");
             }

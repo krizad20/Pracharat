@@ -85,7 +85,7 @@ else if ($mode == "del") {
 else if ($mode == "getNewID") {
     $genID = "";
 
-    $sql = "SELECT `cID` FROM `customer` WHERE `IsDel` = 1 LIMIT 1";
+    $sql = "SELECT `cID` FROM `customer` WHERE `IsDel` = 1 ORDER BY `cID` ASC LIMIT 1";
     $getDel = mysqli_query($conn, $sql);
     $del = mysqli_fetch_array($getDel, MYSQLI_ASSOC);
 
