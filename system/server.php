@@ -49,7 +49,7 @@ function updateStock($conn, $pID, $newVal, $pBP, $pSP)
     return mysqli_query($conn, $sql);
 }
 
-function updateForPack($conn, $pID, $newVal, $pBP, $pSP)
+function updateForPack($conn, $pID, $newVal, $pBP)
 {
     //Update in Pack
     $sql = "UPDATE product p, packproduct pa 

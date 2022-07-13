@@ -147,7 +147,7 @@ if (isset($_POST["action"])) {
                 VALUES ('$time','$pID','$pName','$pNewBP','$pNewSP','$pQuantity')";
         $result = mysqli_query($conn, $sql);
         updateStock($conn,$pID,$pQuantity,$pNewBP,$pNewSP);
-        updateForPack($conn, $pID, $pQuantity, $pNewBP, $pNewSP);
+        updateForPack($conn, $pID, $pQuantity, $pNewBP);
     }
 
     if ($_POST["action"] == "quantity_change") {
