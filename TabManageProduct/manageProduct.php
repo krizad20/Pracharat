@@ -85,7 +85,6 @@ else if ($mode == "edit") {
         $paID = $row1["paID"];
         $paPerPack = $row1["paPerPack"];
         $nVal = $row1["newVal"];
-        echo $nVal;
         $sql2 = "UPDATE product SET pVal = $nVal, pBP = $pBP*$paPerPack WHERE pID = '$paID' and isPacked = 1";
         mysqli_query($conn, $sql2);
     }
