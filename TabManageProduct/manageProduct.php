@@ -73,7 +73,18 @@ else if ($mode == "edit") {
         $pBars[1]["barcode"] = $pBar;
         $pBars = json_encode($pBars, JSON_UNESCAPED_UNICODE);
     }
-    updateForPack($conn, $pID, $pVal, $pBP);
+    $sql1 = "SELECT pa.paID, FLOOR(p.pVal/(pa.paPerPack*1.0)) as newVal ,pa.paPerPack
+            FROM product p, packproduct pa 
+            WHERE p.pID = '$pID'  AND pa.pID = p.pID";
+    $result1 = mysqli_query($conn, $sql1);
+    while ($row1 = $result1->fetch_assoc()) {
+        $paID = $row1["paID"];
+        $paPerPack = $row1["paPerPack"];
+        $nVal = $row1["newVal"];
+        echo $nVal;
+        $sql2 = "UPDATE product SET pVal = $nVal, pBP = $pBP*$paPerPack WHERE pID = '$paID' and isPacked = 1";
+        mysqli_query($conn, $sql2);
+    }
     $sql = "UPDATE product SET pBar='$pBar',pBars = '$pBars',pName='$pName',pBP=$pBP,pSP=$pSP,pVal=$pVal,pCate='$pCate',pUnit='$pUnit',isPacked = $isPacked WHERE pID='$pID'";
     $result = mysqli_query($conn, $sql);
 
