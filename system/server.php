@@ -42,3 +42,25 @@ if (!function_exists('str_contains')) {
         return $needle !== '' && mb_strpos($haystack, $needle) !== false;
     }
 }
+
+function updateStock($conn, $pID, $newVal, $pBP, $pSP)
+{
+    $sql = "UPDATE product SET pVal = pVal + $newVal, pBP = $pBP, pSP = $pSP WHERE pID = '$pID'";
+    return mysqli_query($conn, $sql);
+}
+
+function updateForPack($conn, $pID, $newVal, $pBP, $pSP)
+{
+    
+    $sql = "UPDATE product p, packproduct pa 
+            SET p.pVal = p.pVal + ((SELECT paPerPAck*$newVal FROM packproduct WHERE paID = '$pID'))
+            WHERE p.hasPacked = 1 AND p.pID = (SELECT pID FROM packproduct WHERE paID = '$pID')";
+    mysqli_query($conn, $sql);
+
+    $sql = "UPDATE product p, packproduct pa 
+            SET p.pVal = FLOOR((SELECT p.pVal/(pa.paPerPack*1.0) 
+                                FROM product p, packproduct pa 
+                                WHERE p.pID = '$pID'  AND pa.pID = p.pID)) 
+            WHERE p.isPacked = 1 AND p.pID = (SELECT paID FROM packproduct WHERE pID = '$pID')";
+    mysqli_query($conn, $sql);
+}

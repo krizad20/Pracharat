@@ -146,6 +146,8 @@ if (isset($_POST["action"])) {
         $sql = "INSERT INTO `addtostock`(`aDate`, `apID`, `apName`, `aBP`, `aSP`, `aVal`) 
                 VALUES ('$time','$pID','$pName','$pNewBP','$pNewSP','$pQuantity')";
         $result = mysqli_query($conn, $sql);
+        updateStock($conn,$pID,$pQuantity,$pNewBP,$pNewSP);
+        updateForPack($conn, $pID, $pQuantity, $pNewBP, $pNewSP);
     }
 
     if ($_POST["action"] == "quantity_change") {

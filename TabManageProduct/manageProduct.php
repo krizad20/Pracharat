@@ -57,7 +57,7 @@ else if ($mode == "edit") {
         $isPacked = 0;
     }
     //check duplicate barcode in product
-    $query = "SELECT pBars FROM `product` WHERE `pID` != '$pID' AND `pBars` LIKE '%" . '"' . $pBar . '"' . "%'";
+    $query = "SELECT pBars FROM `product` WHERE `pID` != '$pID' AND `pDel` != '1' AND `pBars` LIKE '%" . '"' . $pBar . '"' . "%'";
     $list = $conn->query($query);
 
     if ($list->num_rows > 0) {
@@ -65,7 +65,7 @@ else if ($mode == "edit") {
         echo "duplicate";
         exit();
     } else {
-        $query = "SELECT pBars FROM `product` WHERE `pID` = '$pID'";
+        $query = "SELECT pBars FROM `product` WHERE `pID` = '$pID' AND `pDel` != '1'";
         $list = $conn->query($query);
         $row = $list->fetch_assoc();
         $pBars = $row["pBars"];
@@ -152,11 +152,10 @@ else if ($mode == "askDel") {
         while ($row1 = $result1->fetch_assoc()) {
             $paID = $row1["paID"];
             $paName = $row1["paName"];
-            $text .=  $paID ." ".$paName. "\n";
+            $text .=  $paID . " " . $paName . "\n";
         }
         echo $text;
-    }
-    else{
+    } else {
         echo "คุณต้องการลบสินค้านี้หรือไม่";
     }
 }
@@ -259,11 +258,13 @@ else if ($mode == "delSubBarcode") {
 }
 
 
-//Add To Stock
-if (isset($_POST['addToStock'])) {
-    $pID = $_POST["pID"];
-    $pName = $_POST["pName"];
-    $pAdd = $_POST["pAddVal"];
-    $sql = "INSERT INTO `addtostock`(`apID`, `apName`, `aVal`) VALUES ('$pID','$pName',$pAdd)";
-    $query = mysqli_query($conn, $sql);
-}
+// //Add To Stock
+// if (isset($_POST['addToStock'])) {
+//     $pID = $_POST["pID"];
+//     $pName = $_POST["pName"];
+//     $pAdd = $_POST["pAddVal"];
+//     $sql = "INSERT INTO `addtostock`(`apID`, `apName`, `aVal`) VALUES ('$pID','$pName',$pAdd)";
+//     $query = mysqli_query($conn, $sql);
+// }
+
+
