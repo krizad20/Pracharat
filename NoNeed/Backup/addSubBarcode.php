@@ -6,7 +6,7 @@ $barcode = $_POST["barcode"];
 $detail = $_POST["detail"];
 
 //check duplicate barcode in product
-$query = "SELECT pBars FROM `product`";
+$query = "SELECT pBars FROM `product` WHERE pDel != 1";
 $list = $conn->query($query);
 $output = [];
 $isDuplicate = false;
@@ -27,7 +27,7 @@ foreach ($output as $key => $value) {
 }
 
 if ($isDuplicate == false) {
-    $query1 = "SELECT pBars FROM `product` WHERE pID = '$pID'";
+    $query1 = "SELECT pBars FROM `product` WHERE pID = '$pID' and pDel != 1";
 
     $list1 = $conn->query($query1);
     $output1;

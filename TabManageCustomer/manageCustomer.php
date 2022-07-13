@@ -14,7 +14,7 @@ if ($mode == "add") {
     $IsDel = 0;
 
     //check duplicate 
-    $query = "SELECT * FROM `customer` WHERE `cName` = '$cName' AND `cSer` = '$cSer' AND `cHouse` = '$cHouse' AND `cMoo` = '$cMoo'";
+    $query = "SELECT * FROM `customer` WHERE `cName` = '$cName' AND `cSer` = '$cSer' AND `cHouse` = '$cHouse' AND `cMoo` = '$cMoo' and IsDel!=1";
     $list = $conn->query($query);
 
     if ($list->num_rows > 0) {
