@@ -19,7 +19,7 @@ if ($mode == "add") {
         $isPacked = 0;
     }
     //check duplicate barcode in product
-    $query = "SELECT pBars FROM `product` WHERE `pID` != '$pID' AND `pBars` LIKE '%" . '"' . $pBar . '"' . "%'";
+    $query = "SELECT pBars FROM `product` WHERE `pID` != '$pID' AND `pDel` != '1' AND `pBars` LIKE '%" . '"' . $pBar . '"' . "%'";
     $list = $conn->query($query);
 
     if ($list->num_rows > 0) {
