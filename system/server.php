@@ -68,7 +68,7 @@ function updateForPack($conn, $pID, $newVal, $pBP, $pSP)
         $paPerPack = $row1["paPerPack"];
         $nVal = $row1["newVal"];
         echo $nVal;
-        $sql2 = "UPDATE product SET pVal = $nVal, pBP = $pBP*$paPerPack, pSP = $pSP*$paPerPack WHERE pID = '$paID' and isPacked = 1";
+        $sql2 = "UPDATE product SET pVal = $nVal, pBP = $pBP*$paPerPack WHERE pID = '$paID' and isPacked = 1";
         mysqli_query($conn, $sql2);
     }
 
