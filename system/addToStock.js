@@ -100,6 +100,7 @@ $("#selectProductA2S tbody").on("click", "tr", function () {
 
 $("#addToStockAndSelect").on("hidden.bs.modal", function (event) {
   $("#selectProductA2S_filter input").val("");
+  selectProductTable.search("").draw();
   selectProductTable.row(".selected").deselect();
   selectProductTable.ajax.reload();
   clearInput();

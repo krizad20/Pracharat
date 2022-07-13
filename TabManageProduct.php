@@ -228,7 +228,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           <div class="mb-1 row">
             <label class="col-sm-4 col-form-label">ราคาซื้อ</label>
             <div class="col-sm-8">
-              <input class="form-control form-control-sm" type="float" autocomplete="off" name="pBP" id="pBPAdd" placeholder="ราคาซื้อ" required disabled> 
+              <input class="form-control form-control-sm" type="float" autocomplete="off" name="pBP" id="pBPAdd" placeholder="ราคาซื้อ" required disabled>
             </div>
           </div>
 
@@ -679,6 +679,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     //row on click
     $('#productTable tbody').on('click', 'tr', function(row, data, index) {
       pID = table.row(this).data()['pID'];
+      let isPacked = 0
       $.ajax({
         url: 'TabManageProduct/selectedProduct.php',
         method: 'POST',
@@ -697,7 +698,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           $('#pUnitEditTable').val(json[0].pUnit)
           $('#pImgEditTable').attr('src', './product_pic/' + json[0].img)
 
-
+          isPacked = json[0].isPacked
           $('#isPackedEditTable').prop("checked", json[0].isPacked == 1);
           $('#managePackEditTable').attr("disabled", json[0].isPacked != 1);
 
@@ -724,6 +725,32 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           $('#pDelTable').attr("disabled", false);
         }
       })
+      if (isPacked = 1) {
+        $('#ppaID').val(pID);
+        $.ajax({
+          url: 'TabManageProduct/selectedPack.php',
+          method: 'POST',
+          data: {
+            pID: pID
+          },
+          success: function(data) {
+            var json = $.parseJSON(data)
+            $('#ppaID').val(json[0].paID);
+            $('#ppID').val(json[0].pID);
+            $('#ppBar').val(json[0].pBar);
+            $('#ppaPerPacked').val(json[0].paPerPack)
+            $('#ppaBPerOne').val(json[0].pBP);
+            subProductVal = json[0].pVal;
+            $('#ppaID').val(pID);
+            $('#ppaName').val($('#pNameEditTable').val());
+            $('#ppaBPerPack').val($('#pBPEditTable').val());
+            $('#ppaSP').val($('#pSPEditTable').val());
+            paCate = $('#pCateEditTable').val();
+
+          }
+        })
+      }
+
     });
 
     //Save EDIT
@@ -822,6 +849,32 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
         $('#pSPEditGrid').attr("disabled", true);
         $('#pValEditGrid').attr("disabled", true);
         $('#pCateEditGrid').attr("disabled", true);
+        $('#ppaID').val(pID);
+        $.ajax({
+          url: 'TabManageProduct/selectedPack.php',
+          method: 'POST',
+          data: {
+            pID: pID
+          },
+          success: function(data) {
+            var json = $.parseJSON(data)
+            $('#ppaID').val(json[0].paID);
+            $('#ppID').val(json[0].pID);
+            $('#ppBar').val(json[0].pBar);
+            $('#ppaPerPacked').val(json[0].paPerPack)
+            $('#ppaBPerOne').val(json[0].pBP);
+            subProductVal = json[0].pVal;
+
+
+            $('#ppaID').val(pID);
+            $('#ppaName').val($('#pNameEditGrid').val());
+            $('#ppaBPerPack').val($('#pBPEditGrid').val());
+            $('#ppaSP').val($('#pSPEditGrid').val());
+            paCate = $('#pCateEditGrid').val();
+
+          }
+        })
+
       }
 
     });
@@ -1038,43 +1091,43 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
     });
 
-    $('#managePackEditTable,#managePackEditGrid,#managePackAdd').click(function(event) {
-      $('#ppaID').val(pID);
-      let id = $(this).attr("id");
+    // $('#managePackEditTable,#managePackEditGrid,#managePackAdd').click(function(event) {
+    //   $('#ppaID').val(pID);
+    //   let id = $(this).attr("id");
 
-      $.ajax({
-        url: 'TabManageProduct/selectedPack.php',
-        method: 'POST',
-        data: {
-          pID: pID
-        },
-        success: function(data) {
-          var json = $.parseJSON(data)
-          $('#ppaID').val(json[0].paID);
-          $('#ppID').val(json[0].pID);
-          $('#ppBar').val(json[0].pBar);
-          $('#ppaPerPacked').val(json[0].paPerPack)
-          $('#ppaBPerOne').val(json[0].pBP);
-          subProductVal = json[0].pVal;
-          if (id == "managePackEditTable") {
-            $('#ppaID').val(pID);
-            $('#ppaName').val($('#pNameEditTable').val());
-            $('#ppaBPerPack').val($('#pBPEditTable').val());
-            $('#ppaSP').val($('#pSPEditTable').val());
-            paCate = $('#pCateEditTable').val();
+    //   $.ajax({
+    //     url: 'TabManageProduct/selectedPack.php',
+    //     method: 'POST',
+    //     data: {
+    //       pID: pID
+    //     },
+    //     success: function(data) {
+    //       var json = $.parseJSON(data)
+    //       $('#ppaID').val(json[0].paID);
+    //       $('#ppID').val(json[0].pID);
+    //       $('#ppBar').val(json[0].pBar);
+    //       $('#ppaPerPacked').val(json[0].paPerPack)
+    //       $('#ppaBPerOne').val(json[0].pBP);
+    //       subProductVal = json[0].pVal;
+    //       if (id == "managePackEditTable") {
+    //         $('#ppaID').val(pID);
+    //         $('#ppaName').val($('#pNameEditTable').val());
+    //         $('#ppaBPerPack').val($('#pBPEditTable').val());
+    //         $('#ppaSP').val($('#pSPEditTable').val());
+    //         paCate = $('#pCateEditTable').val();
 
-          } else if (id == "managePackEditGrid") {
-            $('#ppaID').val(pID);
-            $('#ppaName').val($('#pNameEditGrid').val());
-            $('#ppaBPerPack').val($('#pBPEditGrid').val());
-            $('#ppaSP').val($('#pSPEditGrid').val());
-            paCate = $('#pCateEditGrid').val();
+    //       } else if (id == "managePackEditGrid") {
+    //         $('#ppaID').val(pID);
+    //         $('#ppaName').val($('#pNameEditGrid').val());
+    //         $('#ppaBPerPack').val($('#pBPEditGrid').val());
+    //         $('#ppaSP').val($('#pSPEditGrid').val());
+    //         paCate = $('#pCateEditGrid').val();
 
-          }
+    //       }
 
-        }
-      })
-    });
+    //     }
+    //   })
+    // });
 
     //Select Product For Pack
     var selectDataProductTable = $('#selectProductTable').DataTable({
@@ -1270,6 +1323,19 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
     });
 
+    $('#managePackModal').on('hide.bs.modal', function() {
+      $('#ppaID').val("");
+      $('#ppID').val("");
+      $('#ppBar').val('');
+      $('#ppaPerPacked').val('')
+      $('#ppaBPerOne').val('');
+      $('#ppaID').val('');
+      $('#ppaName').val('');
+      $('#ppaBPerPack').val('');
+      $('#ppaSP').val('');
+
+    });
+
 
     function detailBox(mode, type) {
       if (mode == "enable") {
@@ -1384,7 +1450,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           },
           success: function(data) {
             if (data.trim() == "success") {
-              // table.ajax.reload();
+              table.ajax.reload(null, false);
               // load_product();
               detailBox("disable", "Add");
               $('#pSaveEditTable').attr("disabled", true);
@@ -1456,7 +1522,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           },
           success: function(data) {
             if (data.trim() == "success") {
-              // table.ajax.reload();
+              table.ajax.reload(null, false);
               // load_product();
               detailBox("disable", "Add");
               $('#pSaveEditTable').attr("disabled", true);
@@ -1501,7 +1567,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           success: function(data) {
             console.log(data);
             if (data.trim() == "success") {
-              table.ajax.reload(null,false);
+              table.ajax.reload(null, false);
               // load_product();
               $('#editProductModal').modal('hide');
               detailBox("disable", "EditTable");
@@ -1577,7 +1643,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           },
           success: function(data) {
             if (data.trim() == "success") {
-              table.ajax.reload(null,false);
+              table.ajax.reload(null, false);
               // load_product();
               detailBox("disable", "Add");
               $('#pSaveEditTable').attr("disabled", true);
