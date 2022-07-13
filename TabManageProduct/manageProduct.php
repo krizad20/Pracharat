@@ -73,10 +73,10 @@ else if ($mode == "edit") {
         $pBars[1]["barcode"] = $pBar;
         $pBars = json_encode($pBars, JSON_UNESCAPED_UNICODE);
     }
-
+    updateForPack($conn, $pID, $pVal, $pBP);
     $sql = "UPDATE product SET pBar='$pBar',pBars = '$pBars',pName='$pName',pBP=$pBP,pSP=$pSP,pVal=$pVal,pCate='$pCate',pUnit='$pUnit',isPacked = $isPacked WHERE pID='$pID'";
     $result = mysqli_query($conn, $sql);
-    updateForPack($conn, $pID, $pVal, $pBP);
+
     if ($result) {
         echo "success";
     } else {
@@ -267,5 +267,3 @@ else if ($mode == "delSubBarcode") {
 //     $sql = "INSERT INTO `addtostock`(`apID`, `apName`, `aVal`) VALUES ('$pID','$pName',$pAdd)";
 //     $query = mysqli_query($conn, $sql);
 // }
-
-
