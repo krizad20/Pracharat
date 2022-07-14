@@ -714,33 +714,34 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
 
           if ($('#isPackedEditTable').is(':checked')) {
+            $('#isPackedEditTable').attr("disabled", true);
             $('#pBPEditTable').attr("disabled", true);
             $('#pSPEditTable').attr("disabled", true);
             $('#pValEditTable').attr("disabled", true);
             $('#pCateEditTable').attr("disabled", true);
             $('#ppaID').val(pID);
-          $.ajax({
-            url: 'TabManageProduct/selectedPack.php',
-            method: 'POST',
-            data: {
-              pID: pID
-            },
-            success: function(data) {
-              var json = $.parseJSON(data)
-              $('#ppaID').val(json[0].paID);
-              $('#ppID').val(json[0].pID);
-              $('#ppBar').val(json[0].pBar);
-              $('#ppaPerPacked').val(json[0].paPerPack)
-              $('#ppaBPerOne').val(json[0].pBP);
-              subProductVal = json[0].pVal;
-              $('#ppaID').val(pID);
-              $('#ppaName').val($('#pNameEditTable').val());
-              $('#ppaBPerPack').val($('#pBPEditTable').val());
-              $('#ppaSP').val($('#pSPEditTable').val());
-              paCate = $('#pCateEditTable').val();
+            $.ajax({
+              url: 'TabManageProduct/selectedPack.php',
+              method: 'POST',
+              data: {
+                pID: pID
+              },
+              success: function(data) {
+                var json = $.parseJSON(data)
+                $('#ppaID').val(json[0].paID);
+                $('#ppID').val(json[0].pID);
+                $('#ppBar').val(json[0].pBar);
+                $('#ppaPerPacked').val(json[0].paPerPack)
+                $('#ppaBPerOne').val(json[0].pBP);
+                subProductVal = json[0].pVal;
+                $('#ppaID').val(pID);
+                $('#ppaName').val($('#pNameEditTable').val());
+                $('#ppaBPerPack').val($('#pBPEditTable').val());
+                $('#ppaSP').val($('#pSPEditTable').val());
+                paCate = $('#pCateEditTable').val();
 
-            }
-          })
+              }
+            })
           }
 
           $('#pSaveEditTable').attr("disabled", false);
