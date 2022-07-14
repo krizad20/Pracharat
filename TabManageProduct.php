@@ -1323,18 +1323,18 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
     });
 
-    $('#managePackModal').on('hide.bs.modal', function() {
-      $('#ppaID').val("");
-      $('#ppID').val("");
-      $('#ppBar').val('');
-      $('#ppaPerPacked').val('')
-      $('#ppaBPerOne').val('');
-      $('#ppaID').val('');
-      $('#ppaName').val('');
-      $('#ppaBPerPack').val('');
-      $('#ppaSP').val('');
+    // $('#managePackModal').on('hide.bs.modal', function() {
+    //   $('#ppaID').val("");
+    //   $('#ppID').val("");
+    //   $('#ppBar').val('');
+    //   $('#ppaPerPacked').val('')
+    //   $('#ppaBPerOne').val('');
+    //   $('#ppaID').val('');
+    //   $('#ppaName').val('');
+    //   $('#ppaBPerPack').val('');
+    //   $('#ppaSP').val('');
 
-    });
+    // });
 
 
     function detailBox(mode, type) {
