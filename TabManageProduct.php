@@ -1327,20 +1327,20 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
     });
 
-    $('#managePackModal').on('show.bs.modal', function() {
-      if($('#addProductModal').hasClass('show')){
-        $('#ppaID').val("");
-        $('#ppID').val("");
-        $('#ppBar').val('');
-        $('#ppaPerPacked').val('')
-        $('#ppaBPerOne').val('');
-        $('#ppaID').val('');
-        $('#ppaName').val('');
-        $('#ppaBPerPack').val('');
-        $('#ppaSP').val('');
-      }
+    // $('#managePackModal').on('show.bs.modal', function() {
+    //   if($('#addProductModal').hasClass('show')){
+    //     $('#ppaID').val("");
+    //     $('#ppID').val("");
+    //     $('#ppBar').val('');
+    //     $('#ppaPerPacked').val('')
+    //     $('#ppaBPerOne').val('');
+    //     $('#ppaID').val('');
+    //     $('#ppaName').val('');
+    //     $('#ppaBPerPack').val('');
+    //     $('#ppaSP').val('');
+    //   }
 
-    });
+    // });
 
 
     function detailBox(mode, type) {
