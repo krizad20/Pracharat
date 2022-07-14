@@ -725,7 +725,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
           $('#pDelTable').attr("disabled", false);
         }
       })
-      if (isPacked = 1) {
+      if (isPacked == 1) {
         $('#ppaID').val(pID);
         $.ajax({
           url: 'TabManageProduct/selectedPack.php',
