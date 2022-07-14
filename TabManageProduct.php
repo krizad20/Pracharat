@@ -1091,43 +1091,47 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
     });
 
-    // $('#managePackEditTable,#managePackEditGrid,#managePackAdd').click(function(event) {
-    //   $('#ppaID').val(pID);
-    //   let id = $(this).attr("id");
+    $('#managePackEditTable,#managePackEditGrid,#managePackAdd').click(function(event) {
+      $('#ppaID').val(pID);
+      let id = $(this).attr("id");
 
-    //   $.ajax({
-    //     url: 'TabManageProduct/selectedPack.php',
-    //     method: 'POST',
-    //     data: {
-    //       pID: pID
-    //     },
-    //     success: function(data) {
-    //       var json = $.parseJSON(data)
-    //       $('#ppaID').val(json[0].paID);
-    //       $('#ppID').val(json[0].pID);
-    //       $('#ppBar').val(json[0].pBar);
-    //       $('#ppaPerPacked').val(json[0].paPerPack)
-    //       $('#ppaBPerOne').val(json[0].pBP);
-    //       subProductVal = json[0].pVal;
-    //       if (id == "managePackEditTable") {
-    //         $('#ppaID').val(pID);
-    //         $('#ppaName').val($('#pNameEditTable').val());
-    //         $('#ppaBPerPack').val($('#pBPEditTable').val());
-    //         $('#ppaSP').val($('#pSPEditTable').val());
-    //         paCate = $('#pCateEditTable').val();
+      // $.ajax({
+      //   url: 'TabManageProduct/selectedPack.php',
+      //   method: 'POST',
+      //   data: {
+      //     pID: pID
+      //   },
+      //   success: function(data) {
+      //     var json = $.parseJSON(data)
+      //     $('#ppaID').val(json[0].paID);
+      //     $('#ppID').val(json[0].pID);
+      //     $('#ppBar').val(json[0].pBar);
+      //     $('#ppaPerPacked').val(json[0].paPerPack)
+      //     $('#ppaBPerOne').val(json[0].pBP);
+      //     subProductVal = json[0].pVal;
+      //     if (id == "managePackEditTable") {
+      //       $('#ppaID').val(pID);
+      //       $('#ppaName').val($('#pNameEditTable').val());
+      //       $('#ppaBPerPack').val($('#pBPEditTable').val());
+      //       $('#ppaSP').val($('#pSPEditTable').val());
+      //       paCate = $('#pCateEditTable').val();
 
-    //       } else if (id == "managePackEditGrid") {
-    //         $('#ppaID').val(pID);
-    //         $('#ppaName').val($('#pNameEditGrid').val());
-    //         $('#ppaBPerPack').val($('#pBPEditGrid').val());
-    //         $('#ppaSP').val($('#pSPEditGrid').val());
-    //         paCate = $('#pCateEditGrid').val();
+      //     } else if (id == "managePackEditGrid") {
+      //       $('#ppaID').val(pID);
+      //       $('#ppaName').val($('#pNameEditGrid').val());
+      //       $('#ppaBPerPack').val($('#pBPEditGrid').val());
+      //       $('#ppaSP').val($('#pSPEditGrid').val());
+      //       paCate = $('#pCateEditGrid').val();
 
-    //       }
+      //     }
 
-    //     }
-    //   })
-    // });
+      //   }
+      // })
+    });
+
+    $('#managePackAdd').click(function(event) {
+      $('#ppaID').val(pID);
+    });
 
     //Select Product For Pack
     var selectDataProductTable = $('#selectProductTable').DataTable({
@@ -1333,7 +1337,6 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     //   $('#ppaName').val('');
     //   $('#ppaBPerPack').val('');
     //   $('#ppaSP').val('');
-
     // });
 
 
