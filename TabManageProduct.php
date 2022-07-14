@@ -1327,8 +1327,8 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
     });
 
-    $('#managePackModal').on('hide.bs.modal', function() {
-      if($('#ppaID').val() != pID){
+    $('#managePackModal').on('show.bs.modal', function() {
+      if($('#addProductModal').hasClass('show')){
         $('#ppaID').val("");
         $('#ppID').val("");
         $('#ppBar').val('');
