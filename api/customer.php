@@ -4,17 +4,31 @@ $mode = $_POST["mode"];
 
 if ($mode == "findAllCustomer") {
     $sql = "SELECT * FROM `customer` WHERE IsDel = 0 ORDER BY `cID` ASC";
-    $res = mysqli_query($conn, $sql);
+    $result = mysqli_query($conn, $sql);
 
-    while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         $arr[] = $row;
     }
-    $respond = array(
-        "status" => 200,
-        "data" => $arr
-    );
 
-    echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+    if ($result) {
+        $respond = array(
+            "status" => 200,
+            "message" => "ค้นหาลูกค้าสำเร็จ",
+            "data" => $arr
+        );
+
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
+    } else {
+        $respond = array(
+            "status" => 400,
+            "message" => "ค้นหาลูกค้าไม่สำเร็จ",
+            "data" => []
+        );
+
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
+    }
 }
 if ($mode == "findCustomerBycID") {
     $cID = $_POST['cID'];
@@ -33,6 +47,7 @@ if ($mode == "findCustomerBycID") {
         );
 
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
     } else {
         $respond = array(
             "status" => 400,
@@ -41,6 +56,7 @@ if ($mode == "findCustomerBycID") {
         );
 
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
     }
 }
 
@@ -125,6 +141,7 @@ if ($mode == "save") {
         );
 
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
     } else {
         $respond = array(
             "status" => 400,
@@ -133,6 +150,7 @@ if ($mode == "save") {
         );
 
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
     }
 }
 //DELETE
@@ -156,6 +174,7 @@ if ($mode == "del") {
         );
 
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
     } else {
         $respond = array(
             "status" => 400,
@@ -164,6 +183,7 @@ if ($mode == "del") {
         );
 
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
     }
 }
 //Get ID

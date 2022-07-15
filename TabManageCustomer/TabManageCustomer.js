@@ -29,9 +29,9 @@ let SetupData = (function () {
         $.ajax({
             url: "./api/customer.php",
             method: "POST",
-            data: {
+            data: JSON.stringify({
                 mode: "findAllCustomer",
-            },
+            }),
             success: function (res) {
                 res = JSON.parse(res)
                 if (res.status == 200) {
@@ -81,20 +81,20 @@ let RenderPage = (function () {
                     $.ajax({
                         url: "./api/customer.php",
                         method: "POST",
-                        data: {
+                        data: JSON.stringify({
                             mode: "getNewID"
-                        },
+                        }),
                         success: function (data) {
                             newID = data;
                             $('#cID').val(newID)
-                            $('#cName').val("").prop("disabled",false).focus()
-                            $('#cSer').val("").prop("disabled",false)
-                            $('#cHouse').val("").prop("disabled",false)
-                            $('#cMoo').val("").prop("disabled",false)
-                            $('.MemStatus').prop("disabled",false)
+                            $('#cName').val("").prop("disabled", false).focus()
+                            $('#cSer').val("").prop("disabled", false)
+                            $('#cHouse').val("").prop("disabled", false)
+                            $('#cMoo').val("").prop("disabled", false)
+                            $('.MemStatus').prop("disabled", false)
                             $('#cMem').prop("checked", true);
-                            $('#cSave').prop("disabled",false)
-                            $('#cDel').prop("disabled",true)
+                            $('#cSave').prop("disabled", false)
+                            $('#cDel').prop("disabled", true)
 
                         }
                     });
@@ -194,10 +194,10 @@ var customerTable = (function () {
                 $.ajax({
                     url: 'api/customer.php',
                     method: 'POST',
-                    data: {
+                    data: JSON.stringify({
                         mode: "findCustomerBycID",
                         cID: cID
-                    },
+                    }),
                     success: function (res) {
                         res = JSON.parse(res)
                         let data = res.data[0]
@@ -252,7 +252,7 @@ function editCustomer(data) {
         $.ajax({
             url: "./api/customer.php",
             method: "POST",
-            data: {
+            data: JSON.stringify({
                 mode: "save",
                 cID: data.cID,
                 cName: data.cName,
@@ -261,7 +261,7 @@ function editCustomer(data) {
                 cMoo: data.cMoo,
                 cIsMem: data.cIsMem
 
-            },
+            }),
             success: function (res) {
                 res = JSON.parse(res)
                 if (res.status = 200) {
@@ -289,10 +289,10 @@ function deleteCustomer(cID) {
         $.ajax({
             url: "./api/customer.php",
             method: "POST",
-            data: {
+            data: JSON.stringify({
                 mode: "del",
                 cID: cID
-            },
+            }),
             success: function (res) {
                 res = JSON.parse(res)
                 if (res.status == 200) {

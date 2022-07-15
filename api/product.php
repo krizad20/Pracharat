@@ -4,16 +4,31 @@ $mode = $_POST["mode"];
 
 if ($mode == "findAllProduct") {
     $sql = "SELECT * FROM `product` WHERE pDel = 0 ORDER BY `pID` ASC";
-    $res = mysqli_query($conn, $sql);
+    $result = mysqli_query($conn, $sql);
 
-    while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         $arr[] = $row;
     }
-    $dataset = array(
-        "data" => $arr
-    );
 
-    echo json_encode($arr, JSON_UNESCAPED_UNICODE);
+    if ($result) {
+        $respond = array(
+            "status" => 200,
+            "message" => "ค้นหาลูกค้าสำเร็จ",
+            "data" => $arr
+        );
+
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
+    } else {
+        $respond = array(
+            "status" => 400,
+            "message" => "ค้นหาลูกค้าไม่สำเร็จ",
+            "data" => []
+        );
+
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
+    }
 }
 //ADD
 if ($mode == "add") {
@@ -36,7 +51,13 @@ if ($mode == "add") {
 
     if ($list->num_rows > 0) {
         //$isDuplicate = true;
-        echo "duplicate";
+        $respond = array(
+            "status" => 400,
+            "message" => "สินค้าซ้ำ บันทึกสินค้าไม่สำเร็จ",
+            "data" => []
+        );
+
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
         exit();
     }
     //If gen ID is from del -> UPDATE
@@ -46,11 +67,23 @@ if ($mode == "add") {
             ON DUPLICATE KEY UPDATE pBar='$pBar',pBars = '$pBars',pName='$pName',pBP=$pBP,pSP=$pSP,pVal=$pVal,pCate='$pCate',pUnit='$pUnit',pDel = 0,isPacked=$isPacked";
     $result = mysqli_query($conn, $sql);
     if ($result) {
-        echo "success";
+        $respond = array(
+            "status" => 200,
+            "message" => "บันทึกสินค้าสำเร็จ",
+            "data" => []
+        );
+
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
     } else {
-        echo "fail";
-        echo $sql;
-        echo $result;
+        $respond = array(
+            "status" => 400,
+            "message" => "สินค้าซ้ำ บันทึกสินค้าไม่สำเร็จ",
+            "data" => []
+        );
+
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
     }
 }
 //EDIT
@@ -74,7 +107,13 @@ if ($mode == "edit") {
 
     if ($list->num_rows > 0) {
         //$isDuplicate = true;
-        echo "duplicate";
+        $respond = array(
+            "status" => 400,
+            "message" => "สินค้าซ้ำ บันทึกสินค้าไม่สำเร็จ",
+            "data" => []
+        );
+
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
         exit();
     } else {
         $query = "SELECT pBars FROM `product` WHERE `pID` = '$pID' AND `pDel` != '1'";
@@ -102,9 +141,23 @@ if ($mode == "edit") {
     }
 
     if ($result) {
-        echo "success";
+        $respond = array(
+            "status" => 200,
+            "message" => "บันทึกสินค้าสำเร็จ",
+            "data" => []
+        );
+
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
     } else {
-        echo "fail";
+        $respond = array(
+            "status" => 400,
+            "message" => "บันทึกสินค้าไม่สำเร็จ",
+            "data" => []
+        );
+
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
     }
 }
 //DELETE
@@ -124,18 +177,47 @@ if ($mode == "del") {
         $sql1 = "DELETE FROM packproduct WHERE paID = '$pID'";
         $result1 = mysqli_query($conn, $sql1);
 
+
         if ($result && $result1) {
-            echo "ลบสินค้าสำเร็จ";
+            $respond = array(
+                "status" => 200,
+                "message" => "ลบสินค้าสำเร็จ",
+                "data" => []
+            );
+
+            echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+            exit();
         } else {
-            echo "ลบสินค้าไม่สำเร็จ";
+            $respond = array(
+                "status" => 400,
+                "message" => "ลบสินค้าไม่สำเร็จ",
+                "data" => []
+            );
+
+            echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+            exit();
         }
     } else if ($isPacked == 0 && $hasPacked == 0) {
         $sql = "UPDATE product SET pDel = 1 WHERE pID='$pID'";
         $result = mysqli_query($conn, $sql);
         if ($result) {
-            echo "ลบสินค้าสำเร็จ";
+            $respond = array(
+                "status" => 200,
+                "message" => "ลบสินค้าสำเร็จ",
+                "data" => []
+            );
+
+            echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+            exit();
         } else {
-            echo "ลบสินค้าไม่สำเร็จ";
+            $respond = array(
+                "status" => 400,
+                "message" => "ลบสินค้าไม่สำเร็จ",
+                "data" => []
+            );
+
+            echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+            exit();
         }
     } else if ($isPacked == 0 && $hasPacked == 1) {
         $sql = "UPDATE product SET pDel = 1 WHERE pID='$pID'";
@@ -153,9 +235,23 @@ if ($mode == "del") {
         $sql3 = "DELETE FROM packproduct WHERE pID = '$pID'";
         $result3 = mysqli_query($conn, $sql3);
         if ($result && $result1 && $result2 && $result3) {
-            echo "ลบสินค้าสำเร็จ";
+            $respond = array(
+                "status" => 200,
+                "message" => "ลบสินค้าสำเร็จ",
+                "data" => []
+            );
+
+            echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+            exit();
         } else {
-            echo "ลบสินค้าไม่สำเร็จ";
+            $respond = array(
+                "status" => 400,
+                "message" => "ลบสินค้าไม่สำเร็จ",
+                "data" => []
+            );
+
+            echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+            exit();
         }
     }
 }
@@ -179,9 +275,23 @@ if ($mode == "askDel") {
             $paName = $row1["paName"];
             $text .=  $paID . " " . $paName . "\n";
         }
-        echo $text;
+        $respond = array(
+            "status" => 200,
+            "message" => $text,
+            "data" => []
+        );
+
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
     } else {
-        echo "คุณต้องการลบสินค้านี้หรือไม่";
+        $respond = array(
+            "status" => 200,
+            "message" => "คุณต้องการลบสินค้านี้หรือไม่",
+            "data" => []
+        );
+
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
     }
 }
 //Get ID
@@ -202,7 +312,14 @@ if ($mode == "getNewID") {
     } else {
         $genID = $del['pID'];
     }
-    echo $genID;
+    $respond = array(
+        "status" => 200,
+        "message" => "",
+        "data" => $genID
+    );
+
+    echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+    exit();
 }
 //Add Sub Barcode
 if ($mode == "addSubBarcode") {
@@ -225,7 +342,13 @@ if ($mode == "addSubBarcode") {
         foreach ($json_arr as $key => $value) {
             if ($value['barcode'] == $barcode) {
                 $isDuplicate = true;
-                $msg =  "duplicate";
+                $respond = array(
+                    "status" => 400,
+                    "message" => "บาร์โค้ดซ้ำ",
+                    "data" => []
+                );
+
+                echo json_encode($respond, JSON_UNESCAPED_UNICODE);
                 exit();
             }
         }
@@ -250,8 +373,17 @@ if ($mode == "addSubBarcode") {
         $newJson1 = json_encode($json_arr1, JSON_UNESCAPED_UNICODE);
 
         $sql = "UPDATE `product` SET `pBars`='$newJson1' WHERE pID = '$pID'";
-        mysqli_query($conn, $sql);
-        $msg =  "success";
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            $respond = array(
+                "status" => 200,
+                "message" => "เพิ่มบาร์โค้ดสำเร็จ",
+                "data" => []
+            );
+
+            echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+            exit();
+        }
     }
 }
 //Del Sub Barcode
@@ -280,4 +412,14 @@ if ($mode == "delSubBarcode") {
     $json = json_encode($newArr, JSON_UNESCAPED_UNICODE);
     $sql = "UPDATE product SET pBars = '$json' WHERE pID = '$pID'";
     $result = mysqli_query($conn, $sql);
+    if ($result) {
+        $respond = array(
+            "status" => 200,
+            "message" => "ลบบาร์โค้ดสำเร็จ",
+            "data" => []
+        );
+
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
+    }
 }
