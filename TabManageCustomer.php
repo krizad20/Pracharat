@@ -95,18 +95,23 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
       <div class="col-9">
         <div class="card">
           <div class="card-body">
-            <table class="table table-bordered table-hover" id="customerTable">
-              <thead>
-                <tr>
-                  <th scope="col">รหัสลูกค้า</th>
-                  <th scope="col">บ้านเลขที่</th>
-                  <th scope="col">ชื่อ</th>
-                  <th scope="col">นามสกุล</th>
-                  <th scope="col">หมู่ที่</th>
-                </tr>
-              </thead>
-              <tbody>
-            </table>
+            <div class="row">
+              <div class="col-lg-12">
+                <table class="table table-bordered table-hover nowrap" id="customerTable">
+                  <thead>
+                    <tr>
+                      <th scope="col">รหัสลูกค้า</th>
+                      <th scope="col">บ้านเลขที่</th>
+                      <th scope="col">ชื่อ</th>
+                      <th scope="col">นามสกุล</th>
+                      <th scope="col">หมู่ที่</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                </table>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -116,226 +121,8 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
 
   </div>
-  <script>
-    $(document).ready(function() {
-
-      var table = $('#customerTable').DataTable({
-        "processing": true,
-        "ajax": "./ajax/customer.php",
-        "columns": [{
-            data: 'cID'
-          },
-          {
-            data: 'cHouse'
-          },
-          {
-            data: 'cName'
-          },
-          {
-            data: 'cSer'
-          },
-
-          {
-            data: 'cMoo'
-          }
-        ],
-        select: {
-          style: 'single',
-          select: true,
-          toggleable: false
-        }
-      });
-
-      $('#customerTable tbody').on('click', 'tr', function(row, data, index) {
-        isAdd = false;
-        var cID = table.row(this).data()['cID'];
-        $.ajax({
-          url: 'TabManageCustomer/selectedCustomer.php',
-          method: 'POST',
-          data: {
-            cID: cID
-          },
-          success: function(data) {
-            var json = $.parseJSON(data)
-            $('#cID').val(json[0].cID)
-            $('#cID').attr("disabled", true);
-            $('#cName').val(json[0].cName)
-            $('#cName').attr("disabled", false);
-            $('#cSer').val(json[0].cSer)
-            $('#cSer').attr("disabled", false);
-            $('#cHouse').val(json[0].cHouse)
-            $('#cHouse').attr("disabled", false);
-            $('#cMoo').val(json[0].cMoo)
-            $('#cMoo').attr("disabled", false);
-            console.log(json[0].cIsMem)
-            if (json[0].cIsMem == "1") {
-              $('#cMem').prop("checked", true);
-            } else if (json[0].cIsMem == "2") {
-              $('#cNotMem').prop("checked", true);
-            } else if (json[0].cIsMem == "3") {
-              $('#cNotMoo').prop("checked", true);
-            }
-
-            $('#cSave').attr("disabled", false);
-            $('#cDel').attr("disabled", false);
-            $('#cMem').attr("disabled", false);
-            $('#cNotMem').attr("disabled", false);
-            $('#cNotMoo').attr("disabled", false);
-
-          }
-        })
-      });
-
-      //add onclick
-      $('#cAdd').click(function(event) {
-        {
-          event.preventDefault();
-          var newID = "";
-          table.row('.selected').deselect()
-          $('#cID').val("")
-          $('#cName').val("")
-          $('#cSer').val("")
-          $('#cHouse').val("")
-          $('#cMoo').val("")
-          $('#cMem').prop("checked", true);
-
-          $.ajax({
-            url: "./TabManageCustomer/manageCustomer.php",
-            method: "POST",
-            data: {
-              mode: "getNewID"
-            },
-            success: function(data) {
-              newID = data;
-              $('#cID').val(newID)
-              $('#cName').focus()
-              $('#cName').val("")
-              $('#cSer').val("")
-              $('#cHouse').val("")
-              $('#cMoo').val("")
-              $('#cMem').prop("checked", true);
-            }
-          });
+  <script src="./TabManageCustomer/TabManageCustomer.js"></script>
 
 
-        }
-      });
-
-      //save onclick
-      $('#cSave').click(function(event) {
-        event.preventDefault();
-
-
-        let cID = $('#cID').val()
-        let cName = $('#cName').val()
-        let cSer = $('#cSer').val()
-        let cHouse = $('#cHouse').val()
-        let cMoo = $('#cMoo').val()
-        let cIsMem = 0;
-        if ($('#cMem').prop("checked")) {
-          cIsMem = $('#cMem').val()
-        } else if ($('#cNotMem').prop("checked")) {
-          cIsMem = $('#cNotMem').val()
-        } else if ($('#cNotMoo').prop("checked")) {
-          cIsMem = $('#cNotMoo').val()
-        }
-        
-
-        let data = {
-          cID: cID,
-          cName: cName,
-          cSer: cSer,
-          cHouse: cHouse,
-          cMoo: cMoo,
-          cIsMem: cIsMem
-        }
-
-        editCustomer(data)
-
-      })
-
-      //save onclick
-      $('#cDel').click(function(event) {
-        event.preventDefault();
-        let cID = $('#cID').val()
-
-        deleteCustomer(cID)
-
-      })
-
-
-    });
-
-    function editCustomer(data) {
-      if (data.cID == '' || data.cName == '') {
-        alert("กรุณากรอกข้อมูลให้ครบ");
-      } else {
-
-        $.ajax({
-          url: "./TabManageCustomer/manageCustomer.php",
-          method: "POST",
-          data: {
-            mode: "edit",
-            cID: data.cID,
-            cName: data.cName,
-            cSer: data.cSer,
-            cHouse: data.cHouse,
-            cMoo: data.cMoo,
-            cIsMem: data.cIsMem
-
-          },
-          success: function(data) {
-            console.log(data);
-            if (data.trim() == "success") {
-              alert("บันทึกการแก้ไขเรียบร้อย");
-
-              $('#customerTable').DataTable().ajax.reload(null, false);
-
-              $('#pSave').attr("disabled", true);
-              $('#pDel').attr("disabled", true);
-
-
-            } else if (data.trim() == "duplicate") {
-              alert("บาร์โค้ดซ้ำ");
-            } else {
-              alert("บันทึกการแก้ไขสินค้าไม่สำเร็จ");
-            }
-
-          }
-        });
-      }
-
-
-    }
-
-    function deleteCustomer(cID) {
-      if (confirm("ยืนยันลบรายชื่อลูกค้า")) {
-        $.ajax({
-          url: "./TabManageCustomer/manageCustomer.php",
-          method: "POST",
-          data: {
-            mode: "del",
-            cID: cID
-          },
-          success: function(data) {
-            console.log(data);
-            if (data.trim() == "success") {
-              alert("ลบรายชื่อลูกค้าเรียบร้อย");
-
-              $('#customerTable').DataTable().ajax.reload(null, false);
-
-              $('#pDel').attr("disabled", true);
-              $('#pSave').attr("disabled", true);
-
-            } else {
-              alert("ลบรายชื่อลูกค้าไม่สำเร็จ");
-            }
-
-          }
-        });
-      }
-
-    }
-  </script>
 
 </body>
