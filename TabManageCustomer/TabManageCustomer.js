@@ -70,7 +70,7 @@ let RenderPage = (function () {
                 {
                     event.preventDefault();
                     var newID = "";
-                    table.row('.selected').deselect()
+                    customerTable.table().row('.selected').deselect()
                     $('#cID').val("")
                     $('#cName').val("")
                     $('#cSer').val("")
@@ -79,7 +79,7 @@ let RenderPage = (function () {
                     $('#cMem').prop("checked", true);
 
                     $.ajax({
-                        url: "./TabManageCustomer/manageCustomer.php",
+                        url: "./api/customer.php",
                         method: "POST",
                         data: {
                             mode: "getNewID"
@@ -87,12 +87,15 @@ let RenderPage = (function () {
                         success: function (data) {
                             newID = data;
                             $('#cID').val(newID)
-                            $('#cName').focus()
-                            $('#cName').val("")
-                            $('#cSer').val("")
-                            $('#cHouse').val("")
-                            $('#cMoo').val("")
+                            $('#cName').val("").prop("disabled",false).focus()
+                            $('#cSer').val("").prop("disabled",false)
+                            $('#cHouse').val("").prop("disabled",false)
+                            $('#cMoo').val("").prop("disabled",false)
+                            $('.MemStatus').prop("disabled",false)
                             $('#cMem').prop("checked", true);
+                            $('#cSave').prop("disabled",false)
+                            $('#cDel').prop("disabled",true)
+
                         }
                     });
 
@@ -151,6 +154,7 @@ var customerTable = (function () {
         table = $("#customerTable").DataTable({
             fixedHeader: true,
             data: [],
+            responsive: true,
             columns: [{
                 data: 'cID'
             },
