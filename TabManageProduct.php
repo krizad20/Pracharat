@@ -15,7 +15,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
       <button class="btn btn-primary text-nowrap" name="pAdd" id="pAdd" data-bs-toggle="modal" data-bs-target="#addProductModal">เพิ่มสินค้า</button>
 
     </div>
-    <ul class="nav nav-tabs d-flex me-2" id="productTypeTab" role="tablist">
+    <ul class="nav nav-tabs d-flex me-2 mb-2" id="productTypeTab" role="tablist">
       <li class="nav-item" role="presentation">
         <button class="nav-link active" id="product-tab" data-bs-toggle="tab" data-bs-target="#product" type="button" role="tab" aria-controls="product" aria-selected="true">
           <i class="fa fa-list"></i>
@@ -34,9 +34,9 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     <div class="tab-pane fade show active" id="product" role="tabpanel" aria-labelledby="product-tab">
       <div class="row">
         <!-- Detail -->
-        <div class="col-3">
+        <div class="col-3 col-lg-3 col-md-3 col-sm-12">
           <div class="card">
-            <div class="card-body p-2">
+            <div class="card-body">
               <h5>
                 <center>รายละเอียดสินค้า</center>
               </h5>
@@ -99,8 +99,8 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
                     </div>
                   </div>
 
-                  <div class="col-sm-4 align-self-center">
-                    <img class="img" id="pImgEditTable" src="./product_pic/P00000.png" alt="" width="100px" height="100px">
+                  <div class="col-sm-4 d-flex justify-content-center align-items-center">
+                    <img class="img" id="pImgEditTable" src="./product_pic/P00000.png" width="100%" height="auto">
                   </div>
                 </div>
 
@@ -148,7 +148,7 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
         </div>
 
         <!-- Table -->
-        <div class="col-9">
+        <div class="col-9 col-lg-9 col-md-9 col-sm-12">
           <div class="card">
             <div class="card-body p-2">
               <table class="table table-bordered table-hover" id="productTable" style="width: 100%;">
@@ -171,22 +171,15 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
     </div>
 
     <!-- Grid Product Tab -->
-    <div class="tab-pane fade mb-2" id="packed" role="tabpanel" aria-labelledby="packed-tab">
-      <div class="d-flex" style="width: 100%;">
-        <div class="card" style="width: 100%;">
-          <div class="card-body overflow-auto position-sticky">
-            <div class="list row overflow-auto" id="display_item" style="height: 60vh;">
-            </div>
-          </div>
-
-          <div class="card-footer position-sticky fixed-bottom">
-            <div class="d-flex justify-content-center " style="font-size: medium;">
-              <ul class="pagination"></ul>
-            </div>
-          </div>
-
+    <div class="tab-pane fade overflow-auto" id="packed" role="tabpanel" aria-labelledby="packed-tab">
+      <!-- Product -->
+      <div>
+        <div class="row row-cols-6 row-cols-lg-6 row-cols-md-2 g-4" id="products-list">
+          <!-- Product item -->
         </div>
       </div>
+      <ul class="pagination mt-3 d-flex justify-content-center">
+      </ul>
     </div>
 
   </div>
@@ -392,8 +385,9 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
         </form>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-success" id="pSaveEditGrid">บันทึก</button>
+        <button type="button" class="btn btn-danger" id="pDelGrid">ลบ</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
-        <button type="button" class="btn btn-primary" id="pSaveEditGrid">บันทึก</button>
       </div>
     </div>
   </div>
@@ -558,7 +552,27 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
 </div>
 
-<script>
+<script src="./TabManageProduct/TabManageProduct.js"></script>
+<script type="text/html" id="product-template">
+  <div class="col">
+    <div class="card" style="height: 100%;">
+      <div class="card-body d-flex flex-column justify-content-between text-center">
+        <img class="card-img-top" src="./product_pic/%%img%%"  width="auto" height="180px" alt="">
+        <span type="button" class="position-absolute top-0 end-0 btn add_fav d-flex">
+          <i class="fas fa-star"></i>
+        </span>
+        <h5 class="card-title text-wrap p-1">%%pName%%</h5>
+        <h4 class="card-text text-danger">%%pSP%% ฿</h4>
+        <button type="button" class="btn btn-warning edit-grid" value="%%pIDValue%%" data-bs-toggle="modal" data-bs-target="#editProductModal">แก้ไข</button>
+      </div>
+      <div class="card-footer d-flex text-end">
+        <span class="card-text pValText" value="%%pValValue%%">คงเหลือ %%pValText%%</span>
+      </div>
+    </div>
+  </div>
+</script>
+
+<!-- <script>
   $(document).ready(function() {
     var pID;
     var pBar;
@@ -1716,4 +1730,4 @@ if (!isset($_SESSION['seller']) || $_SESSION['permission'] == "2") {
 
 
   });
-</script>
+</script> -->

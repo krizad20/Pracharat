@@ -8,11 +8,9 @@ function findAllProduct() {
         },
         success: function (data) {
             product = JSON.parse(data)
-            console.log(product)
             for (let i = 0; i < product.length; i++) {
                 product[i].pBars = JSON.parse(product[i].pBars)
             }
-            console.log(product)
 
         }
     });

@@ -1,6 +1,7 @@
 <?php
 include(".././system/server.php");
-$mode = $_POST["mode"];
+// $mode = $_POST['mode'];
+$mode = trim($_POST['mode']);
 
 if ($mode == "findAllProduct") {
     $sql = "SELECT * FROM `product` WHERE pDel = 0 ORDER BY `pID` ASC";
@@ -13,19 +14,48 @@ if ($mode == "findAllProduct") {
     if ($result) {
         $respond = array(
             "status" => 200,
-            "message" => "ค้นหาลูกค้าสำเร็จ",
+            "message" => "ค้นหาสินค้าสำเร็จ",
             "data" => $arr
         );
-
+        header("Content-Type:application/json");
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
         exit();
     } else {
         $respond = array(
             "status" => 400,
-            "message" => "ค้นหาลูกค้าไม่สำเร็จ",
+            "message" => "ค้นหาสินค้าไม่สำเร็จ",
             "data" => []
         );
+        header("Content-Type:application/json");
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+}
+if ($mode == "findProductBypID") {
+    $pID = $_POST['pID'];
+    $sql = "SELECT * FROM `product` WHERE pID = '$pID' AND pDel = 0 ORDER BY `pID` ASC";
+    $result = mysqli_query($conn, $sql);
 
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        $arr[] = $row;
+    }
+
+    if ($result) {
+        $respond = array(
+            "status" => 200,
+            "message" => "ค้นหาสินค้าสำเร็จ",
+            "data" => $arr
+        );
+        header("Content-Type:application/json");
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
+    } else {
+        $respond = array(
+            "status" => 400,
+            "message" => "ค้นหาสินค้าไม่สำเร็จ",
+            "data" => []
+        );
+        header("Content-Type:application/json");
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
         exit();
     }
@@ -56,7 +86,7 @@ if ($mode == "add") {
             "message" => "สินค้าซ้ำ บันทึกสินค้าไม่สำเร็จ",
             "data" => []
         );
-
+        header("Content-Type:application/json");
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
         exit();
     }
@@ -67,12 +97,18 @@ if ($mode == "add") {
             ON DUPLICATE KEY UPDATE pBar='$pBar',pBars = '$pBars',pName='$pName',pBP=$pBP,pSP=$pSP,pVal=$pVal,pCate='$pCate',pUnit='$pUnit',pDel = 0,isPacked=$isPacked";
     $result = mysqli_query($conn, $sql);
     if ($result) {
+        $sql = "SELECT * FROM `product` WHERE pDel = 0 ORDER BY `pID` ASC";
+        $result = mysqli_query($conn, $sql);
+
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $product[] = $row;
+        }
         $respond = array(
             "status" => 200,
             "message" => "บันทึกสินค้าสำเร็จ",
-            "data" => []
+            "data" => $product
         );
-
+        header("Content-Type:application/json");
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
         exit();
     } else {
@@ -81,7 +117,7 @@ if ($mode == "add") {
             "message" => "สินค้าซ้ำ บันทึกสินค้าไม่สำเร็จ",
             "data" => []
         );
-
+        header("Content-Type:application/json");
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
         exit();
     }
@@ -112,7 +148,7 @@ if ($mode == "edit") {
             "message" => "สินค้าซ้ำ บันทึกสินค้าไม่สำเร็จ",
             "data" => []
         );
-
+        header("Content-Type:application/json");
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
         exit();
     } else {
@@ -141,12 +177,18 @@ if ($mode == "edit") {
     }
 
     if ($result) {
+        $sql = "SELECT * FROM `product` WHERE pDel = 0 ORDER BY `pID` ASC";
+        $result = mysqli_query($conn, $sql);
+
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $product[] = $row;
+        }
         $respond = array(
             "status" => 200,
             "message" => "บันทึกสินค้าสำเร็จ",
-            "data" => []
+            "data" => $product
         );
-
+        header("Content-Type:application/json");
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
         exit();
     } else {
@@ -155,7 +197,7 @@ if ($mode == "edit") {
             "message" => "บันทึกสินค้าไม่สำเร็จ",
             "data" => []
         );
-
+        header("Content-Type:application/json");
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
         exit();
     }
@@ -179,12 +221,18 @@ if ($mode == "del") {
 
 
         if ($result && $result1) {
+            $sql = "SELECT * FROM `product` WHERE pDel = 0 ORDER BY `pID` ASC";
+            $result = mysqli_query($conn, $sql);
+
+            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                $product[] = $row;
+            }
             $respond = array(
                 "status" => 200,
                 "message" => "ลบสินค้าสำเร็จ",
-                "data" => []
+                "data" => $product
             );
-
+            header("Content-Type:application/json");
             echo json_encode($respond, JSON_UNESCAPED_UNICODE);
             exit();
         } else {
@@ -193,7 +241,7 @@ if ($mode == "del") {
                 "message" => "ลบสินค้าไม่สำเร็จ",
                 "data" => []
             );
-
+            header("Content-Type:application/json");
             echo json_encode($respond, JSON_UNESCAPED_UNICODE);
             exit();
         }
@@ -201,12 +249,18 @@ if ($mode == "del") {
         $sql = "UPDATE product SET pDel = 1 WHERE pID='$pID'";
         $result = mysqli_query($conn, $sql);
         if ($result) {
+            $sql = "SELECT * FROM `product` WHERE pDel = 0 ORDER BY `pID` ASC";
+            $result = mysqli_query($conn, $sql);
+
+            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                $product[] = $row;
+            }
             $respond = array(
                 "status" => 200,
                 "message" => "ลบสินค้าสำเร็จ",
-                "data" => []
+                "data" => $product
             );
-
+            header("Content-Type:application/json");
             echo json_encode($respond, JSON_UNESCAPED_UNICODE);
             exit();
         } else {
@@ -215,7 +269,7 @@ if ($mode == "del") {
                 "message" => "ลบสินค้าไม่สำเร็จ",
                 "data" => []
             );
-
+            header("Content-Type:application/json");
             echo json_encode($respond, JSON_UNESCAPED_UNICODE);
             exit();
         }
@@ -235,12 +289,18 @@ if ($mode == "del") {
         $sql3 = "DELETE FROM packproduct WHERE pID = '$pID'";
         $result3 = mysqli_query($conn, $sql3);
         if ($result && $result1 && $result2 && $result3) {
+            $sql = "SELECT * FROM `product` WHERE pDel = 0 ORDER BY `pID` ASC";
+            $result = mysqli_query($conn, $sql);
+
+            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                $product[] = $row;
+            }
             $respond = array(
                 "status" => 200,
                 "message" => "ลบสินค้าสำเร็จ",
-                "data" => []
+                "data" => $product
             );
-
+            header("Content-Type:application/json");
             echo json_encode($respond, JSON_UNESCAPED_UNICODE);
             exit();
         } else {
@@ -249,7 +309,7 @@ if ($mode == "del") {
                 "message" => "ลบสินค้าไม่สำเร็จ",
                 "data" => []
             );
-
+            header("Content-Type:application/json");
             echo json_encode($respond, JSON_UNESCAPED_UNICODE);
             exit();
         }
@@ -280,7 +340,7 @@ if ($mode == "askDel") {
             "message" => $text,
             "data" => []
         );
-
+        header("Content-Type:application/json");
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
         exit();
     } else {
@@ -289,7 +349,7 @@ if ($mode == "askDel") {
             "message" => "คุณต้องการลบสินค้านี้หรือไม่",
             "data" => []
         );
-
+        header("Content-Type:application/json");
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
         exit();
     }
@@ -317,7 +377,7 @@ if ($mode == "getNewID") {
         "message" => "",
         "data" => $genID
     );
-
+    header("Content-Type:application/json");
     echo json_encode($respond, JSON_UNESCAPED_UNICODE);
     exit();
 }
@@ -347,7 +407,7 @@ if ($mode == "addSubBarcode") {
                     "message" => "บาร์โค้ดซ้ำ",
                     "data" => []
                 );
-
+                header("Content-Type:application/json");
                 echo json_encode($respond, JSON_UNESCAPED_UNICODE);
                 exit();
             }
@@ -375,12 +435,18 @@ if ($mode == "addSubBarcode") {
         $sql = "UPDATE `product` SET `pBars`='$newJson1' WHERE pID = '$pID'";
         $result = mysqli_query($conn, $sql);
         if ($result) {
+            $sql = "SELECT * FROM `product` WHERE pDel = 0 ORDER BY `pID` ASC";
+            $result = mysqli_query($conn, $sql);
+
+            while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+                $product[] = $row;
+            }
             $respond = array(
                 "status" => 200,
                 "message" => "เพิ่มบาร์โค้ดสำเร็จ",
-                "data" => []
+                "data" => $product
             );
-
+            header("Content-Type:application/json");
             echo json_encode($respond, JSON_UNESCAPED_UNICODE);
             exit();
         }
@@ -413,12 +479,271 @@ if ($mode == "delSubBarcode") {
     $sql = "UPDATE product SET pBars = '$json' WHERE pID = '$pID'";
     $result = mysqli_query($conn, $sql);
     if ($result) {
+        $sql = "SELECT * FROM `product` WHERE pDel = 0 ORDER BY `pID` ASC";
+        $result = mysqli_query($conn, $sql);
+
+        while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $product[] = $row;
+        }
         $respond = array(
             "status" => 200,
             "message" => "ลบบาร์โค้ดสำเร็จ",
+            "data" => $product
+        );
+        header("Content-Type:application/json");
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+}
+
+if ($mode == "addToStock") {
+    //get Bangkok time
+    $time = date("Y-m-d H:i:s");
+    $pID = $_POST["pID"];
+    $pName = $_POST["pName"];
+    $pQuantity = $_POST["pQuantity"];
+    $pNewBP = $_POST["pNewBP"];
+    $pNewSP = $_POST["pNewSP"];
+
+    // $sql = "UPDATE product SET pVal = pVal + $pQuantity,pBP = '$pNewBP', pSP = '$pNewSP' WHERE pID = '$pID'";
+    // $result = mysqli_query($conn, $sql);    
+
+    $sql = "INSERT INTO `addtostock`(`aDate`, `apID`, `apName`, `aBP`, `aSP`, `aVal`) 
+            VALUES ('$time','$pID','$pName','$pNewBP','$pNewSP','$pQuantity')";
+    $result = mysqli_query($conn, $sql);
+    updateStock($conn, $pID, $pQuantity, $pNewBP, $pNewSP);
+    updateForPack($conn, $pID, $pQuantity, $pNewBP);
+}
+
+if ($mode == "findAllUnit") {
+    $sql = "SELECT `pUnit` FROM `product` GROUP BY `pUnit` ORDER BY `pUnit` ASC";
+    $result = mysqli_query($conn, $sql);
+
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        $arr[] = $row;
+    }
+
+    if ($result) {
+        $respond = array(
+            "status" => 200,
+            "message" => "",
+            "data" => $arr
+        );
+        header("Content-Type:application/json");
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+}
+
+if ($mode == "findAllCate") {
+    $sql = "SELECT `pCate` FROM `product` GROUP BY `pCate` ORDER BY `pCate` ASC";
+    $result = mysqli_query($conn, $sql);
+
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+        $arr[] = $row;
+    }
+    if ($result) {
+        $respond = array(
+            "status" => 200,
+            "message" => "",
+            "data" => $arr
+        );
+        header("Content-Type:application/json");
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+}
+
+if ($mode == "uploadImage") {
+    $pID = $_POST['pID'];
+    $dir = ".././product_pic/";
+    move_uploaded_file($_FILES["image"]["tmp_name"], $dir . $pID . ".png");
+
+    $sql = "UPDATE product SET img = '$pID.png' WHERE pID = '$pID'";
+    $result = mysqli_query($conn, $sql);
+}
+
+if ($mode == "getProductsGrid") {
+    $response['code'] = '0';
+    $filters['query'] = isset($_REQUEST['s']) ? filter_var(trim($_REQUEST['s'])) : "";
+
+    /* pagination logic start */
+    $items_count = count(getProducts(array('pID'), $filters, 0, -1));
+
+    $items_per_page = isset($_REQUEST['per_page']) ? $_REQUEST['per_page'] : 24;
+    $items_per_page = $items_per_page > 50 ? 50 : $items_per_page;
+
+    $max_pages = intval($items_count / $items_per_page + 1);
+
+    $current_page = !isset($_REQUEST['paged']) || intval($_REQUEST['paged']) < 1 ? 1 : filter_var(trim($_REQUEST['paged']), FILTER_SANITIZE_NUMBER_INT);
+    $current_page = $current_page > $max_pages ? $max_pages : $current_page;
+
+    $offset = $items_per_page * $current_page - $items_per_page;
+    /* pagination logic end */
+
+    $order_by = (isset($_REQUEST['order_by']) && in_array(trim($_REQUEST['order_by']), array("pID", "pName", "pFav"))) ? trim($_REQUEST['order_by']) : 'pID';
+    $order = (isset($_REQUEST['order']) && in_array(trim($_REQUEST['order']), array("ASC", "DESC"))) ? trim($_REQUEST['order']) : 'ASC';
+
+    $pagination_html = '
+	';
+
+    $total_links = $max_pages;
+
+    $previous_link = '';
+
+    $next_link = '';
+
+    $page_link = '';
+
+    if ($total_links > 4) {
+        if ($current_page < 5) {
+            for ($count = 1; $count <= 5; $count++) {
+                $page_array[] = $count;
+            }
+            $page_array[] = '...';
+            $page_array[] = $total_links;
+        } else {
+            $end_limit = $total_links - 5;
+
+            if ($current_page > $end_limit) {
+                $page_array[] = 1;
+
+                $page_array[] = '...';
+
+                for ($count = $end_limit; $count <= $total_links; $count++) {
+                    $page_array[] = $count;
+                }
+            } else {
+                $page_array[] = 1;
+
+                $page_array[] = '...';
+
+                for ($count = $current_page - 1; $count <= $current_page + 1; $count++) {
+                    $page_array[] = $count;
+                }
+
+                $page_array[] = '...';
+
+                $page_array[] = $total_links;
+            }
+        }
+    } else {
+        for ($count = 1; $count <= $total_links; $count++) {
+            $page_array[] = $count;
+        }
+    }
+
+    for ($count = 0; $count < count($page_array); $count++) {
+        if ($current_page == $page_array[$count]) {
+            $page_link .= '
+            <li class="page-item active">
+                <a href="javascript:;" page="' . $page_array[$count] . '" class="page-link">' . $page_array[$count] . ' </a>
+              </li>
+
+			';
+
+            $previous_id = $page_array[$count] - 1;
+
+            if ($previous_id > 0) {
+                $previous_link = '
+                    <li class="page-item">
+                        <a href="javascript:;" page="' . $previous_id . '" class="page-link">
+                        <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    ';
+            } else {
+                $previous_link = '
+				<li class="page-item">
+                    <a href="#" class="page-link">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+				';
+            }
+
+            $next_id = $page_array[$count] + 1;
+
+            if ($next_id >= $total_links) {
+                $next_link = '
+				<li class="page-item">
+                    <a href="#" class="page-link">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+				';
+            } else {
+                $next_link = '
+				<li class="page-item">
+                    <a href="javascript:;" page="' . $next_id . '" class="page-link">
+                    <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>';
+            }
+        } else {
+            if ($page_array[$count] == '...') {
+                $page_link .= '
+				<li class="page-item">
+                    <a href="" class="page-link">...</a>
+                </li>
+				';
+            } else {
+                $page_link .= '
+				<li class="page-item">
+                    <a href="javascript:;" page="' . $page_array[$count] . '" class="page-link">' . $page_array[$count] . ' </a>
+                </li>
+				';
+            }
+        }
+    }
+
+    $pagination_html .= $previous_link . $page_link . $next_link;
+
+    $response['products'] = getProducts(array(), $filters, $offset, $items_per_page, $order_by, $order);
+    $response['page'] = $current_page;
+    $response['pages'] = $max_pages;
+    $response['pagination'] = $pagination_html;
+    $response['msg'] = "success";
+
+    header("Content-Type:application/json");
+    echo json_encode($response);
+    exit();
+}
+
+if ($mode == 'addFavProduct') {
+    $pID = $_POST["pID"];
+    //get last fav number 
+    $queryFav = "SELECT pFav FROM `product` ORDER BY `pFav` DESC LIMIT 1";
+    $resultFav = mysqli_query($conn, $queryFav);
+    $rowFav = mysqli_fetch_array($resultFav);
+    $favID = $rowFav["pFav"];
+    $favID = $favID + 1;
+    $sql = "UPDATE `product` SET `pFav` = '$favID' WHERE `pID` = '$pID'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result) {
+        $respond = array(
+            "status" => 200,
+            "message" => "เพิ่มรายการโปรดสำเร็จ",
             "data" => []
         );
+        header("Content-Type:application/json");
+        echo json_encode($respond, JSON_UNESCAPED_UNICODE);
+        exit();
+    }
+}
 
+if ($mode == 'removeFavProduct') {
+    $pID = $_POST["pID"];
+    $sql = "UPDATE `product` SET `pFav` = '0' WHERE `pID` = '$pID'";
+    $result = mysqli_query($conn, $sql);
+    if ($result) {
+        $respond = array(
+            "status" => 200,
+            "message" => "ลบรายการโปรดสำเร็จ",
+            "data" => []
+        );
+        header("Content-Type:application/json");
         echo json_encode($respond, JSON_UNESCAPED_UNICODE);
         exit();
     }

@@ -6,11 +6,40 @@ if (!isset($_SESSION['seller'])) {
 
 ?>
 
-<div class="row overflow-auto" style="height: 90%;">
-    <div class="d-flex col-md-6">
-        <?php include("./TabManageProduct/allProductGrid.php"); ?>
+<div class="row overflow-auto" style="height: 90%;" id="TabSaleDiv">
+    <div class="d-flex col-md-6" id="productDiv">
+        <div class="card" style="width: 100%;">
+            <div class="card-header">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex">
+                        <input class="search form-control me-2" type="search" id="searchBar" placeholder="ค้นหาสินค้า" aria-label="Search" autocomplete="off" autofocus>
+                        <button class="sort btn btn-success text-nowrap" type="button" data-sort="name" style="width: fit-content;font-size: 50%;"> เรียงตามชื่อ</button>
+                    </div>
+                    <div class="d-flex">
+                        <select class="form-select form-select-sm" name="cate" id="pCateSelect">
+                        </select>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body overflow-auto position-sticky p-1">
+                <div>
+                    <div class="row row-cols-5 row-cols-lg-5 row-cols-md-2 g-2" id="products-list" style="height: 60vh;">
+                        <!-- Product item -->
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer position-sticky fixed-bottom p-1">
+                <ul class="pagination d-flex justify-content-between">
+                </ul>
+            </div>
+
+        </div>
     </div>
-    <div class="d-flex col-md-6">
+    <div class="d-flex col-md-6" id="cartDiv">
         <div class="card" style="width: 100%;">
             <div class="card-header sticky-top p-2" style="height: fit-content;">
                 <div class="row d-flex justify-content-between align-items-end">
@@ -273,7 +302,32 @@ if (!isset($_SESSION['seller'])) {
     </div>
 </div>
 
-<script>
+<script src="./TabSale/TabSale.js"></script>
+
+<script type="text/html" id="product-template">
+    <div class="col d-flex align-items-stretch product-item">
+        <div class="card p-1" style="height: auto;">
+            <div class="card-body d-flex flex-column justify-content-between text-center p-1">
+                <img class="card-img-top" src="./product_pic/%%img%%" width="auto" height="120px" alt="">
+                <span type="button" class="position-absolute top-0 end-0 btn add_fav d-flex" pID="%%pID%%">
+                    <i class="%%iconClass%%"></i>
+                </span>
+                <span class="fs-10 fw-bolder text-primary text-wrap p-1">%%pName%%</span>
+                <!-- <h5 class="card-title text-wrap p-1"></h5> -->
+                <h4 class="card-text text-danger">%%pSP%% ฿</h4>
+                <button type="button" pID="%%pID%%" pBar="%%pBar%%" pName="%%pName%%" pBP="%%pBP%%" pSP="%%pSP%%" class="btn %%buttonClass%% btn-sm" value="%%pVal%%">%%buttonText%%</button>
+                <!-- <button type="button" class="btn btn-warning edit-grid" value="%%pIDValue%%" data-bs-toggle="modal" data-bs-target="#editProductModal">แก้ไข</button> -->
+            </div>
+            <div class="card-footer d-flex text-end p-1">
+                <span class="card-text pValText" value="%%pVal%%">คงเหลือ %%pVal%%</span>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+
+<!-- <script>
     $.fn.dataTable.ext.errMode = 'throw';
 
     var userList;
@@ -1028,4 +1082,4 @@ if (!isset($_SESSION['seller'])) {
             e.returnValue = true;
         }
     }
-</script>
+</script> -->

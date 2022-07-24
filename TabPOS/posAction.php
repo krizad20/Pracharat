@@ -131,24 +131,7 @@ if (isset($_POST["action"])) {
         }
     }
 
-    if ($_POST["action"] == "addToStock") {
-        //get Bangkok time
-        $time = date("Y-m-d H:i:s");
-        $pID = $_POST["pID"];
-        $pName = $_POST["pName"];
-        $pQuantity = $_POST["pQuantity"];
-        $pNewBP = $_POST["pNewBP"];
-        $pNewSP = $_POST["pNewSP"];
-
-        // $sql = "UPDATE product SET pVal = pVal + $pQuantity,pBP = '$pNewBP', pSP = '$pNewSP' WHERE pID = '$pID'";
-        // $result = mysqli_query($conn, $sql);    
-
-        $sql = "INSERT INTO `addtostock`(`aDate`, `apID`, `apName`, `aBP`, `aSP`, `aVal`) 
-                VALUES ('$time','$pID','$pName','$pNewBP','$pNewSP','$pQuantity')";
-        $result = mysqli_query($conn, $sql);
-        updateStock($conn,$pID,$pQuantity,$pNewBP,$pNewSP);
-        updateForPack($conn, $pID, $pQuantity, $pNewBP);
-    }
+    
 
     if ($_POST["action"] == "quantity_change") {
         $sID = $_POST["sID"];
@@ -197,23 +180,7 @@ if (isset($_POST["action"])) {
         unset($_SESSION['customer'][$_POST["sID"]]);
     }
 
-    if ($_POST["action"] == 'addFav') {
-        $pID = $_POST["pID"];
-        //get last fav number 
-        $queryFav = "SELECT pFav FROM `product` ORDER BY `pFav` DESC LIMIT 1";
-        $resultFav = mysqli_query($conn, $queryFav);
-        $rowFav = mysqli_fetch_array($resultFav);
-        $favID = $rowFav["pFav"];
-        $favID = $favID + 1;
-        $sql = "UPDATE `product` SET `pFav` = '$favID' WHERE `pID` = '$pID'";
-        $result = mysqli_query($conn, $sql);
-    }
-
-    if ($_POST["action"] == 'removeFav') {
-        $pID = $_POST["pID"];
-        $sql = "UPDATE `product` SET `pFav` = '0' WHERE `pID` = '$pID'";
-        $result = mysqli_query($conn, $sql);
-    }
+ 
 
     if ($_POST["action"] == "checkBill") {
         date_default_timezone_set("Asia/Bangkok");

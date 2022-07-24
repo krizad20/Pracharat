@@ -29,9 +29,9 @@ let SetupData = (function () {
         $.ajax({
             url: "./api/customer.php",
             method: "POST",
-            data: JSON.stringify({
-                mode: "findAllCustomer",
-            }),
+            data:
+                { mode: "findAllCustomer" }
+            ,
             success: function (res) {
                 res = JSON.parse(res)
                 if (res.status == 200) {
@@ -81,9 +81,9 @@ let RenderPage = (function () {
                     $.ajax({
                         url: "./api/customer.php",
                         method: "POST",
-                        data: JSON.stringify({
-                            mode: "getNewID"
-                        }),
+                        data:
+                            { mode: "getNewID" }
+                        ,
                         success: function (data) {
                             newID = data;
                             $('#cID').val(newID)
@@ -194,10 +194,11 @@ var customerTable = (function () {
                 $.ajax({
                     url: 'api/customer.php',
                     method: 'POST',
-                    data: JSON.stringify({
+                    data:
+                    {
                         mode: "findCustomerBycID",
                         cID: cID
-                    }),
+                    },
                     success: function (res) {
                         res = JSON.parse(res)
                         let data = res.data[0]
@@ -252,7 +253,8 @@ function editCustomer(data) {
         $.ajax({
             url: "./api/customer.php",
             method: "POST",
-            data: JSON.stringify({
+            data:
+            {
                 mode: "save",
                 cID: data.cID,
                 cName: data.cName,
@@ -260,8 +262,9 @@ function editCustomer(data) {
                 cHouse: data.cHouse,
                 cMoo: data.cMoo,
                 cIsMem: data.cIsMem
+            }
 
-            }),
+            ,
             success: function (res) {
                 res = JSON.parse(res)
                 if (res.status = 200) {
@@ -289,10 +292,10 @@ function deleteCustomer(cID) {
         $.ajax({
             url: "./api/customer.php",
             method: "POST",
-            data: JSON.stringify({
+            data: {
                 mode: "del",
                 cID: cID
-            }),
+            },
             success: function (res) {
                 res = JSON.parse(res)
                 if (res.status == 200) {

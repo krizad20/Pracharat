@@ -1,6 +1,0 @@
-{
-    "appService.defaultWebAppToDeploy": "/subscriptions/8560eb42-f538-42c9-b970-97cfe68acb3a/resourceGroups/pracharat-rg/providers/Microsoft.Web/sites/pracharat12",
-    "appService.deploySubpath": ".",
-    "liveServer.settings.port": 5501,
-    "cSpell.words": []
-}
