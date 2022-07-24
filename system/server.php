@@ -77,13 +77,26 @@ function getConnection()
     $password = "";
     $dbname = "pracharat";
 
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if (mysqli_connect_error()) {
-        die("Database connection failed: " . mysqli_connect_error());
-    } else {
-        return $conn;
+    //Connection
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    mysqli_set_charset($conn, "utf8");
+    //Check
+
+    if (!$conn) {
+        $servername = "localhost";
+        $username = "u396242790_krizad_test";
+        $password = "Moomint1812!!";
+        $dbname = "u396242790_pracharat_test";
+
+        //Connection
+        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        mysqli_set_charset($conn, "utf8");
+        if (!$conn) {
+            die("Fail" . mysqli_connect_error());
+        }
+        else{
+            return $conn;
+        }
     }
 }
 
