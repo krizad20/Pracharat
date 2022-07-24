@@ -1,5 +1,5 @@
 
-let productData = []
+let productDataA2S = []
 $(document).ready(function () {
   let defer1 = $.Deferred();
 
@@ -35,9 +35,9 @@ let SetupData1 = (function () {
       success: function (res) {
 
         if (res.status == 200) {
-          productData = res.data
-          for (let i = 0; i < productData.length; i++) {
-            productData[i].pBars = JSON.parse(productData[i].pBars)
+          productDataA2S = res.data
+          for (let i = 0; i < productDataA2S.length; i++) {
+            productDataA2S[i].pBars = JSON.parse(productDataA2S[i].pBars)
           }
           defer1.resolve(true);
         } else {
@@ -69,7 +69,7 @@ let selectProductTableA2S = (function () {
   let initTable = function () {
     table = $("#selectProductA2S").DataTable({
       fixedHeader: true,
-      data: productData,
+      data: productDataA2S,
       columns: [
         {
           data: "pID",
