@@ -12,25 +12,15 @@ mysqli_set_charset($conn, "utf8");
 
 if (!$conn) {
     $servername = "localhost";
-    $username = "u396242790_krizad";
-    $password = "Moomint1812";
-    $dbname = "u396242790_pracharat";
+    $username = "u396242790_krizad_test";
+    $password = "Moomint1812!!";
+    $dbname = "u396242790_pracharat_test";
 
     //Connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
     mysqli_set_charset($conn, "utf8");
     if (!$conn) {
-        $servername = "127.0.0.1:50776";
-        $username = "azure";
-        $password = "6#vWHD_$";
-        $dbname = "pracharat";
-
-        //Connection
-        $conn = mysqli_connect($servername, $username, $password, $dbname);
-        mysqli_set_charset($conn, "utf8");
-        if (!$conn) {
-            die("Fail" . mysqli_connect_error());
-        }
+        die("Fail" . mysqli_connect_error());
     }
 }
 
@@ -101,7 +91,7 @@ function getProducts($columns = array(), $filters = array(), $offset = 0, $limit
 {
     $conn = getConnection();
     $data = array();
-    
+
     $sql = "SELECT * FROM product WHERE pDel = 0";
     if (!empty($columns) && is_array($columns)) {
         $sql = "SELECT `" . implode("`,`", $columns) . "` FROM product WHERE pDel = 0";
